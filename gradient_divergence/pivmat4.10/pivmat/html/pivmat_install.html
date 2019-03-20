@@ -1,0 +1,75 @@
+<html><head><title>PIVMat Installation</title>
+
+<link rel=stylesheet href="docstyle1.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+<!-- NAVBARTOP -->
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>PIVMat Installation</b></td>
+</tr>
+</table>
+
+
+<h1>PIVMat Installation</h1>
+<hr>
+
+<br>
+
+
+<h2>Compatibility</h2>
+
+<p>The PIVMat Toolbox works with MATLAB 7 or higher, on every operating system. PIVMat supports files from:
+<ul>
+    <li><p><a href="http://www.lavision.de/en">DaVis (LaVision GmbH)</a></p></li>
+    <li><p><a href="http://www.dantecdynamics.com/dynamicstudio">DynamicStudio (Dantec Dynamics)</a></p></li>
+    <li><p><a href="http://www.oxfordlasers.com/imaging/particle-image-velocimetry-piv/particle-image-velocimetry-software-vidpiv/">VidPIV (Oxford Laser)</a></p></li>
+    <li><p><a href="https://www.irphe.fr/~meunier/#PIV">DPIVSoft (Meunier & Leweke, 2003)</a></p></li>
+    <li><p><a href="http://folk.uio.no/jks/matpiv/index2.html">MatPIV (J. Kristian Sveen, 2006)</a></p></li>
+</ul></p>
+
+<p>By default, PIVMat can import files from DynamicStudio, DPIVSoft, VidPIV and MatPIV.
+In order to import files from DaVis (<tt>VC7</tt> files), it is necessary to
+install an additional package: <tt>ReadIMX</tt> (see below).</p>
+
+<p>Some functions require the <a href="http://www.mathworks.com/products/image/">Image Processing Toolbox</a>.</p>
+
+<br>
+
+<h2>Installation procedure</h2>
+
+<p>1. Download the PIVMat Toolbox and extract the ZIP file in a
+folder, for example <tt>/My documents/Matlab/toolbox/pivmat</tt> (make sure the
+subdirectories <tt>html</tt>, <tt>sample</tt> and <tt>private</tt> are
+correctly unzipped as well). Do <b>NOT</b> install in the Matlab application
+folder (typically <tt>/Program Files/Matlab/...</tt>). If you
+upgrade from an older version, first delete the previous <tt>pivmat</tt> directory.</p>
+
+<p>2. If you wish to import DaVis files, download also the 
+    ReadIMX package available from the <a href="http://www.lavision.de/en">LaVision web site</a>
+(with user registration).</p>
+
+
+<p>3. In the 'Home' tab, select '<tt>Set Path</tt>', click on '<tt>Add Folder</tt>' (<b>NOT</b> <tt>'Add with Subfolders'</tt>)
+and select the directory <tt>pivmat</tt>. (Select also the directory <tt>readimx</tt> if necessary). Click on '<tt>Save</tt>' and '<tt>Close</tt>'.</p>
+
+<p>4. To get started, type <tt>docpivmat</tt>.</p>
+
+
+<h2>Matlab upgrade</h2>
+
+    <p>If you upgrade Matlab, you don't need to reinstall <tt>PivMat</tt> (and
+    <tt>ReadIMX</tt>). Just follow steps 3 and 4.</p>
+
+    
+<h2>PIVMat upgrade</h2>
+    
+    <p>Quit Matlab, replace your old <tt>pivmat</tt> folder with the new one,
+    and re-launch Matlab. Type <tt>docpivmat</tt> in the command window to check if the new version is correctly recognized.</p>
+
+<br>
+
+<br>
+<table width="100%" border=0 cellspacing=0 bgcolor=d0d0f0><tr><td>&nbsp</td></tr></table><br>
+2005-2016 <a href="pivmat.html">PIVMat Toolbox</a><br>
+</body>
+</html>

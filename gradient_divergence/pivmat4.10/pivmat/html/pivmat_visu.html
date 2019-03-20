@@ -1,0 +1,330 @@
+<html><head><title>Visualization tools</title>
+        
+        <link rel=stylesheet href="docstyle1.css" type="text/css">
+    </head>
+    <body bgcolor=#ffffff>
+          <!-- NAVBARTOP -->
+    <table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+                <td valign=baseline bgcolor="#e7ebf7"><b>Data organisation in PIVMat</b></td>
+            </tr>
+        </table>
+        
+        <h1>Visualization tools</h1>
+        <hr>
+        
+        <br>
+        
+        <p>All visualizations of vector or scalar fields, either for still images
+            or movies, are based on the
+        PIVMat function <tt><a href="showf.html">showf</a></tt> (which means <i>show field</i>).</p>
+        
+        <p>When the
+            first input parameter of  <tt><a href="showf.html">showf</a></tt>
+            is a single PIVMat structure, it is displayed as a
+            still image. When it is a structure array, it is displayed as a movie
+            (see the page <a href="pivmat_data.html">Data Organization</a> to learn more about
+        PIVMat structures and structure arrays.)</p>
+        
+        <p>This 
+            documentation describes how to control 'in live' the movies displayed
+            by  <tt><a href="showf.html">showf</a></tt>, and lists all the
+        available input parameters.</p>
+        
+        <br>
+        <h2>Live control</h2>
+        
+        <p>During the visualization of a movie, several 'live' controls are possible by pressing the
+        following keys:</p>
+        
+        <center>
+            <table Border="2" cellpadding=4 cellspacing=0>
+            <tr>
+                    <td><b>Keys</b></td>
+                    <td><b>Description</b></td>
+                </tr>
+                <tr>
+                    <td>Space bar</td>
+                    <td>Make a pause (press space bar again to resume)</td>
+                </tr>
+                <tr>
+                    <td>* and /</td>
+                    <td>Stretch/compress the colormap</td>
+                </tr>
+                <tr>
+                    <td>+ and -</td>
+                    <td>Increase/decrease the vector arrow length</td>
+                </tr>
+                <tr>
+                    <td>Right arrow, or <tt>n</tt></td>
+                    <td>Next frame.</td>
+                </tr>
+                <tr>
+                    <td>Left arrow, or <tt>b</tt></td>
+                    <td>Previous frame.</td>
+                </tr>
+                <tr>
+                    <td><tt>g</tt> or <tt>j</tt></td>
+                    <td>Jump to a specified frame.</td>
+                </tr>
+                <tr>
+                    <td><tt>Esc</tt> or <tt>x</tt> or <tt>q</tt> or <tt>Ctrl+C</tt></td>
+                    <td>Exit</td>
+                </tr>
+            </table>
+        </center>
+        
+        
+        
+        <br>
+        <h2>Input Parameters of <tt>showf</tt></h2>
+        
+        <p>The general syntax of <tt><a href="showf.html">showf</a></tt> is:</p>
+        
+        <blockquote><pre>showf(V, 'PropertyName1', PropertyValue1, 'PropertyName2', etc.)</pre></blockquote>
+        
+        <p>The list of available PropertyName/PropertyValue pairs is given in the table below.</p>
+        
+        <p>There are however two convenient shortcuts:</p>
+        
+        <ul>
+            <li>If <tt>V</tt> is a vector field, 
+                the second input parameter directly specifies the background: <tt>'norm'</tt>, <tt>'rot'</tt>, <tt>'ken'</tt>
+            etc.</li>
+            <li>If <tt>V</tt> is a scalar field, 
+                the second input parameter directly specifies the Color limit (<tt>'CLim'</tt>) property,
+            in the form <tt>[CMIN,CMAX]</tt>.</li>
+        </ul>
+        
+        
+        <table Border="2" cellpadding=4 cellspacing=0>
+        <tr>
+                <td><b>PropertyName</b></td>
+                <td><b>PropertyValue</b></td>
+                <td><b>Description</b></td>
+            </tr>
+            
+            <tr>
+                <td><tt>Background</tt></td>
+                <td><tt>BGMODE</tt></td>
+                <td>specifies the scalar field, computed from the input vector field,
+                    displayed in the background. <tt>BGMODE</tt> may be '<tt>norm</tt>',
+                    '<tt>rot</tt>', '<tt>div</tt>', '<tt>ken</tt>', etc. See
+                    <tt><a href="vec2scal.html">vec2scal</a></tt> for a complete list
+                of available backgrounds.</td>
+            </tr>
+            
+            <tr>
+                <td><tt>Spacing</tt></td>
+                <td><tt>[NX NY]</tt> or <tt>N</tt></td>
+                <td>displays 1 vector every <tt>NX</tt> (resp. <tt>NY</tt>) in the 
+                    <tt>X</tt> (resp. <tt>Y</tt>) direction. If only one number <tt>N</tt> is specified,
+                    take <tt>NX=NY=N</tt>. By default, <tt>NX</tt> and <tt>NY</tt> are such that
+                32 vectors are displayed in each direction.</td>
+            </tr>
+            
+            <tr>
+                <td><tt>ScaleArrow</tt></td>
+                <td><tt>SA</tt></td>
+                <td>Specifies the scale for the vector arrows.
+                <tt>SA</tt> is such that a vector of norm <tt>L</tt> in
+                vector units, e.g. m/s) has length <tt>SA*L</tt>
+                (in units of space coordinates, e.g. mm).
+                If not specified, or if <tt>SA = 0</tt>, a default value is automatically chosen.
+                Use the keys '</tt>+</tt>' and '<tt>-</tt>' to modify this 
+                parameter during a movie. If <tt>SA < 0</tt>, the arrows are not displayed. </td>
+            </tr>
+            
+            
+            <tr>
+                <td><tt>Colorvec</tt></td>
+                <td><tt>COL</tt></td>
+                <td>Color of the vector arrows. <tt>COL</tt> may be any
+                    Matlab compatible color specification: a
+                    string (<tt>'r'</tt>, <tt>'k'</tt> etc)
+                    or an array of 3 numbers in the form
+                <tt>[R G B]</tt>. </td>
+            </tr>
+            
+            <tr>
+                <td><tt>CMap</tt></td>
+                <td><tt>COL</tt></td>
+                <td>Specifies the colormap, where <tt>COL</tt>
+                    may be a string (<tt>'gray'</tt>, <tt>'jet'</tt>, etc.) or a 
+                    m-by-3 matrix of real numbers between 0.0 and 
+                1.0. See the reference page for <tt>COLORMAP</tt>.</td>
+            </tr>
+            
+            <tr>
+                <td><tt>CLim</tt></td>
+                <td><tt>[CMIN CMAX]</tt></td>
+                <td>specifies the min and max of the colormap.
+                    Use the keys '</tt>*</tt>' and '<tt>/</tt>' to modify this 
+                range during a movie. </td>
+            </tr>
+            
+            <tr>
+                <td><tt>CLim</tt></td>
+                <td><tt>CMAX</tt></td>
+                <td>specifies the max of the colormap;
+                    the min is taken as <tt>0</tt> or 
+                    <tt>-CMAX</tt>, depending on the nature of
+                the scalar field (strictly positive or not).</td>
+            </tr>
+            
+            <tr>
+                <td><tt>CLim</tt></td>
+                <td><tt>'all'</tt> or <tt>0</tt></td>
+                <td>normalize the colormap using the min and 
+                max of all the scalar fields (by default).</td>
+            </tr>
+            
+            
+            <tr>
+                <td><tt>CLim</tt></td>
+                <td><tt>'each'</tt> or <tt>-1</tt></td>
+                <td>normalize the colormap using the min and 
+                max of each field taken one by one.</td>
+            </tr>
+            
+            <tr>
+                <td><tt>Contour</tt></td>
+                <td><tt>n</tt></td>  
+                <td>Displays <tt>n</tt> contour lines</td>
+            </tr>
+            
+            <tr>
+                <td><tt>Contourf</tt></td>
+                <td><tt>n</tt></td>    
+                <td>Displays <tt>n<tt> filled contour lines </td>
+            </tr>
+            
+            <tr>
+                <td><tt>Streamline</tt></td>
+                <td><tt>[NX,NY]</tt></td>
+                <td>display streamlines. The starting points of the 
+                    streamlines are chosen on a uniform grid with 
+                spacing <tt>[NX,NY]</tt>. (<tt>NX=NY=16</tt> by default)</td> 
+            </tr>
+            
+            <tr>
+                <td><tt>Loop</tt></td>  
+                <td>-</td>
+                <td>loop the movie (press <tt>'esc'</tt> to exit)</td> 
+            </tr>
+            
+            <tr>
+                <td><tt>Backward</tt></td>
+                <td>-</td> 
+                <td>plays the movie backward</td>
+            </tr>
+            
+            <tr>
+                <td><tt>Delay</tt></td>
+                <td><tt>n</tt></td>     
+                <td>waits <tt>n</tt> seconds between each frame </td>
+            </tr>
+            
+            <tr>
+                <td><tt>Pause</tt></td> 
+                <td>-</td>    
+                <td>directly enter in the 'pause' mode (press 
+                'space' to exit the pause mode) </td>
+            </tr>
+            
+            <tr>
+                <td><tt>Title</tt></td> 
+                <td><tt>TIT</tt></td>   
+                <td>specifies the string <tt>TIT</tt> of the title
+                    displayed above the figure. The string <tt>TIT</tt>
+                    may contain the following commands:<br>
+                    - <tt>'%n'</tt> : name of the field<br>
+                    - <tt>'%s'</tt> : name of the set (directory where the fields are stored)<br>
+                    - <tt>'%i'</tt> : field number in the set<br> 
+                    - <tt>'%t'</tt> : time in sec. (see <tt><a href="getpivtime.html">getpivtime</a></tt>)<br> 
+                    - <tt>'%t0'</tt> : time, with origin t(1)=0.<br>
+                By default, <tt>TIT =  '%s [#%i]'</tt>.</td>
+            </tr>
+            
+            
+        </table>
+        <br>
+        
+        <p>The following additional PropertyName/PropertyValue pairs is available
+        only for scalar fields:</p>
+        
+        <table Border="2" cellpadding=4 cellspacing=0>
+        <tr>
+                <td><b>PropertyName</b></td>
+                <td><b>PropertyValue</b></td>
+                <td><b>Description</b></td>
+            </tr>
+            
+            <tr>
+                <td><tt>Contour3</tt></td> 
+                <td><tt>n</tt></td> 
+                <td>Displays <tt>n</tt> contour lines beneath the 3D view of
+                the scalar fields(<tt>n=8</tt> by default)</td>
+            </tr>
+            
+            <tr>
+                <td><tt>Surf</tt></td> 
+                <td>-</td>
+                <td>3-D shaded surface (see <tt>SURF</tt>)</td> 
+            </tr>
+            
+            <tr>
+                <td><tt>Surfc</tt></td> 
+                <td>-</td>
+                <td>3-D shaded surface with a contour plot 
+                beneath the surface (see <tt>SURFC</tt>)</td> 
+            </tr>
+            
+            <tr>
+                <td><tt>Surfl</tt></td> 
+                <td>-</td>
+                <td>3-D shaded surface with colormap-based 
+                lighting (see <tt>SURFL</tt>)</td> 
+            </tr>
+            
+            <tr>
+                <td><tt>Mesh</tt></td> 
+                <td>-</td>
+                <td>3-D wireframe parametric surface (see <tt>MESH</tt>) </td>
+            </tr>
+            
+            <tr>
+                <td><tt>Meshc</tt></td> 
+                <td>-</td>
+                <td>3-D wireframe parametric surface with a
+                contour plot beneath the surface (see <tt>MESCHC</tt>)</td>
+            </tr>
+            
+            <tr>
+                <td><tt>ResetCameraSettings</tt></td> 
+                <td>-</td>
+                <td>refresh the camera angle, view etc. </td>
+            </tr>
+            
+            <tr>
+                <td><tt>Command</tt></td> 
+                <td><tt>STR</tt></td>
+                <td>Specifies a string <tt>STR</tt>
+                to be evaluated at each 
+                frame. <tt>STR</tt> may contain any Matlab commands,
+            groups of commands (separated by ;), user-defined functions etc.</td>
+            </tr>
+            
+        </table>
+        
+        <br>
+        <h2>Examples</h2>
+        
+        <p>See the documentation of <tt><a href="showf.html">showf</a></tt> and
+        the <a href="pivmat_faq.html">FAQ</a> for examples.</p>
+        
+        
+        <br>
+        <table width="100%" border=0 cellspacing=0 bgcolor=d0d0f0><tr><td>&nbsp</td></tr></table><br>
+        2005-2016 <a href="pivmat.html">PIVMat Toolbox</a><br>
+    </body>
+</html>

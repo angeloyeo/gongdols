@@ -1,0 +1,121 @@
+<html><head><title>Functions -- By Category (PIVMat Functions)</title>
+
+<link rel=stylesheet href="docstyle1.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+<!-- NAVBARTOP -->
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>PIVMat Function Reference</b></td>
+</tr>
+</table>
+
+
+<h1>Functions -- By Category</h1>
+<hr>
+<code><pre>
+ 
+<b>Data import and display</b>
+  <a href="loadvec.html">loadvec</a>           - Load vector/scalar fields
+  <a href="showf.html">showf</a>             - Display vector/scalar fields (still images or movies)
+  <a href="vec2scal.html">vec2scal</a>          - Compute scalar fields from vector fields
+ 
+<b>Spatial field processing</b> 
+  <a href="filterf.html">filterf</a>           - Spatial filter of a field 
+  <a href="interpf.html">interpf</a>           - Interpolate missing data
+  <a href="bwfilterf.html">bwfilterf</a>         - Spatial Butterworth filter of a field 
+  <a href="medianf.html">medianf</a>           - Median filter
+  <a href="spaverf.html">spaverf</a>           - Spatial average over X and/or Y of a field 
+  <a href="azaverf.html">azaverf</a>           - Azimuthally average field
+  <a href="azprofile.html">azprofile</a>         - Azimuthal profile
+  <a href="subaverf.html">subaverf</a>          - Substract the average of field 
+  <a href="remapf.html">remapf</a>            - Remap a field to a new grid
+  <a href="truncf.html">truncf</a>            - Truncate a field 
+  <a href="extractf.html">extractf</a>          - Extract a rectangle from a field 
+  <a href="resizef.html">resizef</a>           - Resize a field
+  <a href="maskrectf.html">maskrectf</a>         - Mask a rectangular area on fields
+  <a href="rotatef.html">rotatef</a>           - Rotate a field about the center 
+  <a href="shiftf.html">shiftf</a>            - Shift the axis of a field 
+  <a href="setoriginf.html">setoriginf</a>        - Set the origin (0,0) of a field 
+  <a href="flipf.html">flipf</a>             - Flip (mirror) a field
+  <a href="operf.html">operf</a>             - Other operations (sum, multiply, etc)
+  <a href="gradientf.html">gradientf</a>         - Gradient of a scalar field
+  <a href="convert3dto2df.html">convert3dto2df</a>    - Convert 3D vector fields to 2D vector fields
+
+<b>Temporal field processing</b> 
+  <a href="averf.html">averf</a>             - Average, standard deviation and rms of fields 
+  <a href="subaverf.html">subaverf</a>          - Substract the average of fields 
+  <a href="phaseaverf.html">phaseaverf</a>        - Phase average of fields
+  <a href="tempspecf.html">tempspecf</a>         - Temporal power spectrum of fields.
+  <a href="tempcorrf.html">tempcorrf</a>         - Temporal correlation function of fields
+  <a href="tempfilterf.html">tempfilterf</a>       - Temporal filter (e.g., band-pass filter)
+  <a href="spatiotempcorrf.html">spatiotempcorrf</a>   - Spatio-temporal correlation function of a scalar field.
+  <a href="smoothf.html">smoothf</a>           - Temporal smooth of fields 
+  <a href="resamplef.html">resamplef</a>         - Re-sample time series of fields
+  <a href="probef.html">probef</a>            - Record the time evolution of a probe in a field
+ 
+<b>Statistics, spectra and histograms</b>
+  <a href="statf.html">statf</a>             - Mean, standard deviation and rms of a field. 
+  <a href="histf.html">histf</a>             - Histogram of a field. 
+  <a href="corrf.html">corrf</a>             - Spatial correlation function of a scalar field.
+  <a href="histvec_disp.html">histvec_disp</a>      - Display histograms from vector fields. 
+  <a href="histscal_disp.html">histscal_disp</a>     - Display histograms from scalar fields. 
+  <a href="statvec_disp.html">statvec_disp</a>      - Display statistics from vector fields. 
+  <a href="ssf.html">ssf</a>               - Scalar structure functions.
+  <a href="vsf.html">vsf</a>               - Vector structure functions.
+  <a href="vsf_disp.html">vsf_disp</a>          - Display vector structure functions. 
+  <a href="specf.html">specf</a>             - 1D power spectrum of vector/scalar fields.
+  <a href="spec2f.html">spec2f</a>            - 2D power spectrum of vector/scalar fields.
+  <a href="tempspecf.html">tempspecf</a>         - Temporal power spectrum of vector/scalar fields.
+  <a href="jpdfscal.html">jpdfscal</a>          - Joint probability density function.
+  <a href="jpdfscal_disp.html">jpdfscal_disp</a>     - Display joint PDF
+ 
+<b>Advanced file operations</b> 
+  <a href="loadpivtxt.html">loadpivtxt</a>        - Load a vector field exported in text format (TXT, DAT)
+  <a href="loadarrayvec.html">loadarrayvec</a>      - Load a 2D array of vector fields 
+  <a href="changefieldf.html">changefieldf</a>      - Change the values of variables in a PIVMat structure
+  <a href="batchf.html">batchf</a>            - Execute arbitrary functions over a series of files 
+  <a href="vec2mat.html">vec2mat</a>           - Convert any PIVMat-compatible files into standard MAT files
+  <a href="imvectomovie.html">imvectomovie</a>      - Create a movie directly from files
+  <a href="zerotonanfield.html">zerotonanfield</a>    - Convert missing data representation to NaNs
+  <a href="nantozerofield.html">nantozerofield</a>    - Convert missing data representation to zeros
+  <a href="randvec.html">randvec</a>           - Random vector field. 
+  <a href="addnoisef.html">addnoisef</a>         - Add noise to fields
+  <a href="vortex.html">vortex</a>            - Test vector field containing a single vortex. 
+  <a href="multivortex.html">multivortex</a>       - Test vector fields of randomly distributed Burgers vortices
+  <a href="nam.html">nam</a>               - Normalized Angular Momentum
+  <a href="stresstensor.html">stresstensor</a>      - Reynolds stress tensor
+  <a href="matrixcoordf.html">matrixcoordf</a>      - Matrix-coordinates (i,j) of a point (x,y) in a field
+  
+<b>Specific DaVis file handling (VEC, VC7, SET files)</b> 
+  <a href="getattribute.html">getattribute</a>      - Get attributes from an IMX/IM7 or VEC/VC7 file 
+  <a href="readsetfile.html">readsetfile</a>       - Get attributes from the definition .SET file of a set 
+  <a href="getpivtime.html">getpivtime</a>        - Returns the time of IMX/IM7 or VEC/VC7 files 
+  <a href="getframedt.html">getframedt</a>        - Time intervals between the frames of an IMX/IM7 file
+ 
+<b>Miscellaneous files handling (from Fileseries v1.40)</b> 
+  <a href="cdw.html">cdw</a>               - Change current working directory with wildcards
+  <a href="lsw.html">lsw</a>               - List directory with wildcards
+  <a href="rdir.html">rdir</a>              - Recursive list directory. 
+  <a href="rdelete.html">rdelete</a>           - Delete files recursively. 
+  <a href="rrmdir.html">rrmdir</a>            - Delete directories recursively. 
+  <a href="renamefile.html">renamefile</a>        - Rename a series of files. 
+  <a href="renumberfile.html">renumberfile</a>      - Re-number the indices of a series of files 
+  <a href="getfilenum.html">getfilenum</a>        - Get the index of a series of files. 
+ 
+<b>Free-Surface Synthetic Schlieren (FS-SS)</b>
+  <a href="makebospattern.html">makebospattern</a>    - Make random dot pattern for SS or BOS
+  <a href="surfheight.html">surfheight</a>        - Surface height reconstruction.   
+
+<b>Miscellaneous</b> 
+  <a href="getsetname.html">getsetname</a>        - Get the name of the current directory
+  <a href="getvar.html">getvar</a>            - Get the value of the parameters in a string 'p1=v1_p2=v2_...'
+
+ 
+</pre></code>
+<br>
+
+<br>
+<table width="100%" border=0 cellspacing=0 bgcolor=d0d0f0><tr><td>&nbsp</td></tr></table><br>
+2005-2017 <a href="pivmat.html">PIVMat Toolbox</a><br>
+</body>
+</html>

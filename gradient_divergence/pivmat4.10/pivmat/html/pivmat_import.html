@@ -1,0 +1,235 @@
+
+<html><head><title>Importing data into PIVMat</title>
+
+<link rel=stylesheet href="docstyle1.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+<!-- NAVBARTOP -->
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>Importing data into PIVMat</b></td>
+</tr>
+</table>
+
+<h1>Importing data into PIVMat</h1>
+<hr>
+
+<br>
+
+<p>The function <tt><a href="loadvec.html">loadvec</a></tt> allows to
+import data from several file formats into a PIVMat structure for further processing.
+See the page <a href="pivmat_data.html">Data organisation in PIVMat</a> to learn
+more about PIVMat structures.</p>
+
+<p>PIVMat supports files from:</p>
+<ul>
+    <li><a href="http://www.lavision.de/en">DaVis (LaVision GmbH)</a></li>
+    <li><a href="http://www.dantecdynamics.com/dynamicstudio">DynamicStudio (Dantec Dynamics)</a></li>
+    <li><a href="http://www.oxfordlasers.com/imaging/particle-image-velocimetry-piv/particle-image-velocimetry-software-vidpiv/">VidPIV (Oxford Laser)</a></li>
+    <li><a href="https://www.irphe.fr/~meunier/#PIV">DPIVSoft (Meunier & Leweke, 2003)</a></li>
+    <li><a href="http://folk.uio.no/jks/matpiv/index2.html">MatPIV (J. Kristian Sveen, 2006)</a></li>
+</ul>
+
+<p>Examples in this page are provided for DaVis files (*.VC7), but
+they work similarly for the other supported files.</p>
+
+<p>If you are in a directory containing PIVMat-compatible files
+(files with suffix <tt>.VC7</tt>, <tt>.MAT</tt> etc.), you can load a single
+field into a PIVMAT structure using the function
+<tt><a href="loadvec.html">loadvec</a></tt>:
+<blockquote><pre>v = loadvec('B00001.vc7');</pre></blockquote>
+But <tt><a href="loadvec.html">loadvec</a></tt> offers a lot of possibilities
+to import series of files, using wildcards (*), file numbering etc.</p>
+
+
+<h2>Importing files using the wildcard (*)</h2>
+
+<p>In order to import all the files of the current directory into a
+structure array, simply use <pre><blockquote>v = loadvec('*')</pre></blockquote></p>
+
+    
+<p>It is also possible to import files belonging to different directories,
+using wildcards (*) in the path names like this:
+    <blockquote><pre>v1 = loadvec('*Loop=1*/PIV*/*.vc7');
+v2 = loadvec('*Loop=2*/PIV*/*.vc7');</pre></blockquote>
+    You can also concatenate all the files into a big PIVMat structure like this:
+    <blockquote><pre>v = loadvec('*Loop*/PIV*/*.vc7');</pre></blockquote>
+    You can also load the first file of each directory <tt>Loop=*</tt> like this:
+<blockquote><pre>v = loadvec('*Loop*/PIV*/B00001.vc7');</pre></blockquote></p>
+See also <tt><a href="loadarrayvec.html">loadarrayvec</a></tt> to import
+different files from different directories under two-dimensional structure arrays.
+
+
+<h2>Importing files using file enumeration (without brackets [])</h2>
+
+<p>Suppose the files are named <tt>B00001.vc7</tt>, <tt>B00002.vc7</tt> etc.
+(standard DaVis file naming convention). If you want to load files 1 to 10,
+you can use the following syntax: <pre><blockquote>v = loadvec(1:10);</pre></blockquote>
+You can use all Matlab ways to enumerate numbers, e.g. <pre><blockquote>v = loadvec([1 10 12:20]);</pre></blockquote>
+or <pre><blockquote>v = loadvec(100:-1:1);</pre></blockquote></p>
+
+
+<h2>Importing files using file enumeration (with brackets [])</h2>
+
+<p>Another convenient way to import some specified files is the file
+enumeration operator, coded with brackets [...] in the filename.</p>
+
+<p>For instance, to load the first 5 files from the Loops number 1 to 3 only, use
+<blockquote><pre>v = loadvec('*Loop=[1:3,1]*/PIV*/B[1:5].vc7');</pre></blockquote></p>
+
+<p>The bracket syntax is <tt>[RANGE, NZ]</tt>, where <tt>RANGE</tt> is a range of
+    numbers in the Matlab syntax (e.g. 1:10, 1:2:10, 10:-1:1 etc), and <tt>NZ</tt> specifies
+    the number of zeros to pad the result (5 by default). For instance, <tt>[1:4,3]</tt>
+is equivalent to <tt>001</tt>, <tt>002</tt>, <tt>003</tt>, <tt>004</tt>.</p>
+
+<p>You can also use non-integer indices, using the syntax <tt>[RANGE, NZ.NP]</tt>,
+    where <tt>NZ</tt> is the total number of characters of the index, and <tt>NP</tt>
+is the number of digits after the decimal point (if not specified, NP=0).</p>
+
+<p>For instance, suppose your files (originating from a 4-Hz acquisition
+system) have names in the form:
+<tt>
+    <ul>
+        <li>Mydata_t=0001.00s.mat</li>
+        <li>Mydata_t=0001.25s.mat</li>
+        <li>Mydata_t=0001.50s.mat</li>
+        <li>Mydata_t=0001.75s.mat</li>
+        <li>Mydata_t=0002.00s.mat</li>
+        <li>...</li>
+    </ul>
+</tt>
+You can import the files from time 10 to 14 s by steps of 0.5 s using
+<blockquote><pre>v = loadvec('My*_t[10:0.5:14,7.2]*.mat');</pre></blockquote></p>
+
+
+<h2>Importing files using <tt>for</tt> loops</h2>
+
+If you can't store all your files into a single PIVMat structure (lack of memory),
+then you will have to make a direct loop over your files. This can be readily done using
+the function <a href="rdir.html">rdir</a>:
+<blockquote><pre>file = rdir('*.vc7');
+for i=1:length(file)
+   v = loadvec(file{i});
+   st = statf(vec2scal(v,'ken'));
+   k(i) = st.mean;
+end;
+plot(k);</pre></blockquote>
+(note the use of curly braces {} for cell arrays of strings - see <a href="rdir.html">rdir</a> for details).
+
+
+<h2>Saving / reloading files</h2>
+
+Once a set of DaVis files have been imported into a PIVMat structure <tt>v</tt>,
+you can perform a number of computations, e.g.
+<blockquote><pre>v = loadvec('*Loop*/PIV*/*.vc7');
+nv = filterf(medianf(rotatef(v,pi/8));</pre></blockquote>
+You can save your modified fields <tt>nv</tt> into standard Matlab's
+<tt>MAT</tt> files using the command <tt>save</tt>:
+<blockquote><pre>save('myfields.mat','nv');</pre></blockquote>
+Those Matlab files may be loaded either using standard Matlab's
+<tt>load</tt> command or, more conveniently, directly using
+<a href="loadvec.html">loadvec</a>:
+<blockquote><pre>v = loadvec('myfields.mat');</pre></blockquote>
+Note that the file <tt>myfields.mat</tt> only needs to contain at least one
+PIVMat-compatible structure for this to work, whatever its name. 
+Here, <tt>loadvec</tt> recognizes the PIVMat structure <tt>nv</tt> in the
+file, and outputs it under the new name <tt>v</tt>.
+
+
+<h2>Using DaVis files without the <tt>ReadIMX</tt> package</h2>
+
+<p>DaVis uses various file formats (<tt>VC7</tt>, <tt>IM7</tt> and others) which
+    can be imported into Matlab using the <tt>ReadIMX</tt>
+    package provided by LaVision.</p>
+
+<p>It is also possible to translate the DaVis
+   files into standard Matlab <tt>MAT</tt>
+   files, that can be further processed on systems without <tt>ReadIMX</tt>.
+For this purpose, use the function <tt><a href="vec2mat.html">vec2mat</a></tt>.
+    Use for instance <blockquote><pre>vec2mat('*.vc7');</pre></blockquote>
+    to translate all the <tt>VC7</tt> files
+    from the current directory into <tt>MAT</tt> files with the same name
+    (e.g. <tt>B00001.MAT</tt>, <tt>B00002.MAT</tt> etc). Those <tt>MAT</tt> files
+    can be re-loaded as usual using the <tt><a href="loadvec.html">loadvec</a></tt>
+function, e.g. <blockquote><pre>v = loadvec('*.mat');</pre></blockquote></p>
+
+
+<h2>DaVis files organization</h2>
+
+<p>Files in DaVis 7 are organized by default into a specific tree of folders
+    and subfolders. PIVMat provides a number of command-line functions to easily
+    navigate through those folders: <tt><a href="rdir.html">rdir</a></tt>,
+<tt><a href="cdw.html">cdw</a></tt>, <tt><a href="lsw.html">lsw</a></tt>.</p>
+
+<p>With the use of wildcards (*) and file enumeration with brackets ([]),
+<tt><a href="loadvec.html">loadvec</a></tt>
+allows you to easily import files from the right (sub)directories of the DaVis hierarchy.</p>
+
+
+<p>Here is an example of DaVis project content:</p>
+
+<tt>
+    <ul>
+        <li>D:\MyProjects\100121_expe
+            <ul>
+                <li>Properties
+                    <ul>
+                        <li>Calibration.set</li>
+                        <li>...</li>
+                </ul></li>
+                <li>Properties.set</li>
+                <li>labbook.txt</li>
+                <li>Cam_Date=091127_Time=111140_Loop=1_dt1=20000
+                    <ul>
+                        <li>B00001.im7</li>
+                        <li>B00001.im7</li>
+                        <li>...</li>
+                        <li>PIV_MP(32x32_50%ov)_PostProc
+                            <ul>
+                                <li>B00001.vc7</li>
+                                <li>B00002.vc7</li>
+                                <li>...</li>
+                        </ul></li>
+                        <li>PIV_MP(32x32_50%ov)_PostProc.set</li>
+                </ul></li>
+                <li>Cam_Date=091127_Time=111140_Loop=1_dt1=20000.set</li>
+                <li>Cam_Date=091127_Time=111718_Loop=2_dt1=20000
+                    <ul>
+                        <li>B00001.im7</li>
+                        <li>B00001.im7</li>
+                        <li>...</li>
+                        <li>PIV_MP(32x32_50%ov)_PostProc
+                            <ul>
+                                <li>B00001.vc7</li>
+                                <li>B00002.vc7</li>
+                                <li>...</li>
+                        </ul></li>
+                        <li>PIV_MP(32x32_50%ov)_PostProc.set</li>
+                </ul></li>
+                <li>Cam_Date=091127_Time=111718_Loop=2_dt1=20000.set</li>
+        </ul></li>
+    </ul>
+</tt>
+
+<p>In order to easily navigate in this tree, using the number of the loop
+<tt>Loop=x</tt> for instance, you can use the functions
+<tt><a href="cdw.html">cdw</a></tt> and <tt><a href="lsw.html">lsw</a></tt>
+(analogous to <tt>cd</tt> and <tt>ls</tt> with wildcards *):
+<blockquote><pre>cdw *Loop=2*</pre></blockquote>
+
+
+
+<h2>Importing other types of DaVis files</h2>
+
+<p>The function <a href="loadvec.html">loadvec</a> is also able to import
+DaVis image files (<tt>IMX</tt>, <tt>IMG</tt> and <tt>IM7</tt> files).</p>
+
+<p>In order to import DaVis <tt>.SET</tt> and <tt>.EXP</tt> files, use
+<tt><a href="readsetfile.html">readsetfile</a></tt>.</p>
+
+<br>
+
+<br>
+<table width="100%" border=0 cellspacing=0 bgcolor=d0d0f0><tr><td>&nbsp</td></tr></table><br>
+2005-2016 <a href="pivmat.html">PIVMat Toolbox</a><br>
+</body>
+</html>

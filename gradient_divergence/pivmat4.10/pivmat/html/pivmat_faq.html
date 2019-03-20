@@ -1,0 +1,562 @@
+<html><head><title>PIVMat Frequently Asked Questions</title>
+
+<link rel=stylesheet href="docstyle1.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+<!-- NAVBARTOP -->
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>PIVMat Frequently Asked Questions</b></td>
+</tr>
+</table>
+
+
+<h1>PIVMat Frequently Asked Questions</h1>
+<hr>
+
+<br>
+
+If you have a question which is not answered here, or a suggestion on how
+you would improve this section, please feel free to send an e-mail to
+the author, <a href="mailto:moisy@fast.u-psud.fr">moisy@fast.u-psud.fr</a>.
+
+
+<br>
+<br>
+
+<h3>Basic questions</h3>
+<ol>
+<li><a href="#a1">How to import and display velocity fields from Davis?</a></li>
+<li><a href="#a2">How to have a quick help on a function from the PIVMat toolbox?</a></li>
+<li><a href="#a3">What Matlab knowledge should I have to use the PIVMat toolbox?</a></li>
+<li><a href="#a4">My velocity fields are noisy, how to smooth?</a></li>
+<li><a href="#a5">How can I display the vorticity from a velocity field?</a></li>
+<li><a href="#a6">I just want to display the first 10 fields of my set!</a></li>
+<li><a href="#a7">Can I import an IMX or IM7 image file?</a></li>
+<li><a href="#a8">Can I import a vector field saved in TXT or DAT file?</a></li>
+<li><a href="#a9">Why all the vectors are not displayed with showf?</a></li>
+<li><a href="#a10">What is the difference between the ReadIMX package provided
+by LaVision and the PIVMat toolbox?</a></li>
+<li><a href="#a11">Can I import 3D velocity fields (Stereoscopic PIV)?</a></li>
+</ol>
+
+<h3>Advanced questions</h3>
+<ol>
+<li><a href="#b1">How to plot lines of iso-velocity?</a></li>
+<li><a href="#b2">How to navigate into a set of fields?</a></li>
+<li><a href="#b3">How are stored the vector fields in Matlab?</a></li>
+<li><a href="#b4">How can I plot a velocity profile from a vector field?</a></li>
+<li><a href="#b5">How can I plot a vorticity profile?</a></li>
+<li><a href="#b6">How can I create a MP4 / AVI movie file from my fields?</a></li>
+<li><a href="#b7">What is the mean kinetic energy of my field?</a></li>
+<li><a href="#b8">How to save fields processed with Matlab?</a></li>
+<li><a href="#b9">Where is stored the acquisition time of a vector field?</a></li>
+<li><a href="#b10">How can I compute the rms (root-mean-square) of a series of vector fields?</a></li>
+<li><a href="#b11">How can I plot the velocity at some given point as a function of time?</a></li>
+<li><a href="#b12">How can I plot a spatio-temporal diagram from a vector field?</a></li>
+<li><a href="#b13">What are all the successive operations performed on a given field?</a></li>
+<li><a href="#b14">Should I always use <tt>loadvec</tt> to display/process my set of files?</a></li>
+<li><a href="#b15">Can I display the current time in my movie?</a></li>
+</ol>
+
+<h3>Expert questions</h3>
+<ol>
+<li><a href="#c1">I have to process 1000 vector fields but I haven't enough memory!</a></li>
+<li><a href="#c2">I want to load n sets of p vector fields</a></li>
+<li><a href="#c3">How to compute ensemble averages from my n sets of p fields?</a></li>
+<li><a href="#c4">How to compute scalar fields other than the default ones proposed in vec2scal?</a></li>
+<li><a href="#c5">How to load multiframe fields?</a></li>
+<li><a href="#c6">What is the variable ysign?</a></li>
+</ol>
+
+<br>
+
+<hr>
+
+<h2>Basic questions</h2>
+ 
+<ol>
+
+<li><b><a name="a1"></a>How to import and display velocity fields from Davis?</b><br><br>
+
+Go to the directory where your <tt>VEC</tt> or <tt>VC7</tt> files are stored
+(a sample directory named <tt>'sample'</tt>, containing 3 examples of velocity fields,
+is present in the <tt>pivmat</tt> directory).
+Type
+<blockquote><pre>v = loadvec('B00001.VC7');</pre></blockquote>
+to load a single file (here <tt>'B00001.VC7'</tt>). To load all the
+<tt>VC7</tt> files in the current directory, type
+<blockquote><pre>v = loadvec('*.VC7');</pre></blockquote>
+To load only files 1 to 10, use
+<blockquote><pre>v = loadvec(1:10);</pre></blockquote>
+To display the fields, type
+<blockquote><pre>showf(v);</pre></blockquote>
+There are several shortcuts: For instance, this will
+display a movie of all the files in the current directory:
+<blockquote><pre>showf('*.VC7');</pre></blockquote>
+See the page <a href="pivmat_import.html">Importing data into PIVMat</a> to
+learn more.<br><br></li>
+
+<li><b><a name="a2"></a>How to have a quick help on a function from the PIVMat toolbox?</b><br><br>
+To get information about the function <tt>loadvec</tt>, type
+<blockquote><pre>doc loadvec</pre></blockquote>
+(open the help browser with the help for this function), or
+<blockquote><pre>help loadvec</pre></blockquote>
+(display the text of the help in the command window). If you don't know
+what you look for, have a look to the <a href="pivmat_func_cat.html">Function by category</a>
+section from the PIVMat main page:
+<blockquote><pre>docpivmat</pre></blockquote>
+<br><br></li>
+
+
+<li><b><a name="a3"></a>What Matlab knowledge should I have to use the PIVMat toolbox?</b><br><br>
+
+You should be familiar with the basic Matlab syntax, especially the use of colons (:) to
+index arrays, and the use of structures and structure arrays.
+<br><br></li>
+
+
+<li><b><a name="a4"></a>My velocity fields are noisy, how to smooth?</b><br><br>
+
+Use <a href="filterf.html">filterf</a> or <a href="bwfilterf.html">bwfilterf</a>, eg:
+<blockquote><pre>showf(filterf(v,2));</pre></blockquote>
+<br></li>
+
+
+<li><b><a name="a5"></a>How can I display the vorticity from a velocity field?</b><br><br>
+
+First load your vector field with <blockquote><pre>v = loadvec('B00001.VC7');</pre></blockquote>
+Then display it with the background option 'rot'
+<blockquote><pre>showf(v,'rot');</pre></blockquote>
+Another way to do this is to create a scalar field curl,
+<blockquote><pre>curl = vec2scal(v,'rot');</pre></blockquote>
+and then to display it:
+<blockquote><pre>showf(curl);</pre></blockquote>
+Before computing the vorticity field, you will probably want to filter
+your vector field:
+<blockquote><pre>showf(filterf(v,1),'rot');</pre></blockquote>
+Many other vector-to-scalar conversions (divergence, kinetic energy, velocity derivatives...)
+are available from <a href="vec2scal.html">vec2scal</a>.
+<br><br></li>
+
+
+<li><b><a name="a6"></a>I just want to display the first 10 fields of my set!</b><br><br>
+
+You may load all the vector fields and display only the ones you want:
+<blockquote><pre>v = loadvec('*.VC7');</pre></blockquote>
+Just refer to the fields you want with <tt>v(n)</tt>, where <tt>n</tt>
+is a number (eg, <tt>showf(v(4))</tt> displays the field #4).<br>
+If you want to refer to a range of fields, <tt>n</tt> may be an array,
+like <tt>[1 3 8]</tt>, or <tt>1:10</tt> (type <tt>doc colon</tt> to learn
+more about Matlab's colon (:)). So, to display only the first
+10 fields, type
+<blockquote><pre>showf(v(1:10));</pre></blockquote>
+If you want to skip one field every 2, type
+<blockquote><pre>showf(v(1:2:10));</pre></blockquote>
+You may also only load the fields you want, by using wildcards
+(*) and/or brackets []. In order to load only the files <tt>B00001.VC7</tt> to
+<tt>B00010.VC7</tt>, type
+<blockquote><pre>v = loadvec('B[1:10].VC7');</pre></blockquote>
+See <a href="rdir.html">rdir</a> for details about the usage
+of the brackets []. There is also a shortcut to do so,
+<blockquote><pre>v = loadvec(1:10);</pre></blockquote>
+(in this case, the 10 first files are loaded in the alphabetically-ordered
+set of files of the current directory).<br>
+See the page <a href="pivmat_import.html">Importing data into PIVMat</a> to
+learn more.
+<br><br></li>
+
+
+<li><b><a name="a7"></a>Can I import an IMX or IM7 image file?</b><br><br>
+
+Yes, <a href="loadvec.html">loadvec</a> accepts <tt>IMX/IM7</tt> files; they will be considered
+as normal scalar fields, ie: use <a href="showf.html">showf</a> to display them. You may
+use <tt>colormap gray</tt> to use a black-and-white color map, which is usually more
+suitable for images.
+<br><br></li>
+
+
+<li><b><a name="a8"></a>Can I import a vector field saved in a TXT or DAT file?</b><br><br>
+
+Yes. Simply use <a href="loadvec.html">loadvec</a> (see also <a href="loadpivtxt.html">loadpivtxt</a>).
+However, if you work with DaVis, it is better to import directly the <tt>VEC/VC7</tt> files:
+it is faster, and these files contain many additional informations.
+<br><br></li>
+
+
+
+<li><b><a name="a9"></a>Why all the vectors are not displayed with showf?</b><br><br>
+
+A vector field is a bit confusing when too many vectors are present in
+a field. By default, <a href="showf.html">showf</a> displays at most
+32 vectors in each direction, whatever the vector field resolution. This
+can be changed using the 'Spacing' option of <a href="showf.html">showf</a>, eg:
+<blockquote><pre>showf(v,'norm','spacing',2);</pre></blockquote>
+You may also display specify different spacing in the x- and y-direction:
+<blockquote><pre>showf(filterf(v,1.5),'ken','spacing',[4 12]);</pre></blockquote>
+<p><img src="pivmat_faq_fig1.jpg"></p>
+<br></li>
+
+
+<li><b><a name="a10"></a>What is the difference between the ReadIMX package provided
+by LaVision and the PIVMat toolbox?</b><br><br>
+
+The ReadIMX package provided by LaVision allows to import
+a (single) <tt>VEC/VC7/IMX/IM7</tt> file from Davis into Matlab, and to display it. That's all.<br>
+The PIVMat toolbox is based on the function <tt>readimx</tt> from the ReadIMX package,
+but offers much more. Note that the ReadIMX package has to be installed separately for the
+PIVMat toolbox to work correctly (see the <a href="pivmat_install.html">Installation</a> page).
+<br><br></li>
+
+
+<li><b><a name="a11"></a>Can I import 3D velocity fields (Stereoscopic PIV)?</b><br><br>
+
+Yes, since version 3.00, PIVMat is compatible with 3D velocity fields.
+<br><br></li>
+
+
+</ol>
+
+<h2>Advanced questions</h2>
+ 
+<ol>
+
+
+<li><b><a name="b1"></a>How to plot lines of iso-velocity?</b><br><br>
+
+Use  <a href="showf.html">showf</a> with
+the option 'contour' or 'contourf', e.g.
+<blockquote><pre>showf(v,'contourf',8,'spacing',[4 12]);</pre></blockquote>
+<p><img src="pivmat_faq_fig2.jpg"></p>
+<br></li>
+
+
+<li><b><a name="b2"></a>How to navigate into a set of fields?</b><br><br>
+
+First load your vector fields with <blockquote><pre>v = loadvec('*.VC7');</pre></blockquote>
+Display a movie of your fields,
+<blockquote><pre>showf(v);</pre></blockquote>
+You can enter into the 'pause' mode by pressing the space bar. Then navigate using
+the left or right arrow. Press the space bar to run the movie again. Press ESC
+to escape. Use option 'loop' to run the movie in a loop. You may also
+directly enter into the 'pause' mode by specifying the option 'pause'.
+See  <a href="showf.html">showf</a>.
+<br><br></li>
+
+<li><b><a name="b3"></a>How are stored the vector fields in Matlab?</b><br><br>
+
+A vector field loaded with
+<blockquote><pre>v = loadvec('B00001.VC7');</pre></blockquote>
+is stored into a "PIVMat structure" <tt>v</tt>. A PIVMat structure
+is a variable that contains several variables of different types
+(see 'Data Types > Structures' in the Matlab help).
+The structure <tt>v</tt> contains the axis, the velocity components,
+the field names etc. If the fields originate from DaVis, the PIVMat
+structure also contains several attributes saved by DaVis (acquisition time,
+etc). For instance, the x-component of the
+velocity field is stored in the matrix <tt>vx</tt> of the structure <tt>v</tt>.
+In order to refer (eg, plot, display, modify...) to the x-component
+of the velocity at the point <tt>(i,j)</tt>, you should type <blockquote><pre>v.vx(i,j)</pre></blockquote>
+If you have loaded several fields in a single structure <tt>v</tt>, e.g. with 
+<blockquote><pre>v = loadvec('*.VC7');</pre></blockquote>
+then <tt>v</tt> is now a "structure array". You can refer to the <tt>(i,j)</tt> point
+of the x-component of the <tt>n</tt>-th vector field with <blockquote><pre>v(n).vx(i,j)</pre></blockquote>
+See <a href="pivmat_data.html">Data Organization in PIVMat</a> for a full description of 
+PIVMat structures.
+<br><br></li>
+
+
+
+<li><b><a name="b4"></a>How can I plot a velocity profile from a vector field?</b><br><br>
+
+The velocity components are stored in the two arrays <tt>vx</tt>
+and <tt>vy</tt> of the structure <tt>v</tt> loaded by <tt>loadvec</tt> (see question above).
+So, to plot a velocity profile along the horizontal line at height <tt>y=12</tt> (in mesh
+units), type <blockquote><pre>plot(v.x, v.vx(:,12))</pre></blockquote>
+(type <tt>doc colon</tt> to learn more about Matlab's colon (:)).<br> 
+You may also plot the velocity profile averaged over several horizontal lines,
+for instance between <tt>y=12</tt> and <tt>y=14</tt> (in mesh units):
+<blockquote><pre>plot(v.x, mean(v.vx(:,10:14),2))</pre></blockquote>
+<br></li>
+
+
+<li><b><a name="b5"></a>How can I plot a vorticity profile?</b><br><br>
+
+First compute the vorticity from a velocity field,
+<blockquote><pre>vort = vec2scal(v, 'rot');</pre></blockquote>
+Then follow the same procedure as above. The vorticity is contained
+into the variable <tt>w</tt> of the structure <tt>vort</tt>:
+<blockquote><pre>plot(vort.x, vort.w(:,12))</pre></blockquote>
+<br></li>
+
+
+
+<li><b><a name="b6"></a>How can I create a MP4 / AVI movie file from my vector fields?</b><br><br>
+
+(New Pivmat 4.10) 
+
+You can use <a href="showf.html">showf</a> to create MP4 / AVI movies.<br>
+First load your fields, e.g. <blockquote><pre>v = loadvec('*.VC7');</pre></blockquote>
+Create a VideoWriter object:
+<blockquote><pre>vid = VideoWriter('mymovie.mp4');</pre></blockquote>
+Call <tt>showf</tt>
+<blockquote><pre>showf(v, vid, 'rot', 'clim', [-3 3]);</pre></blockquote>
+<br><br>
+    
+Using a very large number of files may produce
+'out of memory'. An alternative method consists in loading the files one by one,
+without storing them in a PIVMat structure:
+<blockquote><pre>vid = VideoWriter('mymovie.avi');
+imvectomovie('*.IM7', vid, 'clim', 2000);</pre></blockquote>
+
+<br><br></li>
+
+
+<li><b><a name="b7"></a>What is the mean kinetic energy of my field?</b><br><br>
+
+First compute the kinetic energy of your field <tt>v</tt>
+<blockquote><pre>ke = vec2scal(v, 'ken');</pre></blockquote>
+Then call the function <tt>statf</tt>
+<blockquote><pre>st = statf(ke);</pre></blockquote>
+What you want is the mean of <tt>ke</tt>:
+<blockquote><pre>st.mean</pre></blockquote>
+<br></li>
+
+
+<li><b><a name="b8"></a>How to save fields processed with Matlab?</b><br><br>
+
+Suppose you have computed complex operations from a series of vector fields,
+<blockquote><pre>v=loadvec('*.vc7');
+v=shiftf(extractf(v,[10 10 100 100],'phys'),'center');
+fv=bwfilterf(v, 2, 8);
+curl=vec2scal(fv, 'rot');</pre></blockquote>
+Then you can save your final set of scalar fields <tt>curl</tt> in a
+Matlab file,
+<blockquote><pre>save('mycurl.mat','curl');</pre></blockquote>
+You can retrieve your fields using
+<blockquote><pre>rot = loadvec('mycurl.mat');</pre></blockquote>
+Note that you can also load your fields using the standard Matlab's <tt>load</tt> function,
+<blockquote><pre>load mycurl</pre></blockquote>
+In this case, the field name (here 'curl') will be the same as the one specified to the <tt>save</tt> command.
+<br><br></li>
+
+
+
+
+
+<li><b><a name="b9"></a>Where is stored the acquisition time of a vector field?</b><br><br>
+
+The acquisition time, and other parameters of Davis, are stored in the variable <tt>Attribute</tt>
+of a field <tt>v</tt>. Use the function <a href="getattribute.html">getattribute</a> to get the value of
+a given attribute. For instance, for <tt>VC7</tt> files (from Davis 7), the time acquisition
+is stored in the attribute <tt>AcqTimeSeries0</tt>:
+<blockquote><pre>t = getattribute(v,'AcqTimeSeries0');</pre></blockquote>
+returns the time <tt>t</tt> of <tt>v</tt> (or the array of times, if <tt>v</tt> is an
+array of fields). You may also use the function <a href="getpivtime.html">getpivtime</a>,
+which is a shortcut for this attribute.<br>
+
+For files from Davis 6, please note that
+the acquisition time is *not* saved by default in the <tt>VEC</tt> file, but
+in the image <tt>IMX</tt> file! See <a href="getpivtime.html">getpivtime</a>.
+
+<br><br></li>
+
+
+
+<li><b><a name="b10"></a>How can I compute the rms (root-mean-square) of a series of vector fields?</b><br><br>
+
+First load your vector fields with <blockquote><pre>v = loadvec('*.vc7');</pre></blockquote>
+Then use <a href="averf.html">averf</a> with the following output arguments and
+plot the result:
+<blockquote><pre>[af rms] = averf(v);
+showf(rms);</pre></blockquote>
+<br></li>
+
+
+<li><b><a name="b11"></a>How can I plot the velocity at some given point as a function of time?</b><br><br>
+
+First load your vector fields with <blockquote><pre>v = loadvec('*.vc7');</pre></blockquote>
+Then store the x and y components of the velocity at a given point, say (X,Y) = (20, 40) mm, using <a href="probef.html">probef</a>:
+<blockquote><pre>[ux,uy] = probef(v, 20, 40);</pre></blockquote>
+then plot the result
+<blockquote><pre>plot(1:length(ux), ux)</pre></blockquote>
+If you use DaVis files, you can use
+ <a href="getpivtime.html">getpivtime</a> and <a href="getattribute.html">getattribute</a>
+ to get the time stored in each file.
+<br><br></li>
+
+
+<li><b><a name="b12"></a>How can I plot a spatio-temporal diagram from a vector field?</b><br><br>
+
+You should build a matrix, say <tt>d(i,j)</tt>, where the quantity of
+interest is a vector (index <tt>i</tt>) and the time is along <tt>j</tt>.
+Once the vector fields <tt>v</tt> and the time <tt>t</tt> are obtained
+(see the above question), type
+<blockquote><pre>for j=1:length(v)
+   d(:,j) = v(j).vx(:,12);
+end;
+imagesc(v(1).x, t, d');
+xlabel('x'); ylabel('t');</pre></blockquote>
+<br></li>
+
+<li><b><a name="b13"></a>What are all the successive operations performed on a given field?</b><br><br>
+
+Among the variables stored in the structure <tt>v</tt>, one is called <tt>"history"</tt>. 
+This variable is a cell array of strings, and each operation adds a new string to this cell array,
+which describes this operation. For instance, suppose you do
+<blockquote><pre>v=loadvec('B00001.vc7');
+v=shiftf(extractf(v,[10 10 100 100],'phys'),'center');
+fv=bwfilterf(v, 2, 8);
+curl=vec2scal(fv, 'rot');</pre></blockquote>
+If you type
+<blockquote><pre>curl.history</pre></blockquote>
+you obtain the following cell array of strings:
+<blockquote><pre>    'loadvec('B00001.vc7')'
+    'extractf(ans, [10 10 100 100], 'phys')'
+    'shiftf(ans, 'center')'
+    'bwfilterf(ans, 2, 8, 'low')'
+    'vec2scal(ans, 'rot', 'nonzero')'</pre></blockquote>
+In this list, <tt>ans</tt> refers to the result of the previous operation.
+See <tt>Programming > Data Types > Cell arrays</tt> in the Matlab help to
+learn more about cell arrays.
+<br><br></li>
+
+
+
+<li><b><a name="b14"></a>Should I always use <tt>loadvec</tt> to display/process my set of files?</b><br><br>
+
+Most of the time you have to first load your files, e.g. <tt>v=loadvec('*.vc7')</tt>,
+and then you perform your computations from <tt>v</tt>, e.g. <tt>showf(filterf(v,2))</tt>.
+However, a number of operations can be performed directly from the files themselves. For example, try
+<blockquote><pre>filterf('*.vc7',2);</pre></blockquote>
+When a string is passed as the first argument of <tt>filterf</tt>, the file
+is first loaded by <tt>loadvec</tt>. When no output argument is specified,
+then <tt>showf</tt> is automatically called.
+Numeric arguments may also be used:
+<blockquote><pre>averf(1:10);</pre></blockquote>
+displays the average of the 10 first files on the current directory.
+<br><br></li>
+
+
+
+<li><b><a name="b15"></a>Can I display the current time in my movie?</b><br><br>
+
+Yes, you may use the option 'title' in <tt>showf</tt> , e.g.
+<blockquote><pre>showf(v,'loop','title','%s, t = %t s');</pre></blockquote>
+In this example, the string '%s' is replaced by the setname (i.e. the directory
+name where were stored the files), and the string
+'%t' is replaced by the current time of each field, as obtained by <tt>getpivtime</tt>.
+
+<br><br></li>
+
+
+</ol>
+
+<h2>Expert questions...</h2>
+ 
+<ol>
+
+
+<li><b><a name="c1"></a>I have to process 1000 vector fields but I haven't enough memory!</b><br><br>
+
+Loading a large amount of fields into a single big structure with
+<tt>v=loadvec('*.vc7')</tt> is not always possible due to lack
+of memory, so
+you should process your files one by one without storing the whole set.<br>
+For simple operations, you may use the function
+<a href="batchf.html">batchf</a> for this purpose
+<blockquote><pre>batchf('*.vc7','showf','norm');</pre></blockquote>
+This calls sequentially the function <tt>showf</tt> for each file matching
+'*.vc7' in the current directory, passing the additional parameter <tt>'norm'</tt>.<br>
+More complex operations should be performed using a <tt>for</tt> loop. 
+This example plots the kinetic energy versus file number
+of all the VC7 files in the current directory:
+<blockquote><pre>file = rdir('*.vc7');
+for i=1:length(file)
+   v = loadvec(file{i});
+   st = statf(vec2scal(v,'ken'));
+   k(i) = st.mean;
+end;
+plot(k);</pre></blockquote>
+(note the use of curly braces {} for cell arrays of strings - see <a href="rdir.html">rdir</a> for details).
+<br><br></li>
+
+
+<li><b><a name="c2"></a>I want to load n sets of p vector fields!</b><br><br>
+
+If you want to concatenate <tt>n</tt> sets of <tt>p</tt> vector fields into
+a single big structure <tt>v</tt> of size <tt>n*p</tt>, assuming the fields are stored
+into directories named <tt>myset1</tt>, <tt>myset2</tt>..., use
+<blockquote><pre>v = loadvec('myset*/*.vc7');</pre></blockquote>
+However, you loose the ordering of the
+files doing so. If now you prefer to store your fields into a 2D array
+of fields, use <a href="loadarrayvec.html">loadarrayvec</a>
+<blockquote><pre>v = loadarrayvec('myset*','*.vc7');</pre></blockquote>
+Use something like <tt>showf(v(1,:))</tt> to display all the fields
+from the first directory, or <tt>showf(v(:,1))</tt> for all the first
+fields from each directory.
+<br><br></li>
+
+
+<li><b><a name="c3"></a>How to compute ensemble averages from my n sets of p fields?</b><br><br>
+
+First load your fields with (see previous question):
+<blockquote><pre>v = loadarrayvec('myset*','*.vc7');</pre></blockquote>
+Then you can average all the first fields from each directory, all the second
+fields from each directory, etc:
+<blockquote><pre>for i=1:size(v,1),
+    af(i) = averf(v(i,:));
+end;
+showf(af);</pre></blockquote>
+<br></li>
+
+
+<li><b><a name="c4"></a>How to compute scalar fields other than the default ones proposed in vec2scal?</b><br><br>
+
+<a href="vec2scal.html">vec2scal</a> allows to convert vector fields into
+most classical scalar fields of interest (vorticity, divergence etc.) For
+more exotic operations, you may use <a href="operf.html">operf</a>. You may
+also write your own <tt>.m</tt> file, starting from a basic scalar field.
+For instance, suppose you want to compute a scalar field given by
+2*vx + vy^2:
+<blockquote><pre>function res = strangefield(v)
+res = vec2scal(v,'norm');
+res.w = 2*v.vx + v.vy.^2;
+res.namew = 'strange field';</pre></blockquote>
+Then simply call your function with:
+<blockquote><pre>showf(strangefield(loadvec('B00001.VC7')));</pre></blockquote>
+<br></li>
+
+
+<li><b><a name="c5"></a>How to load multiframe fields?</b><br><br>
+
+Davis' multiframe fields are not supported by PIVMat. <tt>loadvec</tt> will load
+only the first frame of a field. You should first use Davis to expand your multiframe
+buffer into several single-frame buffers, and then load the resulting buffers as usual
+with <tt>loadvec</tt>.
+<br><br></li>
+
+
+<li><b><a name="c6"></a>What is the variable ysign?</b><br><br>
+
+The calibration of the Y-axis from Davis may be upward or downward.
+In Matlab, the natural way to plot a matrix using the function <tt>image</tt>
+is using a downward Y-axis (defaut mode <tt>axis ij</tt>, for matrix
+representation). When using upward an Y-axis (mode <tt>axis xy</tt>, for
+function representation), Matlab re-orders the Y vector, so the
+Y-axis is wrong.<br>
+The variable <tt>ysign</tt> in the structure <tt>v</tt>
+is a string, that may be <tt>'Y axis downward'</tt> or <tt>'Y axis upward'</tt>,
+which is determined by <tt>loadvec</tt> when loading the field.<br>
+    See also the page <a href="pivmat_data.html">Data Organization in PIVMat</a>
+    to learn more about the matrix indexing convention in PIVMat.
+<br><br></li>
+
+</ol>
+
+<br>
+
+<br>
+<table width="100%" border=0 cellspacing=0 bgcolor=d0d0f0><tr><td>&nbsp</td></tr></table><br>
+2005-2017 <a href="pivmat.html">PIVMat Toolbox</a><br>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<html><head><title>PIVMat Known software problems</title>
+
+<link rel=stylesheet href="docstyle1.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+<!-- NAVBARTOP -->
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>PIVMat Known software problems</b></td>
+</tr>
+</table>
+
+
+<h1>PIVMat Known software problems</h1>
+<hr>
+
+<br>
+
+<p>If you find a bug not documented here, first have a look
+to the updated <a href="http://www.fast.u-psud.fr/pivmat/html/pivmat_knownbugs.html">PIVMat
+Known software problems</a> page online.
+If it is still undocumented, send an e-mail to
+<a href="mailto:moisy@fast.u-psud.fr">moisy@fast.u-psud.fr</a>.</p><br>
+    
+    
+    <ul>
+    
+<li><b>DaVis multiframe <tt>IM7</tt> files not handled properly</b></br>
+
+<tt>loadvec</tt> loads only the 1st frame of DaVis multiframe <tt>IM7</tt> files.
+If you need to access to the other frames, use directly <tt>ReadIMX</tt>.<br><br></li>
+
+<li><b>When I use <tt>loadvec</tt> with DaVis files, I obtain the warning
+<tt>MEX-files with .dll extensions will not execute in a future version of MATLAB</tt>.</b><br>
+
+Upgrade your version of <tt>readimx</tt>
+from the LaVision web site.<br><br></li>
+
+
+<li><b>Compatibility issue.</b>
+Since Matlab 7.4 (R2007a), the behavior of the command <tt>doc</tt> has changed:
+the command <tt>doc pivmat</tt> does not display
+the PIVMat toolbox start page in the help browser any more. If you use Matlab >= 7.4,
+type <tt><a href="docpivmat.html">docpivmat</a></tt> to display the start page, 
+or type <tt>docpivmat function_name</tt> to display the
+html documention of <tt>function_name</tt> in the help browser. If you use
+Matlab 7.3 or before, <tt>doc</tt> and <tt>docpivmat</tt> will
+have the same result.<br><br></li>
+
+                
+<li>When using file selection from a dialog box in <tt><a href="loadvec.html">loadvec</a></tt>, the titles
+from <tt><a href="showvec.html">showvec</a></tt> are buggy.<br><br></li>
+
+</ul>
+
+<br>
+
+<br>
+<table width="100%" border=0 cellspacing=0 bgcolor=d0d0f0><tr><td>&nbsp</td></tr></table><br>
+2005-2017 <a href="pivmat.html">PIVMat Toolbox</a><br>
+</body>
+</html>

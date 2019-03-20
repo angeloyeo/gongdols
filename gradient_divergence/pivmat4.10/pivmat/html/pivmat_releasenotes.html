@@ -1,0 +1,952 @@
+<html><head><title>PIVMat Release Notes</title>
+    
+    <link rel=stylesheet href="docstyle1.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+      <!-- NAVBARTOP -->
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+        <td valign=baseline bgcolor="#e7ebf7"><b>PIVMat Release Notes</b></td>
+    </tr>
+</table>
+
+
+<h1>PIVMat Release Notes</h1>
+<hr>
+
+<br>
+
+
+<table width="100%" border="0" cellpadding="5">
+
+<tr valign="top"><td>V4.10</td><td>2017/02/27</td><td>
+          
+    <p><b>Major improvements</b>
+    <ul>
+        <li>The creation of movies using <tt>movie2avi</tt> is no longer supported by Matlab (since 2016).
+        Movies using <a href="showf.html">showf</a> are now created using Matlab's <tt>videoWriter</tt> objects
+        (see the new option <tt>'savevideo'</tt> in <a href="showf.html">showf</a>).</li>
+        <li><a href="loadvec.html">loadvec</a>: import of AVI and MP4 movies is now supported.</li>
+
+    </ul>
+      
+    <p><b>New functions</b> 
+    <ul>
+        <li><a href="im2pivmat">im2pivmat</a>: Convert an image into a PIVMat structure.</li>
+        <li><a href="spatiotempf.html">spatiotempf</a>: Spatio-temporal diagram.</li>
+        <li><a href="timederivativef.html">timederivativef</a>: Time derivative (central finite difference).</li>
+        <li><a href="probeaverf.html">probeaverf</a>: Time series of a probe averaged over a rectangular area.</li>
+    </ul>
+
+    <p><b>New features</b>
+    <ul>
+        <li><a href="showf.html">showf</a>: new options <tt>'hprofile'</tt>, <tt>'vprofile'</tt>, to adds horizontal or vertical profiles of scalar fields embedded in the figure.</li>
+        <li><a href="extractf.html">extractf</a>: allows to select a rectangle using the mouse.</li>
+        <li><a href="probef.html">probef</a>: allows to select more than one probe point. Allows to select probe point(s) using the mouse.</li>
+        <li><a href="operf.html">operf</a>: now includes field binarization (e.g., keeps only scalar values
+        satisfying <tt>F >= Fc</tt>, where <tt>Fc</tt> is a threshold).</li>
+        <li><a href="tempspecf.html">tempfilterf</a>, <a href="tempspecf.html">tempspecf</a>: run faster (x4).</li>
+        <li><a href="imvectomovie.html">imvectomovie</a>: movies are now generated from VideoWriter objects.</li>
+    </ul>
+    
+    <p><b>Minor changes</b> 
+    <ul>
+        <li><a href="averf.html">averf</a>: The 2nd and 3rd output parameters of <tt>averf</tt> are now
+        the standard deviation STD and root-mean-square RMS respectively, in agreement with the output parameters
+        of <a href="statf.html">statf</a>. Definitions: STD = <(u-< u >)^2>^(1/2), and RMS = < u^2 >^(1/2), where <...> denotes
+        a temporal average.</li>
+        <li><a href="histf.html">histf</a> and <a href="histscal_disp.html">histscal_disp</a>: better default binning
+        for fields with non-zero mean.</li>
+    </ul>
+    
+    <p><b>Bug fixes</b> 
+    <ul>
+        <li><a href="azprofile.html">azprofile</a>: Argument <tt>NA</tt> now properly taken into account.</li>
+        <li><a href="tempspecf.html">tempspecf</a>: now works properly when fields contain zero or NaN data.</li>
+        <li><a href="statvec_disp">statvec_disp</a>: now uses the field data for the labels and legends.</li>
+    </ul>
+ 
+</td></tr>
+
+<tr valign="top"><td>V4.01</td><td>2016/05/23</td><td>
+    
+    <p><b>New functions</b> 
+    <ul>
+        <li><a href="tempfilterf.html">tempfilterf</a>: Applies a (Fourier) temporal filtering to a time series of vector or scalar fields,
+        for instance a band-pass / low-pass / high-pass filtering. In case of a band-pass filtering at a single frequency (Dirac band-pass), this allows
+        to reconstruct the spatial structure of a given eigenmode. It is also possible to remove oscillations, due to unwanted vibrations in an
+        acquisition system.</li>
+        
+        <li><a href="spatiotempcorrf.html">spatiotempcorrf</a>: Computes the spatio-temporal correlation of a time-series of scalar fields. This is useful
+        to detect the convective velocity of a flow pattern (e.g., a wave).</li>
+
+    </ul>
+    
+    <p><b>Bug fix</b> 
+    <ul>
+        <li>Warning removed for obsolete function <tt>nargchk</tt> in Matlab R2016a (thanks Antoine Hector).</li>
+    </ul>
+ 
+</td></tr>
+
+
+<tr valign="top"><td>V4.00</td><td>2016/04/26</td><td>
+       
+    <p><b>Major improvements</b> 
+    <ul>
+        <li>PIVMat is now compatible with the new release ReadIMX 2.x for DaVis files.</li>
+        <li>Beta test: PIVMat now supports DAT and MAT files exported from DynamicStudio (Dantec). See <a href="loadvec.html">loadvec</a>
+    for details.</li>
+    </ul>
+    
+    <p><b>New functions</b> 
+    <ul>
+        <li><a href="probef.html">probef</a>: Record the time evolution of a probe in a field.</li>
+        <li><a href="maskrectf.html">maskrectf</a>: Mask a rectangular area in a vector/scalar field (thanks N. Machicoane).</li>
+        <li><a href="azprofile.html">azprofile</a>: Azimuthal profile (profile along a perimeter).</li>
+    </ul>
+
+    <p><b>Minor change</b> 
+    <ul>
+        <li><a href="showf.html">showf</a>: option <tt>'scalearrow'</tt> with <tt>SA<0</tt> does not display the vector arrows (thanks N. Machicoane).</li>
+    </ul>
+    
+    <p><b>Bug fix</b> 
+    <ul>
+        <li>File selection by dialog box (using <a href="loadvec.html">loadvec</a> without input argument) works.</li>
+    </ul>
+        
+</td></tr>
+
+
+<tr valign="top"><td>V3.03</td><td>2015/02/17</td><td>
+    
+    
+    <p><b>Minor improvement</b> 
+    <ul>
+        <li><a href="showf.html">showf</a> and <a href="vec2scal.html">vec2scal</a>: new
+        options 'eps2d', 'eps3d', 'epsaxi' (squared strain rate, = dissipation rate / viscosity)
+        for 2-component fields, 3-component fields, and 3-component fields with axisymmetry
+        with respect to the vertical (y) axis.</li>
+    </ul>
+    
+    <p><b>Bug fixes</b> 
+    <ul>
+        <li><a href="surfheight.html">surfheight</a>: option 'remap'
+        (for parallax corrections) now works correctly with array of
+        fields, and with fields of size odd.</li>
+    </ul>
+        
+</td></tr>
+
+
+<tr valign="top"><td>V3.02</td><td>2013/06/25</td><td>
+    
+    <p><b>New file format supported</b> 
+    <ul>
+ 
+        <li><a href="loadvec.html">loadvec</a> now accepts
+        MAT files from DPIVSoft (Meunier & Leweke, Exp. in Fluids
+        <b>35</b> (5), 408-421, 2003).</li>
+    </ul>
+    
+    <p><b>Bug fixes</b> 
+    <ul>
+        <li><a href="averf.html">averf</a> now computes correctly
+        the RMS fields containing 0 data (thanks M. Bujalski).</li>
+    </ul>
+        
+</td></tr>
+    
+    
+    <tr valign="top"><td>V3.01</td><td>2013/04/26</td><td>
+    
+    <p><b>Bug fixes</b> 
+    <ul>
+        <li>The y-component (i.e., vertical) of the velocity was inverted
+        for 3-component
+        vector fields having an ascending y axis (thanks M. Bujalski).</li>
+        
+        <li><a href="medianf.html">medianf</a>: the 4 corner
+        matrix elements were set to zero (this bug actually
+        originates from the function <tt>medfilt2</tt> from
+        Mathworks' Image Processing toolbox). The corner elements
+        are now given by the average of the closest neighbors.</li>
+    </ul>
+        
+    <p><b>New function</b>
+        <ul>
+            <li><a href="stresstensor.html">stresstensor</a>: computes
+            the Reynolds stress tensor from 2- or 3-components velocity
+            fields.</li>
+        </ul>
+        
+    <p><b>Minor change</b>
+        <ul>
+            <li><a href="vsf.html">vsf</a> now works with the Parallel Computing toolbox
+            (thanks Antoine Campagne).</li>
+        </ul>
+        
+        <p><b>Compatibility issue</b>
+                <ul>
+                    <li>By default, <a href="subaverf.html">subaverf</a> now subtracts
+                        the 'ensemble' (or 'temporal') average. In order to subtract a
+                    'spatial' average instead, specify the second input parameter AXIS.</li>
+                    
+        </ul>
+</td></tr>
+
+
+<tr valign="top"><td>V3.00</td><td>2013/03/15</td><td>
+    
+    <p><b>Major change</b>
+    <p><b>The PIVMat toolbox is now compatible with 3-components fields from DaVis
+        (e.g. from stereo-PIV).</b> Typical use:<br>
+    <tt>showf(v,'uz');</tt>    displays the 3rd component as background<br>
+    <tt>showf(v,'norm3d');</tt>   displays the 3D norm as background<br>
+    <tt>uz = vec2scal(v,'uz');</tt>   generate scalar fields given by the 3rd component.<br>
+    See <a href="vec2scal.html">vec2scal</a> for
+    the new available 3D-fields to scalar conversions.
+    Most of the functions are compatible with 3-component fields.
+
+</p>
+    
+    <p><b>New functions</b> 
+    <ul>
+        <li><tt><a href="convert3dto2df.html">convert3dto2df</a></tt>:
+        Convert 3D vector fields to 2D vector fields.</li>
+
+        <li><tt><a href="multivortex.html">multivortex</a></tt>:
+        Generate velocity fields containing randomly distributed Burgers vortices.</li>
+    </ul>
+
+    <p><b>Compatibility issues</b> 
+    <ul>
+        <li>Scalar fields computed from spatial derivative using 1st order finite
+        difference (denoted by <tt>rot1</tt>, <tt>duxdy1</tt>
+        etc.) have been removed. Now all
+        spatial derivative are computed from 2nd order differences
+        (denoted by <tt>rot</tt>, <tt>duxdy</tt>
+        etc.)
+        <li>In previous releases of PIVMat, option <tt>'uz'</tt> in <tt>showf</tt>
+            or <tt>vec2scal</tt> was equivalent to <tt>'uy'</tt>. Since PIVMat 3.00, for
+            compatibility with 3-component fields, option <tt>'uz'</tt> now specifies
+        the 3rd component of the vector field.</li>
+    </ul>
+        
+</td></tr>
+
+    <tr valign="top"><td>V2.12c</td><td>2013/01/06</td><td>
+    
+    <p><b>New function</b>
+    <ul>
+        <li><tt><a href="tempcorrf.html">tempcorrf</a></tt>:
+        Temporal correlation function of vector or scalar fields.</li>
+    </ul>
+    
+    <p><b>Minor change</b>
+    <ul>
+        <li>The normalization of the vector arrows in <tt><a href="showf.html">showf</a></tt>
+        is simplified. Option <tt>'ScaleArrow'</tt> now
+        specifies the vector normalization directly in absolute units. Option
+        <tt>'ScaleMode'</tt> has been removed (the previous behaviour 'absolute' is now
+        by default).</li>
+    </ul>
+    
+    <p><b>Bug fix</b>
+        <ul>
+            <li>Transverse structure functions of odd order are now correctly
+            defined in <tt><a href="vsf.html">vsf</a></tt> (thanks Basile)</li>
+        </ul>
+
+</td></tr>
+
+    <tr valign="top"><td>V2.12</td><td>2012/08/18</td><td>
+    
+    <p><b>New documentation</b>
+    <ul>
+        <li>The new page <a href="pivmat_visu.html">Visualization tools</a> describes
+        how to control 'in live' the movies displayed
+            by  <tt><a href="showf.html">showf</a></tt>, and lists all the
+        available input parameters.</li>
+    </ul>
+    
+    <p><b>New feature</b>
+    <ul>
+        <li>Keys '+' and '-' allow to increase/decrease the length of the
+        arrow in live during movies (see <tt><a href="showf.html">showf</a></tt>).</li>
+    </ul>
+    
+    <p><b>Compatibility issue</b>
+    <ul>
+        <li><tt>showvec</tt> and <tt>showscal</tt> have been removed.
+        These functions are replaced by <tt><a href="showf.html">showf</a></tt>, which
+        applies for both vector and scalar fields.</li>
+    </ul>
+
+</td></tr>
+
+<tr valign="top"><td>V2.11</td><td>2012/06/24</td><td>
+        
+        <p><b>New function</b>:
+        <ul>
+            <li><tt><a href="matrixcoordf.html">matrixcoordf</a></tt>:
+                Returns the matrix-coordinates of a point in a field.
+            </li>
+            
+        </ul>
+        
+        <p><b>Minor upgrade</b>:
+        <ul>
+            <li>DAT files exported from VidPIV (Oxford Laser) are now accepted.</li>
+        </ul>
+        
+        <p><b>Bug fix</b>:
+        <ul>
+            <li>The window header is no longer blinking when displaying
+                movies of vector or scalar fields (this bug was only present for
+            non-docked windows).</li>    
+        </ul>
+        
+</td></tr>
+
+<tr valign="top"><td>V2.10</td><td>2012/05/02</td><td>
+        
+        
+        <p><b>New functions</b>:
+        <ul>
+            <li><tt><a href="remapf.html">remapf</a></tt>: Remap vector/scalar fields to a new grid.
+                This function allows the user to increase/decrease the resolution (linear interpolation,
+                similar to <tt><a href="resizef.html">resizef</a></tt>),
+                but also to truncate/enlarge a field. This is useful to compare or perform operations on
+            fields obtained with different settings/calibration.</li>
+            <li><tt><a href="setoriginf.html">setoriginf</a></tt>: Redefine the origin (0,0) of fields.</li>
+            <li><tt><a href="changefieldf.html">changefieldf</a></tt>: Modify attributes in PIVMat structures
+            (e.g., rename the axis, change the title, change the axis calibration, etc.)</li>
+            <li><tt><a href="imvectomovie.html">imvectomovie</a></tt>: Create an AVI movie from a large set of
+            files (compatible with all PIVMat compatible files, including DaVis IM7 and VC7 and other formats).</li>
+        </ul>
+        
+        <p><b>Minor changes</b>:
+        <ul>
+            <li><tt><a href="tempspecf.html">tempspecf</a></tt>:
+            <ul>        
+                <li>Points containing zero or NaN values are not considered in the computation
+                of the temporal energy spectrum (thanks Antoine).</li>
+                
+                <li>Only the peak numbers of the highest peaks are displayed
+                (this feature avoids producing too heavy figures).</li>
+            </ul>
+            
+            <li><tt><a href="addnoisef.html">addnoisef</a></tt> now adds a normally-distributed
+            (instead of uniformly-distributed) white noise.</li>
+            
+            <li>New operations available in <tt><a href="operf.html">operf</a></tt>:
+            real, imag, conj, etc.</li>
+            
+            <li><tt><a href="surfheight.html">surfheight</a></tt> (for Free-Surface Synthetic Schlieren
+            applications): new implementation of the remap
+            procedure, which now corrects properly for parallax distorsions.
+            
+            <li>The directory name (<tt>'setname'</tt> field) is no longer displayed in the title
+            of <tt>showvec</tt> and <tt>showscal</tt> when it is empty.</li>
+        </ul>
+        
+        <p><b>Bug fix</b>:
+        <ul>
+            <li><tt><a href="loadvec.html">loadvec</a></tt> accepts <tt>.SET</tt> files again
+            (this feature was buggy in v2.01)</li>
+            
+            <li><tt><a href="vec2scal.html">vec2scal</a></tt> computes correctly
+            the norm and energy for complex vector fields.</li>
+            
+            
+        </ul>
+        
+</td></tr>
+
+
+
+<tr valign="top"><td>V2.01</td><td>2011/03/11</td><td>
+        
+        <p><b>Bug fix</b>:
+        <ul>
+            <li><tt><a href="loadvec.html">loadvec</a></tt> is now compatible with the new releases
+                (Dec. 2010) of the <tt>ReadIMX</tt> package. When importing DaVis files, the PIVMat toolbox is now
+                compatible with all platforms and Matlab releases supported by the <tt>ReadIMX</tt> package
+                (thanks A. Mishra).
+            </li>
+        </ul>
+        
+        
+        <p><b>New function</b>:
+        <ul>
+            <li><tt><a href="flipf.html">flipf</a></tt>: Flip vector/scalar fields about vertical or horizontal axis.</li>
+        </ul>
+        
+        <p><b>Compatibility issue</b>:
+        <ul>
+        
+        <li><tt>loadset</tt> has been removed. Use <tt><a href="loadvec.html">loadvec</a></tt>
+        with wildcards (*) instead.</li>
+        
+</td></tr>
+
+
+
+<tr valign="top"><td>V2.00</td><td>2010/05/12</td><td>
+        
+        <p><b>New Feature</b>:
+        <ul>
+            <li>Two new documention pages: <a href="pivmat_data.html">Data organisation in PIVMat</a> and
+            <a href="pivmat_import.html">Importing data into PIVMat</a>.</li>
+        </ul>
+        
+        
+        <p><b>New functions</b>:
+        <ul>
+            <li><tt><a href="resamplef.html">resamplef</a></tt>: Re-sample a time series
+                of vector or scalar fields using linear interpolation (e.g., re-sample the fields
+            with a different sampling frequency).</li>
+            
+            <li><tt><a href="phaseaverf.html">phaseaverf</a></tt>: Performs a phase
+                average from a time series of vector or scalar fields (work with integer of non-integer
+            periods; performs a linear interpolation for non-integer periods).</li>
+            
+            <li><tt><a href="tempspecf.html">tempspecf</a></tt>: Temporal power spectrum
+            (spatially averaged) of a time series of vector or scalar fields.</li>
+        </ul>
+        
+        <p><b>Minor changes</b>:
+        <ul>
+            <li>The scaling of the length of the vector arrows in quiver plots (as produced
+                by <tt><a href="showvec.html">showvec</a></tt> and  <tt><a href="showf.html">showf</a></tt>)
+                is now <i>absolute</i>, i.e. the pixel / physical unit calibration remains unchanged
+                during a movie. The previous behavior (<i>relative</i> scaling) is still available,
+            using the option <tt>showvec(..., 'scalemode','relative')</tt>.</li>
+            
+            <li><tt><a href="loadvec.html">loadvec</a></tt> now accepts every <tt>.mat</tt>
+                file containing at least one Pivmat-compatible structure. If, for example,
+                the file <tt>mydata.mat</tt> contains a Pivmat structure named <tt>myfield</tt>, then
+                <tt>v = loadvec('mydata.mat')</tt> will load the Pivmat structure into the
+            variable <tt>v</tt>.</li>
+            
+            <li><tt><a href="rdir.html">rdir</a></tt> (and other functions based
+                on <tt>rdir</tt>, like <tt><a href="loadvec.html">loadvec</a></tt>)
+                now accepts file number indexing using non-integer indices. For instance,
+                <tt>v = loadvec('Myfiles_dt=[1:0.5:2,5.2]s.*')</tt> loads the files
+            <tt>'Myfiles_dt=01.00s.*', 'Myfiles_dt=01.50s.*', 'Myfiles_dt=02.00s.*'</tt>.</li> 
+            
+            <li><tt><a href="corrf.html">corrf</a></tt> now works correctly when zero
+            elements (interpreted as wrong data) are present (thanks J.I. Cardesa-Duenas!)</li>
+            
+            <li><tt><a href="extractf.html">extractf</a></tt> now accepts rectangle
+                coordinates outside the physical domain (a truncation is performed if this
+            occurs).</li>
+            
+            <li>New scalar field conversion available in <tt><a href="vec2scal.html">vec2scal</a></tt>:
+                The 3 measurable components of the Reynolds stress tensor (options <tt>txx</tt>, <tt>txy</tt> and <tt>tyy</tt>,
+            with <tt>tauij = ui uj</tt>).</li>
+            
+            <li>The remapping procedure has been removed from <tt><a href="surfheight.html">surfheight</a></tt>. 
+            The option <tt>noremap</tt> has been removed (since it is now by default).</li>
+            
+            <li><tt>expandstr</tt> not available any more (moved to the <tt>private</tt> directory).
+                The features of <tt>expandstr</tt> (file number indexing) are now directly
+                explained in the documentation of <tt><a href="rdir.html">rdir</a></tt>.
+                
+            </li>
+            
+            <li>Help text improved for several functions.</li>
+        </ul>
+        
+        <p><b>Bugs fixed</b>:
+        <ul>
+            <li><tt><a href="rdir.html">rdir</a></tt> (and other functions based
+                on <tt>rdir</tt>, like <tt><a href="loadvec.html">loadvec</a></tt>)
+                now works properly with <tt>'./'</tt> and with absolute path names (path names starting as
+                <tt>D:\mydir\etc</tt>). This is useful when working through network
+            disks.</li> 
+            
+            <li><tt><a href="loadarrayvec.html">loadarrayvec</a></tt> now works when
+                directories and subdirectories have wildcards ('*'), e.g.
+            <tt>v = loadarrayvec('dir*/PIV*','*.vc7')</tt>.</li>
+            
+            <li><tt><a href="renamefile.html">renamefile</a></tt> now works when
+            filenames contain '=' (thanks Cyril and Pierre).</li>
+            
+            <li><tt><a href="vortex.html">vortex</a></tt> now does not produce strictly
+                zero velocity components, so that they are not interpreted as wrong vectors
+            when displayed by <tt>showvec</tt>.</li>
+        </ul>
+        
+        
+        <p><b>Compatibility issue</b>:
+        <ul>
+        <li>Since 2009, the package <tt>readimx</tt> from LaVision (version 1.0, revision 1.8
+            or higher) is now compatible with the 32 and 64 bits editions of Windows
+            (Vista and 7 only),
+        so PIVMat is now also compatible with Windows 64 bits.</li>
+        
+        <li><tt><a href="loadset.html">loadset</a></tt> is going to be removed from
+            the toolbox in a future version. Use <tt><a href="loadvec.html">loadvec</a></tt>
+        with wildcards (*) instead.</li>
+        
+</td></tr>            
+
+
+<tr valign="top"><td>V1.90</td><td>2009/08/28</td><td>
+
+
+<p><b>New Feature</b>:
+<ul>
+    <li>When a DaVis file is double-clicked on the Current Directory
+        Browser, it is imported into the Workspace (multiple file selection not
+        allowed). Vector files are imported into
+        the varibale <tt>v</tt> and images are imported into <tt>im</tt>.
+        Accepted file formats are: <tt>VEC</tt>,
+        <tt>VC7</tt>, <tt>IMX</tt>, <tt>IM7</tt>, <tt>IMG</tt>, <tt>SET</tt>.
+        If a <tt>SET</tt> file
+        is selected, all the files contained in the corresponding folder
+    are imported.</li>
+</ul>
+
+<p><b>New functions</b>:
+<ul>
+    <li><tt><a href="spec2f.html">spec2f</a></tt>: 2D power spectrum, both for
+    scalar and vector fields, including 2D iso-contours and azimuthal average.</li>
+    
+    <li><tt><a href="nam.html">nam</a></tt>: Implementation of the "Normalized Angular
+    Momentum" method for vortex detection.</li>
+</ul>
+
+<p><b>Minor changes</b>:
+<ul>
+    <li><tt><a href="loadvec.html">loadvec</a></tt> now accepts multi-frame images.
+        Use the option <tt>'frame'</tt> to specify the frame to load.</tt>
+        
+        <li>New option <tt>'streamline'</tt> in <tt><a href="showvec.html">showvec</a></tt>
+        (and <tt><a href="showf.html">showf</a></tt>).</li>
+        
+        <li>New option <tt>'rmax'</tt> in <tt><a href="azaverf.html">azaverf</a></tt> (to save
+        computation time).</li>
+        
+        <li><tt><a href="filterf.html">filterf</a></tt> and <tt><a href="bwfilterf.html">bwfilterf</a></tt>
+            now accept arguments as scalars or arrays. The width of the border truncation for <tt><a href="bwfilterf.html">bwfilterf</a></tt>
+        has been increased (some border effects were still present).</li>
+        
+        <li><tt><a href="loadvec.html">loadvec</a></tt> now converts IMX/IM7
+            image files to double (this allows to use image files for
+        statistics, histograms etc).</li>
+        
+        <li>The Revision 7 (Date 8.12.08) of the ReadIMX package from LaVision
+        is now required for <tt>loadvec</tt>. Please upgrade.</li> 
+        
+        <li>New fields 'min' and 'max' in <tt><a href="statf.html">statf</a></tt>.</li>
+        
+        <li><tt>showscal</tt> displays the unit of the scalar field only if it is defined.</li>
+        
+        <li>New option <tt>'fullsize'</tt> in <tt>showscal</tt> and <tt>showvec</tt>. 
+            This is useful to export a vector/scalar field as an image, without the labels,
+        ticks, colorbar etc.</li>
+        
+        
+        <li><tt><a href="specf.html">specf</a></tt> now accepts string exponents for compensated spectra. For instance,
+        use the input argument '5/3' in order to display 'k^{5/3} E(k)' instead of 'k^{1.6667} E(k)'.</li>
+        
+        <li><tt><a href="renamefile.html">renamefile</a></tt> and
+            <tt><a href="renumberfile.html">renumberfile</a></tt> now work much faster for
+        large files (Thanks Mohammad!). From FileSeries 1.40.</li>
+    </ul>
+    
+    <p><b>Bugs fixed</b>:
+    <ul>
+        <li><tt><a href="showscal.html">showscal</a></tt> and <a href="showvec.html">showvec</a></tt>:
+        Setting equal bounds in the colormap of a scalar field caused an error.</li>
+        
+        <li><tt><a href="truncf.html">truncf</a></tt> now works properly for fields with more rows than columns
+        (thanks Alex!).</li>
+        
+        <li>The definition of the enstrophy in <tt><a href="vec2scal.html">vec2scal</a></tt> now includes the usual factor 1/2
+        (i.e., Z = w^2/2, where w is the vorticity).</li>
+        
+        <li>The definition of the Q factor in <tt><a href="vec2scal.html">vec2scal</a></tt> has been corrected: Q =  (Z - S^2)/2,
+        with Z = w^2/2 the enstrophy (see above) and S^2 the squared strain.</li>
+        
+        <li><tt><a href="specf.html">specf</a></tt>: The factor 1/2 is no longer
+        included in the computation of the spectra.</li>
+        
+        <li><tt><a href="loadvec.html">loadvec</a></tt>: now works correctly
+        with files of IType=2.  Mutiple selection in dialog box now works.</li>
+        
+        <li>Legends and labels of compensated spectra in <tt>specf</tt> corrected.</li>
+        
+    </ul>
+    </p>
+    
+    </td></tr>            
+    
+    
+    <tr valign="top"><td>V1.80</td><td>2008/10/17</td><td>
+    
+    <p><b>New functions</b>:
+    <ul>
+        <li><tt><a href="interpf.html">interpf</a></tt>: Interpolate missing data (fills holes).
+        Based on John D'Errico' <tt>inpaint_nans</tt> function (Matlab Central).
+        
+        <li><tt><a href="ssf.html">ssf</a></tt>: Structure functions of scalar field,
+        and histograms of scalar increments.</li>
+        
+        <li><tt><a href="getframedt.html">getframedt</a></tt>: Get the time intervals between the frames of 
+        multiframe DaVis image file (.IMX/.IM7).</li> 
+        
+        <li><tt><a href="makebospattern.html">makebospattern</a></tt>:
+            Produce a random dot pattern for BOS (Background-oriented Schlieren) / SS (Synthetic Schlieren) /
+            FS-SS (Free-Surface Synthetic Schlieren) applications (see the
+        <a href="http://www.fast.u-psud.fr/~moisy/sgbos/tutorial.php">FS-SS tutorial</a>).</li>
+        
+        <li><tt><a href="zerotonanfield.html">zerotonanfield</a></tt> and
+            <tt><a href="nantozerofield.html">nantozerofield</a></tt>: Converts the
+            zero elements (standing for missing data) of vector or scalar fields as
+        NaN elements and vice-versa.</li>
+        
+        <li><tt><a href="cdw.html">cdw</a></tt> and <tt><a href="lsw.html">lsw</a></tt>:
+        Work as CD and LS, but allow for wildcards (*). From FileSeries 1.30.</li>
+    </ul>
+    
+    <p><b>Major changes</b>:
+    
+    <ul>
+    <li>Missing data are now handled properly for the computation of
+        derivative fields (using <tt>vec2scal</tt>) or
+        for filtering (using <tt>filterf</tt>). For instance, when computing the
+        divergence of a vector field, a point will be considered as "missing"
+        (i.e., its value is set to 0) if the finite difference uses
+        a missing value from the input vector field. This new behavior avoids
+    propagation of errors.</li>
+    
+    <li>Camera can be rotated during a movie for 3D scalar displays using <tt><a href="showscal.html">showscal</a></tt>.</li>
+</li>
+</ul>
+
+<p><b>Minor changes</b>:
+    <ul>
+        <li>Arrows of length zero are not displayed any more by <tt>showvec</tt>
+        for missing data.</li>
+        
+        <li>Option <tt>'keepcamarasettings'</tt> removed in <tt><a href="showscal.html">showscal</a></tt>.
+            Now the camera view, angle, position, are kept for 3D views
+            at each call of <tt>showscal</tt>. To reset those camera settings,
+        use the option <tt>'resetcamerasettings'</tt>.</li>
+        
+        <li><tt><a href="surfheight.html">surfheight</a></tt> (surface height
+            reconstruction for FS-SS, Free-Surface Synthetic Schlieren):
+        now includes finite distance effects and remapping.</li>
+        
+        <li>New option <tt>'verbose'</tt> (display the work in progress)
+            added in a number of functions: <tt>loadvec</tt>, <tt>medianf</tt>,
+        <tt>rdelete</tt>, ... </li>
+        
+        <li>New option <tt>'nowarning'</tt> in <tt>corrf</tt>.</li>
+        
+        <li>Option <tt>'zeros'</tt> removed in <tt>filterf</tt>. Interpolations
+        are now (much better) performed by <tt>interpf</tt>.
+        
+        <li><tt>bwfilterf</tt> now works with non-square fields.</li>
+        
+    </ul>
+</p>
+
+
+<p><b>Bugs fixed</b>:
+    <ul>
+        <li>Color limits in <tt>showscal</tt> are now
+            correct when using options <tt>contour</tt> and
+        <tt>contourf</tt>.</li> 
+        
+        <li>3D visualisations in <tt>showscal</tt> now
+        respect the x/y aspect ratio.</li> 
+        
+        <li><tt>showf</tt> now accepts .imx and .im7 files as input arguments.</li> 
+        
+        <li><tt>specf</tt> and <tt>bwfilterf</tt> now accept fields with odd dimension.</li>
+        
+        <li><tt>loadvec</tt> now does not issue the warning "Concatenation involves
+        an empty array..." for numeric input argument.</li>
+        
+        <li>Methods 'gauss' and 'igauss' were inverted in <tt>filterf</tt>.</li>
+    </ul>
+</p>
+
+</td></tr>            
+
+<tr valign="top"><td>V1.70</td><td>2008/04/18</td><td>
+        <p><b>New functions</b>:
+        <ul>
+            <li><tt><a href="smoothf.html">smoothf</a></tt>: Smoothing (or running average) over
+                consecutive fields. This is useful for a temporal smoothing of time-resolved velocity
+            fields.</li>
+            <li><tt><a href="medianf.html">medianf</a></tt>: Apply a median filter to a vector
+            or scalar field (requires the Image Processing Toolbox)</li>
+            <li><tt><a href="resizef.html">resizef</a></tt>: Resize a field (requires the Image
+            Processing Toolbox)</li>
+            <li><tt><a href="subsbr.html">subsbr</a></tt>: Substract the mean rotation (solid-body
+            rotation) of a vector field</li>
+            <li><tt><a href="specf.html">specf</a></tt>: 1D power spectrum of vector/scalar fields</li>
+            <li><tt><a href="getvar.html">getvar</a></tt>: Extract some variable informations
+            from a string (usually a filename where parameter values are specified).</li>
+        </ul>
+        
+        
+        <p><b>Minor changes</b>:
+            <ul>
+                <li>New examples in the <tt>sample</tt> directory:
+                rotating turbulence (3 fields) and apparent displacement
+                from a refraction experiment (3 fields).<li>
+                <li>New colormap features in <tt>showscal</tt>:
+                <ul>
+                    <li>New option <tt>'ampclim'</tt>, to specify the
+                    colormap bounds in the form MEAN +/- AMP.</li>
+                    <li>Scalar fields made of small oscillations around
+                    a large mean have now a colormap centered on the mean.</li>
+                    <li>New commands '*' and '/' to stretch/compress
+                    the colormap during the movie.</li>
+                    <li>If the scalar field originates from a IMX/IM7
+                    file, the gray colormap is selected by default.</li>
+                </ul>
+                <li>New option 'command' in <tt>showscal</tt>.</li>
+                <li><tt><a href="vec2mat.html">vec2mat</a></tt>: Now can convert files into different destination directory.
+                New option 'verbose'.</li>
+                <li><tt>subaverf</tt> now considers that zero elements
+                    are erroneous, and keeps those elements as zeros instead of
+                substracting the (spatial and/or ensemble) average.</li>
+                <!-- <li>New modes 3-6 in <tt>surfheight</tt>.</li> -->
+                <li><tt>batchvec</tt> is renamed <tt>batchf</tt></li>
+                <li><tt>loadvec</tt> now accepts .UWO files (Optical Flow fields).</li>
+                <li>The PDF documentation has been removed (was it really useful?)
+            </ul>
+        </p>
+        
+        <p><b>Bugs fixed</b>:
+            <ul>
+                <li><tt>loadvec</tt> now recognizes correctly
+                    the label names and units (e.g. mm, m/s) from DaVis vector/scalar files.
+                    Make sure you use the last version of the ReadIMX 1.4 package
+                    (DLL Version: 1.0, Date: 8/06/07 16:38, Revision: 6) or newer. If not, download it from
+                the LaVision website (www.lavision.de).</li>
+                <li>Bugs fixed in the history field for some functions (e.g., <tt>filterf</tt>).</li>
+            </ul>
+        </p>
+        
+        
+</td></tr>
+
+<tr valign="top"><td>V1.60</td><td>2007/04/17</td><td>
+    <p><b>Major change</b>: Scalar fields built from derivatives (e.g., 
+        curl, divergence, strain rate etc.) are now computed from
+        2nd order centered differences, using Matlab's built-in
+        numerical derivative functions, whereas they were computed
+        from a 1st order scheme in the previous versions
+        (see <tt><a href="vec2scal.html">vec2scal</a></tt>).
+        The resulting scalar field has now
+        the same size as the original vector field. Specify
+        '<tt>rot1</tt>','<tt>div1</tt>' etc. instead of '<tt>rot</tt>',
+        '<tt>div</tt>' to use the
+        old 1st order scheme (for which the resulting scalar
+        field is smaller than the original vector field).
+    </p>
+    
+    <p><b>Movie player improved</b> (both <tt><a href="showvec.html">showvec</a></tt>
+    and <tt><a href="showscal.html">showscal</a></tt>):</p>
+    <ul>
+        <li>Movies may now be displayed within docked windows. If the
+            window is not docked, it will stay in front of all other windows
+        ('modal' WindowStyle).</li>
+        <li>Option 'Jump' (or 'Go') by pressing the key 'j' or 'g'.</li>
+        <li>Enter into the pause mode by pressing the arrow keys
+        <li>Escape the movie by pressing ESC, 'q', 'x' or Ctrl+C (works only with
+            selected windows if they are docked) or simply by closing the window
+        if it is undocked.</li>
+    </ul>
+    </p>
+    
+    <p><b>New functions</b>:
+        <ul>
+            <li><tt><a href="showf.html">showf</a></tt>: shortcut for <tt>showvec</tt> or <tt>showscal</tt>.</li>
+            <li><tt><a href="vsf.html">vsf</a></tt> (vector structure functions) and 
+            <tt><a href="vsf_disp.html">vsf_disp</a></tt> (displays the result of <tt>vsf</tt>).</li>
+            <li><tt><a href="jpdfscal.html">jpdfscal</a></tt> (joint probability density function of two scalar fields) and 
+            <tt><a href="jpdfscal_disp.html">jpdfscal_disp</a></tt> (displays the result of <tt>jpdfscal</tt>).</li>
+            <li><tt><a href="surfheight.html">surfheight</a></tt>: Computes the surface
+            height from a displacement vector field.</li>
+        </ul>
+    </p>
+    
+    <p><b>New file format supported</b>: <tt>loadvec</tt> now accepts Mat-files saved from
+    MatPIV (see <tt><a href="http://www.math.uio.no/~jks/matpiv/">http://www.math.uio.no/~jks/matpiv/</a></tt>).</p>
+    
+    <p><b>Minor changes</b>:
+        <ul>
+            <li><tt><a href="showvec.html">showvec</a></tt>: New option '<tt>colorvec</tt>' (specifies the color of the vector arrows).</li>
+            <li><tt><a href="showvec.html">showvec</a></tt>
+                and <tt><a href="showscal.html">showscal</a></tt>: New options '<tt>cmap</tt>' (specifies the color map,
+            'gray','jet'...) and '<tt>title</tt>' (e.g., display the time of the field in the title).</li>
+            <li><tt><a href="loadvec.html">loadvec</a></tt>: The structure <tt>V</tt> contains
+            a new field <tt>choice</tt>, where the number of 1st, 2nd etc. choice vectors are stored.</li>
+            <li><tt><a href="renumberfile.html">renumberfile</a></tt>, <tt><a href="getfilenum.html">getfilenum</a></tt> and <tt><a href="renamefile.html">renamefile</a></tt>: New options '<tt>fileonly</tt>', ''<tt>dironly</tt>'.</li>
+            <li><tt><a href="getfilenum.html">getfilenum</a></tt> now works with both integer and real indices.</li>
+            <li><tt><a href="batchvec.html">batchvec</a></tt>: New option '<tt>nodisp</tt>'.</li>
+        </ul>
+    </p>
+    
+    <p><b>Compatibility issue</b>:
+        Since Matlab 7.4 (R2007a), the behavior of the command <tt>doc</tt> has changed:
+        the command <tt>doc pivmat</tt> does not display
+        the PIVMat toolbox start page in the help browser any more. If you use Matlab 7.4,
+        type <tt><a href="docpivmat.html">docpivmat</a></tt> to display the start page, 
+        or type <tt>docpivmat function_name</tt> to display the
+        html documention of <tt>function_name</tt> in the help browser. If you use
+        Matlab 7.3 or before, <tt>doc</tt> and <tt>docpivmat</tt> will
+    produce the same result.</p>
+    
+    <p><b>Bugs fixed</b>: <tt>loadvec</tt> (scalar fields, IMX/IM7, were transposed), <tt>gradientf</tt> (wrong definition, the gradient was transposed), <tt>vortex</tt> (the undefined field <tt>setname</tt>
+    caused problems with <tt>showvec</tt>), <tt>operf</tt> (minor bug for scalar outputs).</p>
+</td></tr>
+
+<tr valign="top"><td>V1.51</td><td>2006/09/08</td><td>  
+        <p><b>Minor change</b>: <a href="vec2mat.html"><tt>vec2mat</tt></a> now works with all the file formats suported by
+        <tt>loadvec</tt> (<tt>VEC/VC7/IMX/IM7/IMG/TXT/SET</tt>).</p>
+        <p><b>Minor change</b>: <a href="azaverf.html"><tt>azaverf</tt><a> now does not return the leading zeros when
+            the center is outside the field, and does not include zero (erroneous) elements
+        in the computation of the azimuthal average by default (see option 'keepzero').</p>
+        <p><b>Bugs fixed</b>: <tt>renumberfile</tt>, <tt>getfilenum</tt>, <tt>renamefile</tt> (FileSeries 1.20).</p>
+</td></tr>
+
+<tr valign="top"><td>V1.50</td><td>2006/07/21</td><td>
+        <p><b>New</b> <a href="pivmat_faq.html">Frequently Asked Questions</a> section.</p>
+        <p><b>Major change</b>: New syntax for <a href="showvec.html"><tt>showvec</tt></a> and <a href="showscal.html"><tt>showscal</tt></a>: now works on the basis of
+        PropertyName/PropertyValue pairs.</p>
+        <p>New options ('surfl', 'mesh', 'delay', 'backward', 'loop'...).</p>
+        <p><b>Movie viewer improved</b> (<a href="showvec.html"><tt>showvec</tt></a> and <a href="showscal.html"><tt>showscal</tt></a>): it is now possible to enter/exit
+        the 'pause' mode during movies.</p>
+        <p><a href="showscal.html"><tt>showscal</tt></a> now does not refresh the camera settings for 3D views (see the option 'KeepCameraSettings').</p>
+        <p>New functions <a href="azaverf.html"><tt>azaverf</tt></a> (azimuthal average) and <a href="gradientf.html"><tt>gradientf</tt></a>.</p>
+        <p><a href="rotatef.html"><tt>rotatef</tt></a> can now rotate a field about a point different from the center.</p>
+        <p>New options for <a href="shiftf.html">shiftf</a> (bottomright, topleft...).</p>
+        <p>Coordinates in <a href="extractf.html">extractf</a> and <a href="truncf.html">truncf</a> may now be specified in physical or mesh units.</p>
+        <p><a href="loadvec.html">loadvec</a> now accepts old <tt>IMG</tt> files (uncompressed DaVis 6 images).</p>
+</td></tr>
+
+<tr valign="top"><td>V1.41</td><td>2006/05/22</td><td>
+        <p>New function <a href="corrf.html"><tt>corrf</tt></a> (correlation function).</p>
+        <p><a href="vec2scal.html"><tt>vec2scal</tt></a> now considers vectors with a zero component as erroneous (or masked),
+        and does not use them for the computation of derivative fields (rot, div, duxdx...)</p>
+        <p>New option for <a href="truncf.html"><tt>truncf</tt></a>: truncates to the smallest rectangular excluding zero
+        (erroneous or masked) elements.</p>
+        <p>Bugs fixed with <a href="randvec.html"><tt>randvec</tt></a> (history field) and <a href="showvec.html">showvec</a> (lines of other figures
+        were turned to black).</p>
+</td></tr>
+
+<tr valign="top"><td>V1.40</td><td>2006/04/28</td><td>
+        <p><a href="loadvec.html">loadvec</a> and <a href="loadset.html">loadset</a> now accept both vector fields (VEC/VC7) and images (IMX/IM7).</p>
+        <p>New functions <a href="getattribute.html">getattribute</a>, <a href="readsetfile.html">readsetfile</a> and <a href="getpivtime.html">getpivtime</a>. Function getimxtime obsolete.</p>
+        <p><a href="loadvec.html">loadvec</a> now checks that the ReadIMX package (LaVision) is installed.</p>
+        <p>Field 'history' is now a cumulative cell array of strings.</p>
+        <p>Bugs fixed for <a href="bwfilterf.html">bwfilterf</a> and <a href="rotatef.html">rotatef</a>.</p>
+        <p>Several functions moved to a subdirectory 'private'.</p>
+        <p>Better compatibility of the documentation with the MATLAB help browser.</p>
+</td></tr>
+
+<tr valign="top"><td>V1.30</td><td>2005/12/20</td><td>
+        <p><b>The toolbox is now called PIVMat.</b></p>
+        <p>Documentation improved. New 'Known bugs' section.</p>
+        <p>Standard items for the toolbox in the MATLAB 'Start' menu.</p>
+        <p>New about and checkupdate. New home page (<tt>www.fast.u-psud.fr/pivmat</tt>).</p>
+        <p>File '<tt>readme.txt</tt>' retired.</p>
+        <p>Bugs fixed for <tt>loadvec</tt>, due to changes in ReadIMX 1.4 (changes in the VY sign for Y-upward fields).</p>
+        <p>Multiple file selection allowed.</p>
+        <p>Bug fixed for <tt>showvec</tt> (bounds).</p>
+</td></tr>
+
+<tr valign="top"><td>V1.20</td><td>2005/11/18</td><td>
+        <p>LaVision's MATLABIMX package not included any more; it has to be
+        installed separately.</p>
+        <p><tt>showvec</tt> now accepts file numbers as input arguments.</p>
+        <p>New option 'angle' in <tt>vec2scal</tt>.</p>
+</td></tr>
+
+<tr valign="top"><td>V1.13</td><td>2005/10/30</td><td>
+        <p>New functions <tt>vec2mat</tt>, <tt>operf</tt>, <tt>batchvec</tt>,
+        <tt>addnoisef</tt>.</p>
+        <p>Bug fixed for <tt>filterf</tt>.</p>
+        <p><tt>statf</tt> improved (history field).</p>
+</td></tr>
+
+<tr valign="top"><td>V1.12</td><td>2005/10/21</td><td>
+        <p>The bugs with up/downward Y axis are fixed in loadvec, loadpivtxt,
+        vec2scal, showvec and showscal.</p>
+        <p>New functions <tt>shiftf</tt> and <tt>loadarrayvec</tt>.</p>
+        <p><tt>showvec</tt> and <tt>showscal</tt> improved (pause mode).</p>
+        <p><tt>vec2scal</tt> improved (option minus).</p>
+        <p><tt>spaverf</tt> now computes average of non zero elements.</p>
+        <p><tt>vortex</tt> improved (burgers vortex with divergence).</p>
+        <p>Online help files from m2html.</p>
+</td></tr>
+
+<tr valign="top"><td>V1.11</td><td>2005/10/14</td><td>
+        <p>truncf, extractf, bwfilterf, filterf, rotatef, averf, subaverf and
+            ensaverf work now for both vector and scalar fields (truncvec,
+        truncscal etc. retired).</p>
+        <p>readpivtxt and dav2mat retired, replaced by loadpivtxt.</p>
+        <p>loadvec now accepts TXT, SET and MAT files.</p>
+        <p>New functions from Fileseries toolbox 1.01 (rrmdir,  rdelete).</p>
+</td></tr>
+
+<tr valign="top"><td>V1.10</td><td>2005/10/07</td><td>
+        <p>New functions getfilenum, rdir, renamefile.</p>
+        <p>renumberfile improved.</p>
+        <p>completefilename and pickfile retired (see rdir).</p>
+        <p>loadvec and loadset improved (uses rdir, txt files allowed).</p>
+        <p>showvec(-scal) improved (colormap label, titles and arrow scaling).</p>
+        <p>submeanvec improved, now called subavervec(scal).</p>
+        <p>New functions avervec(scal) and ensavervec(scal).</p>
+</td></tr>
+
+<tr valign="top"><td>V1.05</td><td>2005/09/29</td><td>
+        <p>loadset and loadvec improved ('nosave' option added, filename expansion).</p>
+        <p>filtervec(-scal) improved.</p>
+        <p>New functions expandstr and pickfile.</p>
+        <p>buildfilename retired.</p>
+</td></tr>
+
+<tr valign="top"><td>v1.04</td><td>2005/09/23</td><td>
+        <p>Upward and Downward Y-axis recognized: Files that have a downward
+        Y-axis have the v_y component inversed.</p>
+</td></tr>
+
+<tr valign="top"><td>v1.03</td><td>2005/09/09</td><td>
+        <p>Sample directory and readme.txt file (this one) added.</p>
+        <p>loadset and showvec improved.</p>
+</td></tr>
+
+<tr valign="top"><td>v1.02</td><td>2005/09/05</td><td>
+        <p>loadvec and loadset improved: multiple files/sets and wildcards allowed.</p>
+</td></tr>
+
+<tr valign="top"><td>v1.01</td><td>2005/08/31</td><td>
+        <p>First online release.</p>
+        <p>Compatible with DaVis 7.</p>
+        <p>New functions included (filters, stats...)</p>
+</td></tr>
+
+<tr valign="top"><td>v1.00</td><td>2005/02/23</td><td>
+        <p>First release (original name: davis toolbox)</p>
+</td></tr>
+
+</table> 
+<br>
+
+
+<table width="100%" border=0 cellspacing=0 bgcolor=d0d0f0><tr><td>&nbsp</td></tr></table><br>
+2005-2017 <a href="pivmat.html">PIVMat Toolbox</a><br>
+</body>
+</html>

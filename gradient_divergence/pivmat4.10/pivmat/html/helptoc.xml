@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+
+<toc version="1.0">
+
+<tocitem target="pivmat.html" image="$toolbox/matlab/icons/book_mat.gif">PIVMat Toolbox
+
+<tocitem target="pivmat_gettingstarted.html" image="$toolbox/matlab/icons/greencircleicon.gif">Getting Started
+</tocitem>
+
+<tocitem target="pivmat_faq.html" image="$toolbox/matlab/icons/demoicon.gif">Frequently Asked Questions
+</tocitem>
+
+<tocitem target="pivmat_install.html" image="$toolbox/matlab/icons/pagesicon.gif">Installation
+</tocitem>
+
+<tocitem target="pivmat_import.html" image="$toolbox/matlab/icons/pagesicon.gif">Importing data into PIVMat
+</tocitem>
+
+<tocitem target="pivmat_data.html" image="$toolbox/matlab/icons/pagesicon.gif">Data organization in PIVMat
+</tocitem>
+
+<tocitem target="pivmat_visu.html" image="$toolbox/matlab/icons/pagesicon.gif">Visualization tools
+</tocitem>
+
+<tocitem target="pivmat_func_cat.html" image="$toolbox/matlab/icons/reficon.gif">Functions -- By Category
+</tocitem>
+
+<tocitem target="pivmat_func_alpha.html" image="$toolbox/matlab/icons/reficon.gif">Functions -- Alphabetical List
+</tocitem>
+
+<tocitem target="pivmat_releasenotes.html" image="$toolbox/matlab/icons/notesicon.gif">Release Notes
+</tocitem>
+
+<tocitem target="pivmat_knownbugs.html" image="$toolbox/matlab/icons/notesicon.gif">Known software problems
+</tocitem>
+
+<tocitem target="http://www.fast.u-psud.fr/pivmat" image="$toolbox/matlab/icons/webicon.gif">Product Page (Web)
+</tocitem>
+
+</tocitem>
+
+</toc>

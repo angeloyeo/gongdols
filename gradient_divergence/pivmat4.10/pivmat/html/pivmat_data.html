@@ -1,0 +1,522 @@
+<html><head><title>Data organisation in PIVMat</title>
+
+<link rel=stylesheet href="docstyle1.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+<!-- NAVBARTOP -->
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>Data organisation in PIVMat</b></td>
+</tr>
+</table>
+
+<h1>Data organisation in PIVMat</h1>
+<hr>
+
+<br>
+
+
+<h2>Data storage</h2>
+
+
+<p>In PIVMat, a vector or scalar field is stored into a <i>structure</i>. A <i>structure</i>
+is one of the data type provided by Matlab, which allows the user to store several
+variables (named 'fields') into a single variable. For instance, <tt>v.x</tt> refers
+to the variable (field) <tt>x</tt> stored into the structure <tt>v</tt>.</p>
+
+<p>The various features of a vector field, such as the two matrices of the vector
+components,  the axes, labels, title etc., are stored into a single structure.
+This is because handling a single variable instead
+of a list of variables is very convenient for a number of operations.
+If you are not familiar with structures, please refer to the Matlab documentation.</p>
+
+<p>All the functions of the PIVMat
+toolbox are designed to operate directly with those structures.</p>
+
+<p>For instance, in order to display a vector field, the structure
+<tt>v</tt> is given as the unique input parameter to the function <tt>showf</tt>,
+which is able to display the vector field with the right physical coordinates
+and the right axis names and units.</p>
+
+<p>When extracting physical information from a raw vector field, the physical
+units are automatically taken into account. For instance, if the vector field
+is a velocity field in <tt>m/s</tt>, on a spatial grid in <tt>mm</tt>, then the vorticity (curl)
+will be expressed consistently in <tt>1/s</tt>.</p>
+
+<p>See also the <a href="pivmat_faq.html">Frequently Asked Questions</a>, which
+provide some examples of how to access and process the data of PIVMat structures.</p>
+
+
+<br>
+    
+<h2>Single fields</h2>
+
+<h3>Single vector field</h3>
+
+
+<p>The structure containing a vector field is usually noted <tt>v</tt> in this
+documentation. It is typically obtained from the function <tt><a href="loadvec.html">loadvec</a></tt>
+(see <a href="pivmat_import.html">Importing data into PIVMat</a>).</p>
+
+
+<p>The structure <tt>v</tt> contains serveral 'fields' (sub-variables). Below
+are listed the basic fields which are common to all PIVMat vector field structures:</p>
+
+<table Border="2" cellpadding=4 cellspacing=0>
+    <tr>
+        <td><b>Field name</b></td>
+        <td><b>Type</b></td>
+        <td><b>Description</b></td>
+    </tr>
+    <tr>
+        <td><tt>vx</tt>, <tt>vy</tt> (<tt>vz</tt>)</td>
+        <td>2 or 3 M-by-N matrices</td>
+        <td>2 or 3 matrices containing the <tt>x</tt>, <tt>y</tt> (and
+            possibly <tt>z</tt>) components
+        of the vector field</td>
+    </tr>
+    <tr>
+        <td><tt>x</tt>, <tt>y</tt></td>
+        <td>A 1-by-M and a 1-by-N array</td>
+        <td>2 arrays containing the physical coordinates of each <tt>x</tt>
+        and <tt>y</tt> collocation points.</td>
+    </tr>
+    <tr>
+        <td><tt>namex</tt>, <tt>namey</tt></td>
+        <td>strings</td>
+        <td>Name of the <tt>x</tt> and <tt>y</tt> axis (usually 'x' and 'y').</td>
+    </tr> 
+    <tr>
+        <td><tt>unitx</tt>, <tt>unity</tt></td>
+        <td>strings</td>
+        <td>Unit of the <tt>x</tt> and <tt>y</tt> coordinates (usually in millimeters, 'mm').</td>
+    </tr> 
+     <tr>
+         <td><tt>namevx</tt>, <tt>namevy</tt> (<tt>namevz</tt>)</td>
+        <td>strings</td>
+        <td>Name of the <tt>x</tt> and <tt>y</tt> (and possibly <tt>z</tt>)
+        components of the vector field (usually 'u_x', 'u_y' and 'u_z').</td>
+    </tr> 
+    <tr>
+        <td><tt>unitvx</tt>, <tt>unitvy</tt> (<tt>unitvz</tt>)</td>
+        <td>strings</td>
+        <td>Unit of the <tt>x</tt> and <tt>y</tt> (and possibly <tt>z</tt>)
+        components of the vector field (usually 'm/s').</td>
+    </tr> 
+    <tr>
+        <td><tt>ysign</tt></td>
+        <td>string</td>
+        <td>Specifies whether the <tt>y</tt> axis is upward or downward. The 'upward'
+        mode corresponds to Matlab's <tt>axis xy</tt> (cartesian) mode, with the coordinate system
+        origin in the lower left corner. The 'downward'
+        mode corresponds to Matlab's <tt>axis ij</tt> (matrix) mode, with the coordinate system
+        origin in the upper left corner.</td>
+    </tr>
+    <tr>
+        <td><tt>pivmat_version</tt></td>
+        <td>string</td>
+        <td>Version number of the PIVMat toolbox at the time at which the structure
+        has been created, for instance by the <tt>loadvec</tt> command. This information
+        is useful for compatibility.</td>
+    </tr>
+    <tr>
+        <td><tt>source</tt></td>
+        <td>string</td>
+        <td>Specifies the origin of the vector field: 'DaVis', 'DynamicStudio', 'MatPIV' etc.</td>
+    </tr>
+    <tr>
+        <td><tt>name</tt></td>
+        <td>string</td>
+        <td>Name of the input file. For DaVis file, the name is usually in the form
+        <tt>'B00001.VC7'</tt>.</td>
+    </tr>
+    <tr>
+        <td><tt>setname</tt></td>
+        <td>string</td>
+        <td>Name of the directory which contained the input file.</td>
+    </tr>
+    <tr>
+        <td><tt>history</tt></td>
+        <td>cell array</td>
+        <td>This cell array tracks the sequence of successive operations which have
+        been performed on the field. Each time an operation (e.g. filtering, scalar
+        extraction) is performed on a field, the corresponding Matlab command string is
+        added to this cell array. For instance, <tt>history{n}</tt> is the string
+        of the <tt>n</tt>th operation performed on the field. The first operation
+        is usually a <tt>loadvec</tt> command.</td>
+    </tr>
+</table>
+
+<p>In addition to these generic fields, a number of specific fields may also be present,
+which depend on the source type. For vector fields originating from DaVis (<tt>.VEC</tt>
+and <tt>.VC7</tt> files), these additional fields are:</p>        
+
+<table Border="2" cellpadding=4 cellspacing=0>
+    <tr>
+        <td><b>Field name</b></td>
+        <td><b>Type</b></td>
+        <td><b>Description</b></td>
+    </tr>
+    <tr>
+        <td><tt>choice</tt></td>
+        <td>1-5 array</td>
+        <td>Contains the number of vectors computed as 1st, 2nd, 3rd, 4th choice, and
+        the number of interpolated vectors.</td>
+    </tr>
+    <tr>
+        <td><tt>Attributes</tt></td>
+        <td>String</td>
+        <td>Contains several informations from DaVis. This string is composed
+        of independent lines, each specifying the value of a DaVis variable,
+        such that axis calibrations, date, acquisition time, etc.  The values
+        of those variables may be obtained using the function <tt>getattribute</tt>.</td>
+    </tr>
+</table>    
+
+<p>Simply type <tt>v</tt> to see the content of the structure:</p>
+
+<blockquote><pre>>> cd sample/jet
+>> v=loadvec('B00001.VC7');
+>> v
+
+v = 
+
+                 x: [1x128 double]
+                 y: [1x128 double]
+                vx: [128x128 double]
+                vy: [128x128 double]
+            choice: [0 0 0 0 15399 985]
+             unitx: 'mm'
+             unity: 'mm'
+             namex: 'x'
+             namey: 'y'
+            unitvx: 'm/s'
+            unitvy: 'm/s'
+            namevx: 'u_x'
+            namevy: 'u_y'
+    pivmat_version: '1.90'
+             ysign: 'Y axis upward'
+        Attributes: [1x585 char]
+              name: 'B00001.vc7'
+           setname: 'jet'
+           history: {'loadvec('B00001.vc7')'}
+            source: 'DaVis 70'</pre></blockquote>
+
+<p>In order to access to the value of a given field stored in the
+ structure <tt>v</tt>, say <tt>unitx</tt>, simply type
+ <blockquote><pre>v.unitx</blockquote></pre>
+ Similarly, <blockquote><pre>v.vx(5,1)</blockquote></pre> refers to the x-component of the vector at
+ point (5,1).</p>
+ 
+<br>
+
+
+<h3>Single scalar field</h3>
+ 
+<p>A scalar field, usually noted <tt>s</tt> in this documentation, can be obtained
+in two ways:
+<ul>
+<li>Directly by loading an image field using <tt>loadvec</tt>, for instance
+a Davis' <tt>.IMX</tt> or <tt>.IM7</tt> file:<blockquote><pre>im = loadvec('B00001.IM7');</blockquote></pre></li>
+<li>By extracting a scalar quantity from a vector field <tt>v</tt>, using
+    <tt>vec2scal</tt> (vector-to-scalar), such as the divergence, vorticity,
+    energy etc:<blockquote><pre>v = loadvec('B00001.VC7');
+r = vec2scal(filterf(v), 'rot');</blockquote></pre></li>
+</ul>
+
+<p>The content of a scalar field is very similar to that of vector fields:</p>
+
+<table Border="2" cellpadding=4 cellspacing=0>
+<tr>
+        <td><b>Field name</b></td>
+        <td><b>Type</b></td>
+        <td><b>Description</b></td>
+    </tr>
+    <tr>
+        <td><tt>w</tt></td>
+        <td>M-by-N matrix</td>
+        <td>Scalar field</td>
+    </tr>
+    <tr>
+        <td><tt>x</tt>, <tt>y</tt></td>
+        <td>A 1-by-M and a 1-by-N array</td>
+        <td>2 arrays containing the physical coordinates of each <tt>x</tt>
+        and <tt>y</tt> collocation points.</td>
+    </tr>
+    <tr>
+        <td><tt>namex</tt>, <tt>namey</tt></td>
+        <td>strings</td>
+        <td>Name of the <tt>x</tt> and <tt>y</tt> axis (usually 'x' and 'y').</td>
+    </tr> 
+    <tr>
+        <td><tt>unitx</tt>, <tt>unity</tt></td>
+        <td>strings</td>
+        <td>Unit of the <tt>x</tt> and <tt>y</tt> coordinates (usually in millimeters, 'mm').</td>
+    </tr> 
+    <tr>
+        <td><tt>namew</tt></td>
+        <td>string</td>
+        <td>Name of scalar field, typically generated by <tt>vec2scal</tt> (e.g. 'div', 'rot'...).</td>
+    </tr> 
+    <tr>
+        <td><tt>unitw</tt></td>
+        <td>string</td>
+        <td>Unit of the scalar field, typically generated by <tt>vec2scal</tt> (e.g. 's^{-1}', 'm^2 / s^2'...).</td>
+    </tr> 
+    <tr>
+        <td><tt>ysign</tt></td>
+        <td>string</td>
+        <td>Specifies whether the <tt>y</tt> axis is upward or downward. The 'upward'
+            mode corresponds to Matlab's <tt>axis xy</tt> (cartesian) mode, with the coordinate system
+            origin in the lower left corner. The 'downward'
+            mode corresponds to Matlab's <tt>axis ij</tt> (matrix) mode, with the coordinate system
+        origin in the upper left corner.</td>
+    </tr>
+    <tr>
+        <td><tt>pivmat_version</tt></td>
+        <td>string</td>
+        <td>Version number of the PIVMat toolbox at the time at which the structure
+            has been created, for instance by the <tt>loadvec</tt> command. This information
+        is useful for compatibility.</td>
+    </tr>
+    <tr>
+        <td><tt>source</tt></td>
+        <td>string</td>
+        <td>Specifies the origin of the vector field: 'DaVis', 'MatPIV' or 'Optical Flow'.</td>
+    </tr>
+    <tr>
+        <td><tt>name</tt></td>
+        <td>string</td>
+        <td>Name of the input file. For DaVis file, the name is usually in the form
+        <tt>'B00001.VC7'</tt>.</td>
+    </tr>
+    <tr>
+        <td><tt>setname</tt></td>
+        <td>string</td>
+        <td>Name of the directory which contained the input file. (This is relevant
+        for DaVis, where the vector files are stored into directories named 'sets'.</td>
+    </tr>
+    <tr>
+        <td><tt>history</tt></td>
+        <td>cell array</td>
+        <td>This cell array tracks the sequence of successive operations which have
+            been performed on the field. Each time an operation (e.g. filtering, scalar
+            extraction) is performed on a field, the corresponding Matlab command string is
+            added to this cell array. For instance, <tt>history{n}</tt> is the string
+            of the <tt>n</tt>th operation performed on the field. The first operation
+        is usually a <tt>loadvec</tt> command.</td>
+    </tr>
+</table>
+
+<p>In addition to these generic fields, a number of specific fields may also be present,
+which depend on the source type.</p>
+
+<p>Simply type the name of the scalar field structure to see its content:</p>
+
+<blockquote><pre>>> cd sample/jet
+>> v=loadvec('B00001.VC7');
+>> rot=vec2scal(v,'rot');
+>> rot
+
+rot = 
+
+    x: [1x128 double]
+    y: [1x128 double]
+    choice: [0 0 0 0 15399 985]
+    unitx: 'mm'
+    unity: 'mm'
+    namex: 'x'
+    namey: 'y'
+    pivmat_version: '1.90'
+    ysign: 'Y axis upward'
+    Attributes: [1x585 char]
+    name: 'B00001.vc7'
+    setname: 'jet'
+    history: {2x1 cell}
+    source: 'DaVis 70'
+    w: [128x128 double]
+    namew: 'Curl'
+    unitw: 's^{-1}'</pre></blockquote>
+
+<br>
+
+
+<h2>Array of fields</h2>
+
+<p>It is possible to handle more than one field (e.g. a movie), either vector
+    or scalar, into a single variable. For this, PIVMat makes
+use of a <i>structure array</i>, which is an array whose elements are structures.</p>
+
+<p>Array of vector fields are usually obtained from the function
+<tt><a href="loadvec.html">loadvec</a></tt>:</p>
+
+<blockquote><pre>>> cd sample/jet
+>> v=loadvec('*');
+>> v
+
+v = 
+        
+    1x3 struct array with fields:
+        x
+        y
+        vx
+        vy
+        choice
+        unitx
+        unity
+        namex
+        namey
+        unitvx
+        unitvy
+        namevx
+        namevy
+        pivmat_version
+        ysign
+        Attributes
+        name
+        setname
+        history
+        source</pre></blockquote>
+
+<p>If <tt>v</tt> is a <i>structure array</i> containing an ensemble of vector fields,
+    then you simply access to the field number <i>n</i> by typing <tt>v(n)</tt>, as
+    for classical arrays. <tt>v(n)</tt> is a structure, whose elements are that
+    described in the previous section.  For instance, <blockquote><pre>v(n).vx(5,1)</blockquote></pre> refers to
+the x-component of the vector field number <tt>n</tt> taken at point (5,1).</p>
+
+<p>Most of the PIVMat functions are designed to work directly with arrays
+    of fields. If an array of fields is given as an input parameter to <tt>showf</tt>,
+    then the movie is displayed. See the help of <tt>showf</tt> for
+    more information about the display options of a movie (loop mode, frame per second, etc.),
+or to export the movie into an <tt>AVI</tt> file.</p>
+
+<p>The operations such as scalar extraction (<tt>vec2scal</tt>), filtering etc.
+    work for each element of the array of fields. It is essentially equivalent to call
+the function for each element <tt>v(i)</tt> in a <tt>for</tt>-loop.</p>
+
+<p>The statistical operations (spectra, histograms, structure functions etc.)
+return statistics averaged over all the elements of the array of fields.</p>
+
+<br>
+
+<h2>Matrix indexing</h2>
+
+
+<p><b>Different matrix indexing conventions are used in Matlab and PIVMat!</b></p>
+
+<p>To reference a particular element in a matrix <tt>m</tt>, in Matlab you must 
+    specify the <b>row (i) first</b> and <b>column (j) second</b>:
+    <blockquote><pre>m(row i, column j)   % Matlab convention</blockquote></pre>
+    In PIVMat, the two components of a vector field are stored into the two
+    matrices <tt>vx</tt> and <tt>vy</tt> of the structure <tt>v</tt>. To reference
+    a particular element in one of those matrices, e.g. <tt>vx</tt>,  you must specify
+    the <b>column (x) first</b> and <b>row (y) second</b>:
+    <blockquote><pre>v.vx(column x, row y)   % PIVMat convention</blockquote></pre>
+(the same goes for the matrix <tt>w</tt> of a scalar field).</p>
+
+<p>The Matlab imaging tools, such that <tt>image</tt>, <tt>contour</tt>,
+    <tt>pcolor</tt> etc., use the <tt>(i,j)</tt> matrix indexing convention. 
+    In this convention, the vertical axis (first index <tt>i</tt>) is descending
+(top to bottom).</p>
+
+<p>On the other
+    hand, the PIVMat imaging tool (<tt>showf</tt>) uses the <tt>(x,y)</tt> matrix indexing convention.
+    Here, the vertical axis (second index <tt>y</tt>) is either ascending (bottom to top)
+    or descending (top to bottom),
+depending on the variable <tt>v.ysign</tt>.</p>
+
+<p>If you want to perform your own data visualization using Matlab functions
+    from PIVMat structures, you will need to <i>transpose</i> the matrices (using
+    the prime: <tt>m = v.vx'</tt>). For instance:
+<blockquote><pre>imagesc(v.vx');</blockquote></pre>
+Use the Matlab commands <tt>axis ij</tt> and <tt>axis xy</tt> if you want to
+switch from descending (default) to ascending vertical axis convention.</p>
+<br>
+    
+<h2>The <tt>history</tt> field</h2>
+
+<p>Among the fields available in a PIVMat structure, one is named <tt>history</tt>.
+    This field is a <i>cell array of strings</i>, which contain the succession
+    of operations performed on a given vector or scalar field. At each new operation,
+    a new string is added in this cell array, so that it is possible to check
+which operations have been performed.</p>
+
+<p>See the <a href="pivmat_faq.html">Frequently Asked Questions</a> page, item no. 13.</p> 
+
+
+<br>
+
+<h2>DaVis Attributes</h2> 
+
+
+<p>Vector fields imported from DaVis (<tt>VEC</tt> and <tt>VC7</tt> files)
+contain a string variable, named <tt>Attributes</tt>, which contains a number
+of useful information from DaVis:</p>
+
+<blockquote><pre>>> v=loadvec('B00001.VC7');
+>> v.Attributes
+
+ans =
+
+_SCALE_X=0.115125;-134.395004;mm;
+_SCALE_Y=-0.115125;234.199997;mm;
+_SCALE_Z=1.000000;0.000000;pixel;
+_SCALE_I=2.878120;0.000000;m/s;velocity
+_SCALE_F=1.000000;0.000000;frame;
+_TIME=14:53:49.703
+AttributeDisplayFrameInfo=SetupDialogBufferAttrFrameInfo(-1)
+ExpPathValue_Date=050728
+ExpPathValue_Time=142639
+FrameScaleI0=2.87812;0;m/s;velocity
+FrameScaleZ0=1;0;pixel;
+FrameScaleY0=-0.115125;234.2;mm;
+FrameScaleX0=0.115125;-134.395;mm;
+FrameDt0=40 us
+FrameProcessing0=0
+AcqTimeSeries0=1529976 µs
+AcqTime0=4040
+CameraName0=1 * 1
+PeakRatioMode0=0
+PivCalculationTime=11941.3
+_DATE=28.07.05</pre></blockquote>
+
+<p>In order to extract useful information from this lengthy string,
+use the function <tt><a href="getattribute.html">getattribute</a></tt>:</p>
+
+<blockquote><pre>>> attr = getattribute(v);
+>> attr.AcqTimeSeries0
+
+ans =
+
+1529976 µs</pre></blockquote>
+
+<p>You can also use the following shorter syntax:
+
+<blockquote><pre>>> time = getattribute(v,'TIME')
+
+time =
+
+14:53:49.703</pre></blockquote>
+
+<p>If <tt>v</tt> is an array of field, then the output <tt>time</tt>
+is a cell array of strings:</p>
+
+<blockquote><pre>>> v=loadvec('*');
+>> time = getattribute(v,'TIME')
+
+time = 
+
+    '14:53:49.703'    '14:54:03.140'    '14:54:15.296'
+
+>> time{1}
+
+ans =
+
+14:53:49.703</pre></blockquote>
+
+<br>
+
+<br>
+<table width="100%" border=0 cellspacing=0 bgcolor=d0d0f0><tr><td>&nbsp</td></tr></table><br>
+2005-2017 <a href="pivmat.html">PIVMat Toolbox</a><br>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<html><head><title>PIVMat Getting Started</title>
+
+<link rel=stylesheet href="docstyle1.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+<!-- NAVBARTOP -->
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>PIVMat Getting Started</b></td>
+</tr>
+</table>
+
+
+<h1>PIVMat Getting Started</h1>
+<hr>
+
+<br>
+
+<p>The PIVMat Toolbox for Matlab contains a set of command-line
+    functions to import, post-process and analyse 2- and 3-components
+    vector fields from PIV (particle image velocimetry), stereo-PIV,
+    DIC (digital image correlation)
+SS (synthetic schlieren) or BOS (background-oriented schlieren) applications.</p>
+
+
+<p>The PIVMat Toolbox enables to handle and perform
+    complex operations over large amount of velocity fields, and to
+    produce high-quality vector/scalar outputs. This toolbox in
+itself does not perform any PIV computations.</p>
+
+
+<br>
+
+<h2>Compatibility</h2>
+
+<p>PIVMat supports files from:</p>
+<ul>
+    <li><a href="http://www.lavision.de/en">DaVis (LaVision GmbH)</a></li>
+    <li><a href="http://www.dantecdynamics.com/dynamicstudio">DynamicStudio (Dantec Dynamics)</a></li>
+    <li><a href="http://www.oxfordlasers.com/imaging/particle-image-velocimetry-piv/particle-image-velocimetry-software-vidpiv/">VidPIV (Oxford Laser)</a></li>
+    <li><a href="https://www.irphe.fr/~meunier/#PIV">DPIVSoft (Meunier & Leweke, 2003)</a></li>
+    <li><a href="http://folk.uio.no/jks/matpiv/index2.html">MatPIV (J. Kristian Sveen, 2006)</a></li>
+</ul>
+
+<p>By default, PIVMat can import files from DynamicStudio, DPIVSoft, VidPIV and MatPIV.
+    In order to import files from DaVis (<tt>VC7</tt> files), it is necessary to
+install an additional package: <tt>ReadIMX</tt>. See <a href="pivmat_install.html">PIVMat installation</a></p>
+
+<br>
+
+<h2>Examples</h2>
+
+<p>The first step is to import some vector fields into a MATLAB structure
+array. The simplest way to import data is to double-click on a file
+on the Current Directory Browser. You can also import
+data  using the function <tt><a href="loadvec.html">loadvec</a></tt>.
+Each element of this structure array contains the two matrices of the
+velocity components, the coordinate system, and some additional informations
+(units, axe names, PIV parameters...)</p>
+
+<p>Once imported, the velocity fields can be displayed using <tt><a href="showf.html">showf</a></tt>,
+or converted into scalar fields using <tt><a href="vec2scal.html">vec2scal</a></tt>.
+
+<p>A sample directory, named <tt>sample</tt>, with 4 experimental series of
+PIV fields, is provided
+with the toolbox to test the following examples. These examples are
+    given for DaVis files (<tt>VC7</tt> format), but they also
+    work with any other file format supported by PIVMat).</p>
+
+
+<b>Example 1</b>
+
+    <blockquote><code><pre>
+    v = loadvec('B00001.VC7');           % loads the file B00001.VC7
+    showf(v);                            % displays it
+    curl = vec2scal(filterf(v,2),'rot'); % computes the filtered vorticity
+    figure, showf(curl);                 % displays it
+    </pre></code></blockquote>
+
+<b>Example 2</b>
+
+    <p>Various statistics may be computed from vector and scalar fields:</p>
+
+    <blockquote><code><pre>
+    v = loadvec('*.vc7');                % loads all the VC7 files
+    curl = vec2scal(filterf(v,2),'rot'); % computes the filtered vorticity
+    showf(curl);                         % displays it as a movie
+    showf(averf(curl));                  % displays its ensemble-average
+    histscal_disp(curl);                 % displays its histogram
+    statf(v)                             % computes some statistics
+    </pre></code></blockquote>
+    
+    <p>Go to the <a href="pivmat_faq.html">Frequently Asked Questions</a> section
+ or to the <a href="pivmat_func_cat.html">Function by category</a> section to
+learn more about this toolbox.</p> 
+   
+<br>
+
+<br>
+<table width="100%" border=0 cellspacing=0 bgcolor=d0d0f0><tr><td>&nbsp</td></tr></table><br>
+2005-2017 <a href="pivmat.html">PIVMat Toolbox</a><br>
+</body>
+</html>
