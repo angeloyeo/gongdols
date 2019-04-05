@@ -14,6 +14,7 @@ function setup() {
     [1, 1],
     [0, 1]
   ]
+  
   my_vec = [
     [2],
     [1]
