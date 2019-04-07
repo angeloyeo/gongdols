@@ -4,7 +4,7 @@ t=linspace(-1/16,1/4+1/16,50);
 
 compc(1)=1;
 for n=1:1:3
-    for k=1:1:n
+    for k=1:1:n 
 
         compc(k+1)=(1+i/n)^k;
         x=cos(2*pi*1*t);
