@@ -1,11 +1,12 @@
 clear; close all; clc;
 
+% addpath('C:\Users\icbab\Google 드라이브\여동훈_개인공부정리파일\MATLAB코드모음\다른사람_참고code\VideoRecorder\');
 
 [X,Y]=ndgrid(-6:1:6);
 
 % A = [2 -3;1 1];
 A=[2,1;1,2]; % shear
-% angle = pi/2; A = [cos(angle) -sin(angle); sin(angle) cos(angle)]; %rotation
+% angle = pi/3; A = [cos(angle) -sin(angle); sin(angle) cos(angle)]; %rotation
 % A = [0, 1; 1, 0]; % permutation
 % A = [1,0;0,0]; % projection
 % vector = [1,2]'; A = vector*vector'; % projection on a vector
@@ -13,9 +14,9 @@ n_steps = 100;
 figure;
 set(gcf,'color','w');
 set(gca,'nextplot','replacechildren');
-v = VideoWriter('Shear_transform.mp4','MPEG-4');
+% v = VideoWriter('Shear_transform.mp4','MPEG-4');
 
-open(v);
+% open(v);
 for i_steps = 0:n_steps
     step_mtx = (A-eye(2))/n_steps*i_steps;
     
@@ -40,36 +41,87 @@ for i_steps = 0:n_steps
     new_xy = (eye(2)+step_mtx)*eye(2);
     axis off
     
-    mArrow2(0,0,new_xy(1,1), new_xy(2,1),{'color',[0,153,51]/255,'linewidth',3});
-    mArrow2(0,0,new_xy(1,2), new_xy(2,2),{'color',[255 102 0]/255,'linewidth',3});
-    
-    F=getframe(gcf);
-    writeVideo(v,F);
-    cla
+    %     mArrow2(0,0,new_xy(1,1), new_xy(2,1),{'color',[0,153,51]/255,'linewidth',3});
+    %     mArrow2(0,0,new_xy(1,2), new_xy(2,2),{'color',[255 102 0]/255,'linewidth',3});
+%     
+%     F=getframe(gcf);
+%     writeVideo(v,F);
+% pause;
+    drawnow;
+    if i_steps<n_steps
+        cla
+    end
 end
 % text(1.2714, 0.3325, '$$\hat{i}_{new}$$','interpreter','latex','fontsize',15)
 % text(-2.8949, 0.3325, '$$\hat{j}_{new}$$','interpreter','latex','fontsize',15)
-close(v);
+% close(v);
+
+%% 비선형 변환
+clear; close all
+n_steps = 50;
+clear F
+range = 6;
+figure;
+set(gcf,'color','w');
+
+for i_step = 0:n_steps
+    for i_x = -range:range
+        Y = linspace(-range,range,100);
+        X = i_x*ones(1,100);
+        
+        %%% 함수 %%%
+        [newX,newY]=my_nonlin_func(X,Y);
+        
+        changeX = newX-X;
+        changeY = newY-Y;
+        
+        new_X = X+changeX*i_step/n_steps;
+        new_Y = Y+changeY*i_step/n_steps;
+        
+        plot(new_X,new_Y,'b'); hold on;
+        plot(new_Y,new_X,'b');
+        xlabel('x'); ylabel('y');
+        
+        grid on;
+        xlim([-4,4])
+        ylim([-4,4])
+    end
+    %     F(i_step+1)=getframe(gcf);
+    drawnow;
+    %     pause;
+    hold off;
+    
+end
+%
+% % create the video writer with 1 fps
+% writerObj = VideoWriter('nonlinear_transform3.avi');
+% writerObj.FrameRate = 30;
+% % set the seconds per image
+% % open the video writer
+% open(writerObj);
+% % write the frames to the video
+% for i=1:length(F)
+%     % convert the image to a frame
+%     frame = F(i) ;
+%     writeVideo(writerObj, frame);
+% end
+% % close the writer object
+% close(writerObj);
+
 
 %% 비선형 변환 + local linearity
 
 close all
-n_steps = 100; % frame rate= 30이라는 점을 고려할 것.
+n_steps = 20;
 
-ROI = [1,1]; % 어느 위치에서 local linearity를 확인할 것인가?
+ROI = [1,1];
 delta = 0.1;
 num_lines_ROI = 5; % each for X, Y axis
 xs_ROI = linspace(ROI(1)-delta*floor(num_lines_ROI/2),ROI(1)+delta*floor(num_lines_ROI/2),num_lines_ROI);
 ys_ROI = linspace(ROI(2)-delta*floor(num_lines_ROI/2),ROI(2)+delta*floor(num_lines_ROI/2),num_lines_ROI);
 
-range = 11; % 보통은 5면 충분. cartesian to polar의 경우에는 11로 둘 것.
-h_ROI =0;
-
-h_record = 1;
-record_fname = 'nonlinear_transform4.avi';
-
-clear F
-
+range = 6;
+h_ROI =1;
 for i_step = 0:n_steps
     for i_x = -range:range
         Y = linspace(-range,range,100);
@@ -138,36 +190,12 @@ for i_step = 0:n_steps
         mArrow2(new_ROI(1)-delta*4,new_ROI(2)-delta*4,new_ROI(1)-delta*3,new_ROI(2)-delta*3,{'color','r','linestyle','none'});
     end
     grid on;
-    %     xlim([-4 4])
-    %     ylim([-4 4])
-    
-    xlim([-30 30]) % 변환 4에서는 이정도 필요
-    ylim([-30 30]) % 변환 4에서는 이정도 필요
+    xlim([-4 4])
+    ylim([-4 4])
+%     xlim([-20 20])
+%     ylim([-20 20])
     hold off;
-    if h_record == 1
-        F(i_step+1)=getframe(gcf);
-    end
-    
-    axis off;
     drawnow;
-    %     pause;
+%         pause;
     
-end
-
-if h_record==1
-    
-    % create the video writer with 1 fps
-    writerObj = VideoWriter(record_fname);
-    writerObj.FrameRate = 30;
-    % set the seconds per image
-    % open the video writer
-    open(writerObj);
-    % write the frames to the video
-    for i=1:length(F)
-        % convert the image to a frame
-        frame = F(i) ;
-        writeVideo(writerObj, frame);
-    end
-    % close the writer object
-    close(writerObj);
 end
