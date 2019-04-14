@@ -5,12 +5,12 @@ clear; close all; clc;
 [X,Y]=ndgrid(-6:1:6);
 
 % A = [2 -3;1 1];
-A=[2,1;1,2]; % shear
+% A=[2,1;1,2]; % shear
 % angle = pi/3; A = [cos(angle) -sin(angle); sin(angle) cos(angle)]; %rotation
 % A = [0, 1; 1, 0]; % permutation
 % A = [1,0;0,0]; % projection
-% vector = [1,2]'; A = vector*vector'; % projection on a vector
-n_steps = 100;
+vector = [1,2]'; A = vector*vector'; % projection on a vector
+n_steps = 20;
 figure;
 set(gcf,'color','w');
 set(gca,'nextplot','replacechildren');
