@@ -4,12 +4,12 @@ clear; close all; clc;
 
 [X,Y]=ndgrid(-6:1:6);
 
-% A = [2 -3;1 1];
+A = [2 -3;1 1];
 % A=[2,1;1,2]; % shear
 % angle = pi/3; A = [cos(angle) -sin(angle); sin(angle) cos(angle)]; %rotation
 % A = [0, 1; 1, 0]; % permutation
 % A = [1,0;0,0]; % projection
-vector = [1,2]'; A = vector*vector'; % projection on a vector
+% vector = [1,2]'; A = vector*vector'; % projection on a vector
 n_steps = 20;
 figure;
 set(gcf,'color','w');
@@ -43,10 +43,10 @@ for i_steps = 0:n_steps
     
     %     mArrow2(0,0,new_xy(1,1), new_xy(2,1),{'color',[0,153,51]/255,'linewidth',3});
     %     mArrow2(0,0,new_xy(1,2), new_xy(2,2),{'color',[255 102 0]/255,'linewidth',3});
-%     
-%     F=getframe(gcf);
-%     writeVideo(v,F);
-% pause;
+    %
+    %     F=getframe(gcf);
+    %     writeVideo(v,F);
+    % pause;
     drawnow;
     if i_steps<n_steps
         cla
@@ -55,58 +55,6 @@ end
 % text(1.2714, 0.3325, '$$\hat{i}_{new}$$','interpreter','latex','fontsize',15)
 % text(-2.8949, 0.3325, '$$\hat{j}_{new}$$','interpreter','latex','fontsize',15)
 % close(v);
-
-%% 비선형 변환
-clear; close all
-n_steps = 50;
-clear F
-range = 6;
-figure;
-set(gcf,'color','w');
-
-for i_step = 0:n_steps
-    for i_x = -range:range
-        Y = linspace(-range,range,100);
-        X = i_x*ones(1,100);
-        
-        %%% 함수 %%%
-        [newX,newY]=my_nonlin_func(X,Y);
-        
-        changeX = newX-X;
-        changeY = newY-Y;
-        
-        new_X = X+changeX*i_step/n_steps;
-        new_Y = Y+changeY*i_step/n_steps;
-        
-        plot(new_X,new_Y,'b'); hold on;
-        plot(new_Y,new_X,'b');
-        xlabel('x'); ylabel('y');
-        
-        grid on;
-        xlim([-4,4])
-        ylim([-4,4])
-    end
-    %     F(i_step+1)=getframe(gcf);
-    drawnow;
-    %     pause;
-    hold off;
-    
-end
-%
-% % create the video writer with 1 fps
-% writerObj = VideoWriter('nonlinear_transform3.avi');
-% writerObj.FrameRate = 30;
-% % set the seconds per image
-% % open the video writer
-% open(writerObj);
-% % write the frames to the video
-% for i=1:length(F)
-%     % convert the image to a frame
-%     frame = F(i) ;
-%     writeVideo(writerObj, frame);
-% end
-% % close the writer object
-% close(writerObj);
 
 
 %% 비선형 변환 + local linearity
@@ -122,19 +70,24 @@ ys_ROI = linspace(ROI(2)-delta*floor(num_lines_ROI/2),ROI(2)+delta*floor(num_lin
 
 range = 6;
 h_ROI =1;
+function_num = 'basic';
+% function_num = 1;
+% 
+function_num = 'polar'; % 극좌표계
+range = 11;
+
 for i_step = 0:n_steps
     for i_x = -range:range
         Y = linspace(-range,range,100);
         X = i_x*ones(1,100);
         
         %%% 함수 %%%
-        [newX,newY, changeX, changeY]=my_nonlin_func(X,Y);
+        [newX,newY, changeX, changeY]=my_nonlin_func(X,Y,function_num);
         
         new_X = X+changeX*i_step/n_steps;
         new_Y = Y+changeY*i_step/n_steps;
         
         plot(new_X,new_Y,'b'); hold on;
-        xlabel('x'); ylabel('y');
         
         
     end
@@ -144,13 +97,12 @@ for i_step = 0:n_steps
         Y = i_y*ones(1,100);
         
         %%% 함수 %%%
-        [newX,newY, changeX, changeY]=my_nonlin_func(X,Y);
+        [newX,newY, changeX, changeY]=my_nonlin_func(X,Y,function_num);
         
         new_X = X+changeX*i_step/n_steps;
         new_Y = Y+changeY*i_step/n_steps;
         
         plot(new_X,new_Y,'r'); hold on;
-        xlabel('x'); ylabel('y');
         
         
     end
@@ -161,7 +113,7 @@ for i_step = 0:n_steps
             X = xs_ROI(i_x_ROI)*ones(1,100);
             
             %%% 함수 %%%
-            [newX,newY, changeX, changeY]=my_nonlin_func(X,Y);
+            [newX,newY, changeX, changeY]=my_nonlin_func(X,Y,function_num);
             
             new_X = X+changeX*i_step/n_steps;
             new_Y = Y+changeY*i_step/n_steps;
@@ -174,7 +126,7 @@ for i_step = 0:n_steps
             Y = ys_ROI(i_y_ROI)*ones(1,100);
             
             %%% 함수 %%%
-            [newX,newY, changeX, changeY]=my_nonlin_func(X,Y);
+            [newX,newY, changeX, changeY]=my_nonlin_func(X,Y,function_num);
             
             new_X = X+changeX*i_step/n_steps;
             new_Y = Y+changeY*i_step/n_steps;
@@ -182,7 +134,7 @@ for i_step = 0:n_steps
             plot(new_X,new_Y,'r');
         end
         
-        [newROI(1), newROI(2), change_ROIX, change_ROIY]=my_nonlin_func(xs_ROI(1),ys_ROI(1));
+        [newROI(1), newROI(2), change_ROIX, change_ROIY]=my_nonlin_func(xs_ROI(1),ys_ROI(1),function_num);
         
         new_ROI(1) = ROI(1)+change_ROIX*i_step/n_steps;
         new_ROI(2) = ROI(2)+change_ROIY*i_step/n_steps;
@@ -192,10 +144,60 @@ for i_step = 0:n_steps
     grid on;
     xlim([-4 4])
     ylim([-4 4])
-%     xlim([-20 20])
-%     ylim([-20 20])
+    %     xlim([-20 20])
+    %     ylim([-20 20])
     hold off;
+    drawnow;
+%             pause;
+    
+end
+
+%% 비선형 변환 + 원의 넓이 구하기
+
+close all
+n_steps = 50;
+n_points = 100; % 이 값이 클 수록 촘촘하게 그려질 것이다.
+size = 10;
+my_colors = jet(n_points^2);
+r = 2; % radius
+
+applying_jacobian = 1; % jacobian 적용 여부
+
+[R,THETA] = ndgrid(linspace(0,r,n_points),linspace(0,2*pi,n_points));
+scatter(R(:),THETA(:),size,my_colors,'filled')
+
+[newX,newY, changeR, changeTHETA]=my_nonlin_func(R(:),THETA(:),'polar');
+
+for i_step = 0:n_steps
+    %%% 함수 %%%
+    new_R = R(:)+changeR*i_step/n_steps;
+    new_THETA = THETA(:)+changeTHETA*i_step/n_steps;
+    
+    if applying_jacobian == 0
+        scatter(new_R,new_THETA,size,my_colors,'filled'); hold on;
+    else
+        
+        dist = sqrt(abs(new_R.^2+new_THETA.^2));
+        scatter(new_R,new_THETA,dist*size*2+0.01,my_colors,'filled'); hold on;
+    end
+    
+    
+    if i_step<n_steps
+        xlabel('r'); ylabel('\theta');
+    else
+        xlabel('x = r cos\theta'); ylabel('y = r sin\theta');
+    end
+    
+    grid on;
+    xlim([-4 4])
+    ylim([-r*1.5 2*pi])
+    %     xlim([-20 20])
+    %     ylim([-20 20])
+    hold off;
+    %     axis tight
+    axis square
     drawnow;
 %         pause;
     
 end
+
