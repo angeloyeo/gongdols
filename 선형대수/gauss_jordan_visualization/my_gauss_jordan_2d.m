@@ -2,8 +2,8 @@ clear; close all; clc;
 
 %% 2D case
 
-A = [2 1; 4 3];
-b = [2,3]';
+A = [2 2; 4 2];
+b = [2,2]';
 
 xy_ans = A\b;
 
@@ -16,6 +16,11 @@ hold on;
 plot(x,y2);
 plot(xy_ans(1,1), xy_ans(2,1),'r.','markersize',20)
 grid on;
+
+mArrow2(xy_ans(1,1), xy_ans(2,1), xy_ans(1,1)+A(1,1),xy_ans(2,1)+A(1,2),{'color',[0 0.4470 0.7410]});
+mArrow2(xy_ans(1,1), xy_ans(2,1), xy_ans(1,1)+A(2,1),xy_ans(2,1)+A(2,2),{'color',[0.85 0.325 0.098]});
+xlim([-5 5])
+ylim([-5 5])
 
 
 %% Gauss Jordan Elimination
@@ -49,24 +54,24 @@ XLIMs = get(gca,'xlim');
 YLIMs = get(gca,'ylim');
 % step 1) Ab -> Ab1
 disp('step 1) scaling row 1');
-gj_2d_ani(Ab,Ab1,x,xy_ans,'record','true','record_filename','2d_step1')
+gj_2d_ani(Ab,Ab1,x,xy_ans,'record',true,'record_filename','2d_step1')
 disp('press any key to continue');
-pause;
+% pause;
 
 % step 2) Ab1-> Ab2
 disp('step 2) subtract row 2 from row 1');
-gj_2d_ani(Ab1, Ab2, x, xy_ans,'record','true','record_filename','2d_step2')
+gj_2d_ani(Ab1, Ab2, x, xy_ans,'record',true,'record_filename','2d_step2')
 disp('press any key to continue');
-pause;
+% pause;
 
 % step 3) Ab2-> Ab3
 disp('step 3) scaling row 2');
-gj_2d_ani(Ab2, Ab3, x, xy_ans,'record','true','record_filename','2d_step3')
+gj_2d_ani(Ab2, Ab3, x, xy_ans,'record',true,'record_filename','2d_step3')
 disp('press any key to continue');
-pause;
+% pause;
 
 % step 4) Ab3 -> Ab4
 disp('step 4) subtract row 1 from row 2');
-gj_2d_ani(Ab3, Ab4, x, xy_ans,'record','true','record_filename','2d_step4')
+gj_2d_ani(Ab3, Ab4, x, xy_ans,'record',true,'record_filename','2d_step4')
 disp('press any key to continue');
-pause;
+% pause;

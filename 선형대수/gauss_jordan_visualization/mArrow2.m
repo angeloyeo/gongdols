@@ -1,0 +1,9 @@
+
+function [ h ] = mArrow2(x1,y1,x2,y2,props)
+
+h = annotation('arrow');
+set(h,'parent', gca, ...
+    'position', [x1,y1,x2-x1,y2-y1], ...
+    'HeadLength', 10, 'HeadWidth', 10, 'HeadStyle', 'cback1', ...
+    props{:});
+end

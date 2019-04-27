@@ -1,6 +1,6 @@
 clear; close all; clc;
 
-A = [2 1 -2; 3 -2 4; -4 4 5];
+A = [10 10 15; 3 -2 4; -4 4 5];
 b = [2 4 1]';
 
 
@@ -25,7 +25,7 @@ xlim([-15 15])
 ylim([-15 15])
 zlim([-15 15])
 xlabel('x'); ylabel('y'); zlabel('z')
-view(3)
+view([143 31])
 % intersections
 for i = 1:3
     zdiff = squeeze(zs(i,:,:) - zs(rem(i,3)+1,:,:));
@@ -86,54 +86,54 @@ figure;
 axis; view(3)
 % step 1) scaling row 1
 disp('step 1) scaling row 1');
-gj_3d_ani(Ab, Ab1, x, y, xyz_ans,'record','true','record_filename','3d_step1')
+gj_3d_ani(Ab, Ab1, x, y, xyz_ans,'record',true,'record_filename','3d__step1_scaling_row1')
 disp('press any key to continue');
-pause;
+% pause;
 
 % step 2) subtract row 2 from row 1
 disp('step 2) subtract row 2 from row 1');
-gj_3d_ani(Ab1, Ab2, x, y, xyz_ans)
+gj_3d_ani(Ab1, Ab2, x, y, xyz_ans,'record',true,'record_filename','3d_step2_substract_r2_from_r1')
 disp('press any key to continue');
-pause;
+% pause;
 
 % step 3) subtract row 3 from row 1
 disp('step 3) subtract row 3 from row 1');
-gj_3d_ani(Ab2, Ab3, x, y, xyz_ans)
+gj_3d_ani(Ab2, Ab3, x, y, xyz_ans,'record',true,'record_filename','3d_step3_subtract_r3_from_r1')
 disp('press any key to continue');
-pause;
+% pause;
 
 % step 4) scaling row 2
 disp('step 4) scaling row 2');
-gj_3d_ani(Ab3, Ab4, x, y, xyz_ans)
+gj_3d_ani(Ab3, Ab4, x, y, xyz_ans,'record',true,'record_filename','3d_step4_scaling_r2')
 disp('press any key to continue');
-pause;
+% pause;
 
 % step 5) subtract row 3 from row 2
 disp('step 5) subtract row 3 from row 2');
-gj_3d_ani(Ab4, Ab5, x, y, xyz_ans)
+gj_3d_ani(Ab4, Ab5, x, y, xyz_ans,'record',true,'record_filename','3d_step5_subtract_r3_from_r2')
 disp('press any key to continue');
-pause;
+% pause;
 
 % step 6) scale row 3
 disp('step 6) scale row 3');
-gj_3d_ani(Ab5, Ab6, x, y, xyz_ans)
+gj_3d_ani(Ab5, Ab6, x, y, xyz_ans,'record',true,'record_filename','3d_step6_scaling_r3')
 disp('press any key to continue');
-pause;
+% pause;
 
 % step 7) subtract row 2 from row 3
 disp('step 7) subtract row 2 from row 3');
-gj_3d_ani(Ab6, Ab7, x, y, xyz_ans)
+gj_3d_ani(Ab6, Ab7, x, y, xyz_ans,'record',true,'record_filename','3d_step7_subtract_r2_from_r3')
 disp('press any key to continue');
-pause;
+% pause;
 
 % step 8) subtract row 1 from row 2
 disp('step 8) subtract row 1 from row 2');
-gj_3d_ani(Ab7, Ab8, x, y, xyz_ans)
+gj_3d_ani(Ab7, Ab8, x, y, xyz_ans,'record',true,'record_filename','3d_step8_subtract_r1_from_r2')
 disp('press any key to continue');
-pause;
+% pause;
 
 % step 9) subtract row 1 from row 3
 disp('step 9) subtract row 1 from row 3');
-gj_3d_ani(Ab8, Ab9, x, y, xyz_ans)
+gj_3d_ani(Ab8, Ab9, x, y, xyz_ans,'record',true,'record_filename','3d_step9_subtract_r1_from_r3')
 disp('press any key to continue');
-pause;
+% pause;
