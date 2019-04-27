@@ -49,24 +49,24 @@ XLIMs = get(gca,'xlim');
 YLIMs = get(gca,'ylim');
 % step 1) Ab -> Ab1
 disp('step 1) scaling row 1');
-gj_2d_ani(Ab,Ab1,x,xy_ans)
+gj_2d_ani(Ab,Ab1,x,xy_ans,'record','true','record_filename','2d_step1')
 disp('press any key to continue');
 pause;
 
 % step 2) Ab1-> Ab2
 disp('step 2) subtract row 2 from row 1');
-gj_2d_ani(Ab1, Ab2, x, xy_ans)
+gj_2d_ani(Ab1, Ab2, x, xy_ans,'record','true','record_filename','2d_step2')
 disp('press any key to continue');
 pause;
 
 % step 3) Ab2-> Ab3
 disp('step 3) scaling row 2');
-gj_2d_ani(Ab2, Ab3, x, xy_ans)
+gj_2d_ani(Ab2, Ab3, x, xy_ans,'record','true','record_filename','2d_step3')
 disp('press any key to continue');
 pause;
 
 % step 4) Ab3 -> Ab4
 disp('step 4) subtract row 1 from row 2');
-gj_2d_ani(Ab3, Ab4, x, xy_ans)
+gj_2d_ani(Ab3, Ab4, x, xy_ans,'record','true','record_filename','2d_step4')
 disp('press any key to continue');
 pause;

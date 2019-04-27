@@ -1,4 +1,21 @@
-function gj_3d_ani(before,after,x,y,xyz_ans)
+function gj_3d_ani(before,after,x,y,xyz_ans,varargin)
+
+
+params = inputParser;
+params.CaseSensitive = false;
+params.addParameter('record', 'false');
+params.addParameter('record_filename','record');
+params.parse(varargin{:});
+
+%Extract values from the inputParser
+h_record = params.Results.record;
+record_filename = params.Results.record_filename;
+
+if h_record
+    v = VideoWriter([record_filename,'.mp4'],'MPEG-4');
+    open(v);
+end
+
 [az,el]=view;
 n_steps = 100;
 my_color = lines(3);
@@ -41,6 +58,11 @@ for i_step = 1:n_steps
 %     camlight
     hold off;
     view([az,el]);
+    
+    if h_record
+        F=getframe(gcf);
+        writeVideo(v,F);
+    end
     pause(0.01)
     
 end

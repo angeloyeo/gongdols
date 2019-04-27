@@ -1,4 +1,19 @@
-function gj_2d_ani(before,after,x,xy_ans)
+function gj_2d_ani(before,after,x,xy_ans,varargin)
+
+params = inputParser;
+params.CaseSensitive = false;
+params.addParameter('record', 'false');
+params.addParameter('record_filename','record');
+params.parse(varargin{:});
+
+%Extract values from the inputParser
+h_record = params.Results.record;
+record_filename = params.Results.record_filename;
+
+if h_record
+    v = VideoWriter([record_filename,'.mp4'],'MPEG-4');
+    open(v);
+end
 
 n_steps = 100;
 
@@ -18,6 +33,12 @@ for i_step = 1:n_steps
     hold off;
     xlim([-5 5])
     ylim([-5 5])
+    
+    if h_record
+        F=getframe(gcf);
+        writeVideo(v,F);
+    end
+    
     pause(0.01);
 
 end
