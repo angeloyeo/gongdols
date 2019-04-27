@@ -3,6 +3,7 @@ clear; close all; clc;
 A = [2 1 -2; 3 -2 4; -4 4 5];
 b = [2 4 1]';
 
+
 xyz_ans = A\b;
 
 [x,y] = meshgrid(-5:5);
@@ -14,11 +15,11 @@ for i =1:3 % 총 세 개의 면을 그리겠음.
     zs(2,:,:) = (b(2)-A(2,1)*x-A(2,2)*y)/(A(2,3)+eps);
     zs(3,:,:) = (b(3)-A(3,1)*x-A(3,2)*y)/(A(3,3)+eps);
 end
-
-surf(x,y,squeeze(zs(1,:,:)),'facecolor',[255 102 102]/255,'edgecolor','k')
+my_color = lines(3);
+surf(x,y,squeeze(zs(1,:,:)),'facecolor',my_color(1,:),'edgecolor','k')
 hold on;
-surf(x,y,squeeze(zs(2,:,:)),'facecolor',[51 204 51]/255,'edgecolor','k')
-surf(x,y,squeeze(zs(3,:,:)),'facecolor',[102 204 255]/255,'edgecolor','k')
+surf(x,y,squeeze(zs(2,:,:)),'facecolor',my_color(2,:),'edgecolor','k')
+surf(x,y,squeeze(zs(3,:,:)),'facecolor',my_color(3,:),'edgecolor','k')
 plot3(xyz_ans(1),xyz_ans(2),xyz_ans(3),'r.','markersize',50)
 xlim([-15 15])
 ylim([-15 15])
@@ -84,28 +85,55 @@ close all;
 figure;
 axis; view(3)
 % step 1) scaling row 1
+disp('step 1) scaling row 1');
 gj_3d_ani(Ab, Ab1, x, y, xyz_ans)
+disp('press any key to continue');
+pause;
 
 % step 2) subtract row 2 from row 1
+disp('step 2) subtract row 2 from row 1');
 gj_3d_ani(Ab1, Ab2, x, y, xyz_ans)
+disp('press any key to continue');
+pause;
 
 % step 3) subtract row 3 from row 1
+disp('step 3) subtract row 3 from row 1');
 gj_3d_ani(Ab2, Ab3, x, y, xyz_ans)
+disp('press any key to continue');
+pause;
 
 % step 4) scaling row 2
+disp('step 4) scaling row 2');
 gj_3d_ani(Ab3, Ab4, x, y, xyz_ans)
+disp('press any key to continue');
+pause;
 
 % step 5) subtract row 3 from row 2
+disp('step 5) subtract row 3 from row 2');
 gj_3d_ani(Ab4, Ab5, x, y, xyz_ans)
+disp('press any key to continue');
+pause;
 
 % step 6) scale row 3
+disp('step 6) scale row 3');
 gj_3d_ani(Ab5, Ab6, x, y, xyz_ans)
+disp('press any key to continue');
+pause;
 
 % step 7) subtract row 2 from row 3
+disp('step 7) subtract row 2 from row 3');
 gj_3d_ani(Ab6, Ab7, x, y, xyz_ans)
+disp('press any key to continue');
+pause;
 
 % step 8) subtract row 1 from row 2
+disp('step 8) subtract row 1 from row 2');
 gj_3d_ani(Ab7, Ab8, x, y, xyz_ans)
+disp('press any key to continue');
+pause;
 
 % step 9) subtract row 1 from row 3
+disp('step 9) subtract row 1 from row 3');
 gj_3d_ani(Ab8, Ab9, x, y, xyz_ans)
+disp('press any key to continue');
+pause;

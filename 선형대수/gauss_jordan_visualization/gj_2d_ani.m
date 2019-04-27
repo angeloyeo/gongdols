@@ -16,8 +16,8 @@ for i_step = 1:n_steps
     plot(xy_ans(1,1), xy_ans(2,1),'r.','markersize',20)
     grid on;
     hold off;
-        xlim([-5 5])
+    xlim([-5 5])
     ylim([-5 5])
-    pause(0.01)
+    pause(0.01);
 
 end

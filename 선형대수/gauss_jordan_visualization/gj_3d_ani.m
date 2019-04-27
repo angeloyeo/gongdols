@@ -1,6 +1,7 @@
 function gj_3d_ani(before,after,x,y,xyz_ans)
 [az,el]=view;
 n_steps = 100;
+my_color = lines(3);
 
 diff = after-before;
 % figure;
@@ -14,10 +15,10 @@ for i_step = 1:n_steps
         zs(3,:,:) = (tempA(3,4)-tempA(3,1)*x-tempA(3,2)*y)/(tempA(3,3)+eps);
     end
     
-    surf(x,y,squeeze(zs(1,:,:)),'facecolor',[255 102 102]/255,'edgecolor','none')
+    surf(x,y,squeeze(zs(1,:,:)),'facecolor',my_color(1,:),'edgecolor','none')
     hold on;
-    surf(x,y,squeeze(zs(2,:,:)),'facecolor',[51 204 51]/255,'edgecolor','none')
-    surf(x,y,squeeze(zs(3,:,:)),'facecolor',[102 204 255]/255,'edgecolor','none')
+    surf(x,y,squeeze(zs(2,:,:)),'facecolor',my_color(2,:),'edgecolor','none')
+    surf(x,y,squeeze(zs(3,:,:)),'facecolor',my_color(3,:),'edgecolor','none')
     plot3(xyz_ans(1),xyz_ans(2),xyz_ans(3),'r.','markersize',50)
     xlim([-15 15])
     ylim([-15 15])
