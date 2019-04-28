@@ -38,22 +38,28 @@ base2 = linspace(-3,-0.5,100);
 figure;
 set(gcf,'position',[350 400 850 350])
 
+subplot(1,2,1);
+scatter(x,zeros(1,n),1,my_color);
+axis tight
+grid on;
+
+[~,i_minus_1] = min(abs(base2-(-1)));
 for i_base2 = 1:length(base2)
     y2 = base2(i_base2).^x;
-
-    subplot(1,2,1);
-    scatter(x,zeros(1,n),1,my_color);
-    axis tight
-    grid on;
+    
     
     subplot(1,2,2);
     scatter(real(y2), imag(y2),1,my_color)
-%     axis tight
+    %     axis tight
     grid on;
     xlabel('real'); ylabel('imaginary')
     xlim([-10 10])
     ylim([-10 10])
     title(['y = ',num2str(base2(i_base2)),'^x'])
+    if i_base2 == i_minus_1
+        pause;
+    end
+    
     drawnow;
 end
 
