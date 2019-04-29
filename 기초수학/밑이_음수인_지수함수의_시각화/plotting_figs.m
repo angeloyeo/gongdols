@@ -78,35 +78,41 @@ end
 close(v)
 
 %% fig4 복소 평면
-plotComplexPlane;
+plotComplexPlane(-5,5,-5,5,true);
 
 %% fig5 Euler's Equation
-plotComplexPlane(-5,5,-5,5);
+plotComplexPlane(-5,5,-5,5,true);
 hold on;
 line([0,2],[0,3],'color','k')
 plot(2,3,'o','markerfacecolor','w','markeredgecolor','k')
 
 
 %% fig6 -1 represented with Euler's Equation
+figure
 plotComplexPlane(-2,2,-2,2);
 hold on;
 line([0,-1],[0,0],'color','r','linewidth',2)
 plot(-1,0,'o','markerfacecolor','w','markeredgecolor','r','linewidth',2)
 
 %% fig7 -1 to the x
-
-
 clear v
 v = VideoWriter('fig7.mp4','MPEG-4');
 v.FrameRate = 30;
 v.Quality = 100;
 open(v);
 
-plotComplexPlane(-2,2,-2,2);
+figure;
+subplot(1,2,2)
+plotComplexPlane(-2,2,-2,2,false);
 hold on;
 x = linspace(-pi,pi,100);
 
 for i = 1:length(x)
+    
+    subplot(1,2,1);
+    plot(x(i),0,'o','markerfacecolor','w','markeredgecolor','r','linewidth',2);
+    xlim([-4 4])
+    subplot(1,2,2);
     h(1) = line([0,real(exp(1i*x(i)))],[0,imag(exp(1i*x(i)))],'color','r','linewidth',2);
     h(2) = plot(real(exp(1i*x(i))),imag(exp(1i*x(i))),'o','markerfacecolor','w','markeredgecolor','r','linewidth',2);
     

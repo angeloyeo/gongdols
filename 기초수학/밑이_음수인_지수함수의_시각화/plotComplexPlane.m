@@ -1,8 +1,10 @@
-function plotComplexPlane(x1,x2,y1,y2)
+function plotComplexPlane(x1,x2,y1,y2,h_newfig)
 
-figure;
-set(gcf,'position',[500,100,1000,650])
-set(gcf,'color','w');
+if h_newfig
+    figure;
+    set(gcf,'position',[500,100,1000,650])
+    set(gcf,'color','w');
+end
 set(gca,'visible','off')
 mArrow2(x1,0,x2,0,{'color','k'});
 mArrow2(0,y1,0,y2,{'color','k'});
