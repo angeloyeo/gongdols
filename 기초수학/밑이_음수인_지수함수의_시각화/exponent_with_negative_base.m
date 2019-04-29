@@ -1,6 +1,6 @@
 clear; close all; clc;
 n = 5000;
-base = -2;
+base = -1.5;
 x = linspace(-3,3,n);
 
 y = base.^x;
@@ -14,8 +14,27 @@ h(2) = plot(x,imag(y));
 grid on;
 legend(h, ['real part of y =(',num2str(base),')^x'],['imaginary part of y =(',num2str(base),')^x'],'location','best')
 xlabel('x');
+ylim([-4 4])
+%% envelope 함께 표현
 
-% 한방에 표현할 수는 없을까?
+y2 = (-base).^x;
+
+real(y)
+imag(y)
+figure;
+h(1) = plot(x,real(y));
+hold on;
+h(2) = plot(x,imag(y));
+h(3) = plot(x,y2);
+h(4) = plot(x,-y2);
+
+grid on;
+legend(h, ['real part of y =(',num2str(base),')^x'],['imaginary part of y =(',num2str(base),')^x'],...
+    ['y = ',num2str(-base),'^x'],['y = -',num2str(-base),'^x'],'location','best')
+xlabel('x');
+
+
+%% 한방에 표현할 수는 없을까?
 my_color = jet(length(y));
 
 figure;
