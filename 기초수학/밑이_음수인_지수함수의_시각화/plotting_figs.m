@@ -36,21 +36,8 @@ title('when 0<a<1')
 ylim([-1 8])
 
 %% fig3 수직선 상에 -2를 표시
-addpath('C:\Users\icbab\Google 드라이브\여동훈_개인공부정리파일\프로그래밍_코드모음\wikidocs\선형대수\gauss_jordan_visualization\');
-figure;
-set(gcf,'position',[500,100,1000,650])
-set(gcf,'color','w');
-set(gca,'visible','off')
-mArrow2(-5,0,5,0,{'color','k'});
-xlim([-5 5])
-ylim([-1 1])
-
-for i = -4:4
-    line([i i],[-0.025 0.025],'color','k')
-    t= text(i-0.1, -0.1,num2str(i));
-    t.FontSize=15;
-end
-
+addpath('..\..\선형대수\gauss_jordan_visualization\');
+plotNumberLine(-4,4,true);
 clear v
 v = VideoWriter('fig4.mp4','MPEG-4');
 v.FrameRate = 30;
@@ -102,6 +89,13 @@ v.Quality = 100;
 open(v);
 
 figure;
+set(gcf,'position',[680 432 1200 550])
+
+subplot(1,2,1);
+plotNumberLine(-5,5,false);
+hold on;
+text(0, -0.3,'x');
+
 subplot(1,2,2)
 plotComplexPlane(-2,2,-2,2,false);
 hold on;
@@ -110,28 +104,28 @@ x = linspace(-pi,pi,100);
 for i = 1:length(x)
     
     subplot(1,2,1);
-    plot(x(i),0,'o','markerfacecolor','w','markeredgecolor','r','linewidth',2);
+    ho = plot(x(i),0,'o','markerfacecolor','w','markeredgecolor','r','linewidth',2);
     xlim([-4 4])
     subplot(1,2,2);
     h(1) = line([0,real(exp(1i*x(i)))],[0,imag(exp(1i*x(i)))],'color','r','linewidth',2);
     h(2) = plot(real(exp(1i*x(i))),imag(exp(1i*x(i))),'o','markerfacecolor','w','markeredgecolor','r','linewidth',2);
     
     if imag(exp(1i*x(i)))>=0
-        t = text(-2, 1.5, ['(-1)^{',sprintf('%0.2f',x(i)),'} = ',sprintf('%0.2f',real(exp(1i*x(i)))),' + i ',...
+        t = text(-2.5, 1.5, ['(-1)^{',sprintf('%0.2f',x(i)),'} = ',sprintf('%0.2f',real(exp(1i*x(i)))),' + i ',...
             sprintf('%0.2f',imag(exp(1i*x(i))))]);
     else
-        t = text(-2, 1.5, ['(-1)^{',sprintf('%0.2f',x(i)),'} = ',sprintf('%0.2f',real(exp(1i*x(i)))),' - i ',...
+        t = text(-2.5, 1.5, ['(-1)^{',sprintf('%0.2f',x(i)),'} = ',sprintf('%0.2f',real(exp(1i*x(i)))),' - i ',...
             sprintf('%0.2f',abs(imag(exp(1i*x(i)))))]);
     end
     t.FontSize = 15;
     
     F(i)=getframe(gcf);
     
-    
     drawnow;
     if i<length(x)
         delete(h);
         delete(t);
+        delete(ho);
     end
     
 end
