@@ -45,9 +45,9 @@ axis tight
 grid on;
 
 subplot(1,2,2);
+
 scatter(real(y), imag(y),1,my_color)
 axis tight
-grid on;
 xlabel('real'); ylabel('imaginary')
 
 %% base가 -3에서 -0.5정도로 변하는 영상 만들어볼까?
