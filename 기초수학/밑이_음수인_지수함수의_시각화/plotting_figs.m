@@ -46,7 +46,7 @@ open(v);
 
 clear F
 for i = 1:25
-    h = mArrow2(0,0,-1.5*i/25,0,{'color','r','linewidth',2});
+    h = mArrow2(0,0,-2*i/25,0,{'color','r','linewidth',2});
     
     F(i)=getframe(gcf);
     pause(0.01);
@@ -89,18 +89,17 @@ v.Quality = 100;
 open(v);
 
 figure;
-set(gcf,'position',[152 139 1200 550])
-set(gcf,'color','w')
+set(gcf,'position',[680 432 1200 550])
 
 subplot(1,2,1);
-plotNumberLine(-4,4,false);
+plotNumberLine(-5,5,false);
 hold on;
-text(0, -0.2,'x');
+text(0, -0.3,'x');
 
 subplot(1,2,2)
 plotComplexPlane(-2,2,-2,2,false);
 hold on;
-x = linspace(-1,1,100);
+x = linspace(-pi,pi,100);
 
 for i = 1:length(x)
     
@@ -108,15 +107,15 @@ for i = 1:length(x)
     ho = plot(x(i),0,'o','markerfacecolor','w','markeredgecolor','r','linewidth',2);
     xlim([-4 4])
     subplot(1,2,2);
-    h(1) = line([0,real(exp(1i*pi*x(i)))],[0,imag(exp(1i*pi*x(i)))],'color','r','linewidth',2);
-    h(2) = plot(real(exp(1i*pi*x(i))),imag(exp(1i*pi*x(i))),'o','markerfacecolor','w','markeredgecolor','r','linewidth',2);
+    h(1) = line([0,real(exp(1i*x(i)))],[0,imag(exp(1i*x(i)))],'color','r','linewidth',2);
+    h(2) = plot(real(exp(1i*x(i))),imag(exp(1i*x(i))),'o','markerfacecolor','w','markeredgecolor','r','linewidth',2);
     
-    if imag(exp(1i*pi*x(i)))>=0
-        t = text(-2.5, 1.5, ['(-1)^{',sprintf('%0.2f',x(i)),'} = ',sprintf('%0.2f',real(exp(1i*pi*x(i)))),' + i ',...
-            sprintf('%0.2f',imag(exp(1i*pi*x(i))))]);
+    if imag(exp(1i*x(i)))>=0
+        t = text(-2.5, 1.5, ['(-1)^{',sprintf('%0.2f',x(i)),'} = ',sprintf('%0.2f',real(exp(1i*x(i)))),' + i ',...
+            sprintf('%0.2f',imag(exp(1i*x(i))))]);
     else
-        t = text(-2.5, 1.5, ['(-1)^{',sprintf('%0.2f',x(i)),'} = ',sprintf('%0.2f',real(exp(1i*pi*x(i)))),' - i ',...
-            sprintf('%0.2f',abs(imag(exp(1i*pi*x(i)))))]);
+        t = text(-2.5, 1.5, ['(-1)^{',sprintf('%0.2f',x(i)),'} = ',sprintf('%0.2f',real(exp(1i*x(i)))),' - i ',...
+            sprintf('%0.2f',abs(imag(exp(1i*x(i)))))]);
     end
     t.FontSize = 15;
     
@@ -147,45 +146,32 @@ v.FrameRate = 30;
 v.Quality = 100;
 open(v);
 
-figure;
-set(gcf,'position',[152 139 1200 550])
-set(gcf,'color','w')
-
-subplot(1,2,1);
-plotNumberLine(-4,4,false);
-hold on;
-text(0, -0.2,'x');
-
-subplot(1,2,2)
-plotComplexPlane(-4,4,-4,4,false);
+plotComplexPlane(-5,5,-5,5);
 hold on;
 x = linspace(-3,3,100);
 
 for i = 1:length(x)
+    val = 1.5^x(i)*exp(1i*pi*x(i));
     
-    subplot(1,2,1);
-    ho = plot(x(i),0,'o','markerfacecolor','w','markeredgecolor','r','linewidth',2);
-    xlim([-4 4])
-    subplot(1,2,2);
-    h(1) = line([0,real((1.5)^x(i)*exp(1i*pi*x(i)))],[0,imag((1.5)^x(i)*exp(1i*pi*x(i)))],'color','r','linewidth',2);
-    h(2) = plot(real((1.5)^x(i)*exp(1i*pi*x(i))),imag((1.5)^x(i)*exp(1i*pi*x(i))),'o','markerfacecolor','w','markeredgecolor','r','linewidth',2);
+    h(1) = line([0,real(val)],[0,imag(val)],'color','r','linewidth',2);
+    h(2) = plot(real(val),imag(val),'o','markerfacecolor','w','markeredgecolor','r','linewidth',2);
     
-    if imag((1.5)^x(i)*exp(1i*pi*x(i)))>=0
-        t = text(-5.3307, 3.4661, ['(-1.5)^{',sprintf('%0.2f',x(i)),'} = ',sprintf('%0.2f',real((1.5)^x(i)*exp(1i*pi*x(i)))),' + i ',...
-            sprintf('%0.2f',imag((1.5)^x(i)*exp(1i*pi*x(i))))]);
+    if imag(val)>=0
+        t = text(-5, 3, ['(-1.5)^{',sprintf('%0.2f',x(i)),'} = ',sprintf('%0.2f',real(val)),' + i ',...
+            sprintf('%0.2f',imag(val))]);
     else
-        t = text(-5.3307, 3.4661, ['(-1.5)^{',sprintf('%0.2f',x(i)),'} = ',sprintf('%0.2f',real((1.5)^x(i)*exp(1i*pi*x(i)))),' - i ',...
-            sprintf('%0.2f',abs(imag((1.5)^x(i)*exp(1i*pi*x(i)))))]);
+        t = text(-5, 3, ['(-1.5)^{',sprintf('%0.2f',x(i)),'} = ',sprintf('%0.2f',real(val)),' - i ',...
+            sprintf('%0.2f',abs(imag(val)))]);
     end
     t.FontSize = 15;
-    
+%     
     F(i)=getframe(gcf);
+    
     
     drawnow;
     if i<length(x)
         delete(h);
         delete(t);
-        delete(ho);
     end
     
 end
