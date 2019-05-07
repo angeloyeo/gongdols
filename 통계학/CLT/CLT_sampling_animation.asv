@@ -53,8 +53,8 @@ for i_sampling = 1:n_sampling
     Xs(i_sampling,:)=X;
     set(gcf,'currentaxes',axis_canvas);
     circles = plot(X,300,'o','markerfacecolor',[244 152 66]/255,'markeredgecolor','none');
-    
     % from top to middle
+    
     for i_steps = 1:n_steps
         delete(circles)
         circles = plot(X,300+(200-300)*i_steps/n_steps,'o','markerfacecolor',[244 152 66]/255,'markeredgecolor','none');
@@ -77,16 +77,16 @@ for i_sampling = 1:n_sampling
     
     %% bottom
     axis_bottom = axes('Position',[117/900 138/650 (900-86-117)/900 140/650]);
+
     
-    if i_sampling > 1 && i_sampling<=n_sampling
+    h_hist = histogram(mean(Xs,2),'binWidth',0.25,'FaceColor',[244 143 66]/255,'Normalization','probability');
+    
+    if i_sampling<n_sampling
         delete(h_hist)
     end
     
-    h_hist = histogram(mean(Xs,2),'binWidth',0.25,'FaceColor',[244 143 66]/255,'Normalization','probability');
-    hold off;
-    xlim([-4 4]);
-    ylim([0 1]);
-    
+    xlim([-4 4])
+    ylim([0 1])
     set(axis_bottom,'visible','off')
 end
 % set(axis_bottom,'Color','none','YColor','none')
