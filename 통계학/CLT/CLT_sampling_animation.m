@@ -1,5 +1,9 @@
 clear; close all; clc;
 
+%% DEFINE
+Xs = [];
+ii=1;
+%% CANVAS
 figure;
 set(gcf,'position',[680 330 900 650])
 set(gcf,'color','w');
@@ -42,15 +46,16 @@ xlim([-4 4])
 
 %% middle
 % sampling
-n_sampling = 2;
-Xs = nan(n_sampling,pop_size);
-n_steps = 30; % animation steps
-t0=0.5; % 종단 시간
-t = linspace(0,t0,n_steps);
+n_sampling = 100;
+Xs = [Xs; nan(n_sampling,pop_size)];
+n_steps = 2; % animation steps. 30 느린 편. 10 약간 빠른 편.
+% if ii>1
+%     delete(h_hist)
+% end
 
 for i_sampling = 1:n_sampling
     X=pop_mn+pop_sd*(randn(pop_size,1));
-    Xs(i_sampling,:)=X;
+    Xs(ii,:)=X;
     set(gcf,'currentaxes',axis_canvas);
     circles = plot(X,300,'o','markerfacecolor',[244 152 66]/255,'markeredgecolor','none');
     
@@ -78,15 +83,16 @@ for i_sampling = 1:n_sampling
     %% bottom
     axis_bottom = axes('Position',[117/900 138/650 (900-86-117)/900 140/650]);
     
-    if i_sampling > 1 && i_sampling<=n_sampling
+    if (i_sampling > 1 && i_sampling<=n_sampling) || ii>1
         delete(h_hist)
     end
     
     h_hist = histogram(mean(Xs,2),'binWidth',0.25,'FaceColor',[244 143 66]/255,'Normalization','probability');
     hold off;
     xlim([-4 4]);
-    ylim([0 1]);
+    ylim([0 max(h_hist.Values)]);
     
     set(axis_bottom,'visible','off')
+    ii=ii+1;
 end
 % set(axis_bottom,'Color','none','YColor','none')

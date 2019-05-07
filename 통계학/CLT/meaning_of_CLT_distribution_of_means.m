@@ -22,7 +22,7 @@ X=pop_mn+poissrnd(poisson_lambda,pop_size,1)-poisson_lambda;
 % X=pop_mn+pop_sd*betarnd(A,B,[pop_size,1])-0.5*pop_sd;
 
 %% population의 분포가 normal distribution인 경우
-X=pop_mn+pop_sd*randn(pop_size,1);
+% X=pop_mn+pop_sd*randn(pop_size,1);
 
 
 %% histogram of population
