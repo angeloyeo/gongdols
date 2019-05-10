@@ -161,58 +161,9 @@ end
 close(v)
 
 
-%% Fig 6. 한 점 (x,y) -> (inf, inf) 순간 변화율과 평균 변화율
-figure;
-set(gcf,'position',[500,100,1000,650])
-set(gcf,'color','w');
-
-xx = 3.72;
-
-if xx<20
-    plotXY(-20,20,-20,20,false,15)
-    x = linspace(-20,20, 500);
-elseif xx<100
-    plotXY(-20+20*xx/99,xx,-20+20*xx/99,xx,false,10)
-    x = linspace(-20,xx, 500);
-else
-    plotXY(0,xx,0,xx,false,10)
-    x = linspace(-20,xx, 500);
-end
-
-y = 1/5*x+5+2*sin(2*pi*1/3*x).*exp(-x.^2/100);
-
-hold on;
-plot(x,y,'k','linewidth',2)
-
-h(1) = plot(xx, 1/5*xx+5+2*sin(2*pi*1/3*xx).*exp(-xx.^2/100),'o','markerfacecolor','r','markeredgecolor','none','markersize',8);
-%     t = text(0.6307, 1.2953, '$$ (x,y) = (g(t), f(t)) $$','Interpreter','latex');
-%     t.FontSize = 20;
-
-%     dydx = 1+1/3*2*pi*1/3*cos(2*pi*1/3*xx);
-dydx = ...
-    -2/15*xx.*exp((-xx.^2)/100).*sin(2*pi*xx/3)+...
-    4*pi*exp((-xx.^2)/100).*cos(2*pi*xx/3)/3+...
-    1/5;
-XLIMs = xlim;
-dst = diff(XLIMs);
-x = linspace(xx-dst/10,xx+dst/10,10);
-h(2) = plot(x, dydx*(x-xx) + 1/5*xx+5+2*sin(2*pi*1/3*xx).*exp(-xx.^2/100),'color','b','linewidth',2);
-
-slope = (1/5*xx+5+2*sin(2*pi*1/3*xx).*exp(-xx.^2/100))/(xx+eps);
-if xx == eps
-    slope = dydx;
-    x = linspace(0,xx+2,10);
-    h(3) = plot(x, slope*x,'color','r','linewidth',2);
-elseif xx >0
-    x = linspace(0,xx+2,10);
-    h(3) = plot(x, slope*x,'color','r','linewidth',2);
-elseif xx<0
-    x = linspace(xx-0.5,0,10);
-    h(3)= plot(x, slope*x,'color','r','linewidth',2);
-end
-%% Fig 7. 한 점 (x,y) -> (inf, inf) 순간 변화율과 평균 변화율 (동영상)
+%% Fig 6. 한 점 (x,y) -> (inf, inf) 순간 변화율과 평균 변화율 (동영상)
 clear v
-v = VideoWriter('fig7.mp4','MPEG-4');
+v = VideoWriter('fig6.mp4','MPEG-4');
 v.FrameRate = 30;
 v.Quality = 100;
 open(v);
@@ -220,16 +171,14 @@ open(v);
 clear F
 i=1;
 figure;
-set(gcf,'position',[500,100,1000,650])
-set(gcf,'color','w');
 endpoint = 3000;
-for xx = [linspace(3.72,20,200),linspace(20,100,100),linspace(100,endpoint,500)]
+for xx = [linspace(0,20,200),linspace(20,100,100),linspace(100,endpoint,500)]
     
     if xx<20
         plotXY(-20,20,-20,20,false,15)
         x = linspace(-20,20, 500);
-    elseif xx<100
-        plotXY(-20+20*xx/99,xx,-20+20*xx/99,xx,false,10)
+    elseif x<100
+        plotXY(2,xx,0,xx,false,10)
         x = linspace(-20,xx, 500);
     else
         plotXY(0,xx,0,xx,false,10)
@@ -269,7 +218,7 @@ for xx = [linspace(3.72,20,200),linspace(20,100,100),linspace(100,endpoint,500)]
     end
     drawnow;
     
-    F(i)=getframe(gcf);
+        F(i)=getframe(gcf);
     
     %     if xx>eps
     if xx<endpoint
