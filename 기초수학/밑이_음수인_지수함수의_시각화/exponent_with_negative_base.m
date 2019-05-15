@@ -83,4 +83,16 @@ for i_base2 = 1:length(base2)
 end
 
 
+%% 회오리감자...
+my_color = jet(length(y));
 
+n = 5000;
+base = -1.5;
+x = linspace(-3,3,n);
+
+y = base.^x;
+
+scatter3(real(y), imag(y), abs(y),1,my_color)
+xlabel('real(y)');
+ylabel('imag(y)');
+zlabel('abs(y)');
