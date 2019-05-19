@@ -96,3 +96,18 @@ scatter3(real(y), imag(y), abs(y),1,my_color)
 xlabel('real(y)');
 ylabel('imag(y)');
 zlabel('abs(y)');
+
+%% ¿±»Ò¡ÿ¥‘ ¡˙πÆ
+
+
+n = 5000;
+base = -1.5;
+x = linspace(-3,3,n);
+
+y = base.^x;
+my_color = jet(length(y));
+
+scatter3(x, real(y), imag(y), 1, my_color);
+xlabel('x');
+ylabel('real(y)');
+zlabel('imag(y)');
