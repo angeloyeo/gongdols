@@ -1,0 +1,19 @@
+%{ 
+A_NiceGround.m
+
+Use a surface as the ground. Give it a texture and some shadows.
+
+Matt Sheen, mws262@cornell.edu
+%}
+
+%Use 
+ground = 10000*membrane(1,40)-10000; %Once again, the big numbers aren't necessary, just a relic of past stuff.
+groundSurf = surf(linspace(-10000,10000,size(ground,1)),linspace(-10000,10000,size(ground,2)),ground,'LineStyle','none');
+
+
+texture = imread('texture.jpg');
+groundSurf.FaceColor = 'texturemap';
+groundSurf.CData = texture;
+
+material('dull');
+camlight('headlight');

@@ -1,0 +1,42 @@
+%{ 
+A_FancyPlanes.m
+
+Import 3d models as patch objects. After importing, they can be used just
+like the patches we showed in previous examples.
+
+ Requires:
+ - stlread.m (from file exchange or in this folder).
+ - A binary STL file, I got these from a 3D printing website,
+ thingiverse.com. Any should do though.
+
+
+Matt Sheen, mws262@cornell.edu
+%}
+
+%% Make a cessna
+fig1 = figure;
+
+patchData = stlread('cessna.stl');
+
+p1 = patch(patchData,'EdgeColor','none','FaceColor','[0.8 0.8 1.0]','FaceAlpha',0.9);
+
+axis equal
+material('metal')
+camlight('headlight');
+
+view(3)
+
+%% Make an A10
+fig2 = figure;
+
+patchData = stlread('cessna.stl');
+
+p1 = patch(patchData,'EdgeColor','none','FaceColor','[0.8 0.8 1.0]','FaceAlpha',0.9);
+
+axis equal
+material('metal')
+camlight('headlight');
+
+view(3)
+
+
