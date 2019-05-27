@@ -13,26 +13,21 @@ for i = 1:length(theta)
     
     hold on;
     plot(cos(theta(i)), sin(theta(i)),'ro', 'markerfacecolor','r','markersize',15)
-    F(i) = getframe(gcf);
-    
 %     drawnow;
+    F(i) = getframe(gcf);
     
     hold off;
 end
 
-%% video recording
+%% Video Recording
 
 v = VideoWriter('my_animation.mp4','MPEG-4');
-v.FrameRate = 30;
+v.FrameRate = 30; % 1초에 30 frame 보여주겠다.
 v.Quality = 100;
 
 open(v);
 writeVideo(v, F);
 close(v);
-
-
-
-
 
 
 
