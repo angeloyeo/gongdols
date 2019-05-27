@@ -1,122 +1,56 @@
-%% Video 2
-%% Matlab Gaming: Snake
+function snake_game
+figure;
+set(gcf,'color','w');
 
-clear all
-close all
-clc
+XLIMs = [-25,25];
+YLIMs = [-25,25];
 
-speed = .5;
-dir = 0;
+bodies = [1,0;0,0]; % initializing the location of the body
+drt = 'rightarrow'; % initializing the direction of the heado of a snake
+speed = 1; % speed of a snake. speed for a single frame.
+mem_len = 2;
+set(gcf,'KeyPressFcn',@fun_key_stroke); % command window에서 key 입력을 기다리지 않게...
 
-screensize = get(groot,'Screensize');
-dim = [(screensize(3)-screensize(4))/2 0 screensize(4) screensize(4)];
-
-size = 40;
-
-xPos = [0 1 2];
-yPos = [0 0 0];
-xMove = 1;
-yMove = 0;
-
-L = 'You played yourself bud';
-turn = 1;
-
-foodX = round((rand(1)*(size/2-1)+(rand(1)*-(size/2-1))),0);
-foodY = round((rand(1)*(size/2-1)+(rand(1)*-(size/2-1))),0);
-
-scatter(xPos,yPos,'filled','b')
-hold on
-scatter(foodX,foodY,'filled','r')
-xlim([-size/2 size/2])
-ylim([-size/2 size/2])
-hold on
-set(gcf,'position',dim);
-
-set(gcf,'KeyPressFcn',@stroke)
-while xPos(end) > -size/2 & ... 
-        xPos(end) < size/2 & ...
-        yPos(end) > -size/2 &...
-        yPos(end) < size/2
-    
-    dir = get(gcf,'CurrentKey');
-    
-    switch dir
-        case 'downarrow'
-            if yMove ~= speed
-                xMove = 0;
-                yMove = -speed;
-            end
-            
-        case 'uparrow'
-            if yMove ~= -speed
-                xMove = 0;
-                yMove = speed;
-            end
-            
-        case 'rightarrow'
-            if xMove ~= -speed
-                xMove = speed;
-                yMove = 0;
-            end
-            
-        case 'leftarrow'
-            if xMove ~= speed
-                xMove = -speed;
-                yMove = 0;
-            end
-            
-        otherwise
-            xMove = xMove;
-            yMove = yMove;
+while(1)
+    %% dying condition
+    if bodies(1,1)>XLIMs(2) || bodies(1,1)<XLIMs(1)
+        break;
+    elseif bodies(1,2)>YLIMs(2) || bodies(1,2)<YLIMs(1)
+        break;
     end
     
-    xPrev = xPos;
-    yPrev = yPos;
+    %% memorizing the past
+    past_bodies = bodies(1:end-1,:);
     
-    if [xPos(end) yPos(end)] == [foodX foodY]
-        foodX = round((rand(1)*(size/2-1)+(rand(1)*-(size/2-1))),0);
-        foodY = round((rand(1)*(size/2-1)+(rand(1)*-(size/2-1))),0);
-        xPos(end+1) = xPos(end) + xMove;
-        yPos(end+1) = yPos(end) + yMove;
-        xPos(1:end-2) = xPrev(2:end);
-        yPos(1:end-2) = yPrev(2:end);
+    %% moving
+    drt = get(gcf,'CurrentKey');
+    
+    if strcmp(drt,'rightarrow')
+        bodies(1,1) = bodies(1,1)+1;
+    elseif strcmp(drt,'leftarrow')
+        bodies(1,1) = bodies(1,1)-1;
+    elseif strcmp(drt,'uparrow')
+        bodies(1,2) = bodies(1,2)+1;
+    elseif strcmp(drt,'downarrow')
+        bodies(1,2) = bodies(1,2)-1;
     else
-        xPos(end) = xPos(end) + xMove;
-        yPos(end) = yPos(end) + yMove;
-        xPos(1:end-1) = xPrev(2:end);
-        yPos(1:end-1) = yPrev(2:end);
+        bodies(1,1) = bodies(1,1)+1;
     end
     
-    if sum((xPos(end) == xPos(1:end-1)).*(yPos(end) == yPos(1:end-1))) > 0
-        xPos(end) = size;
-    end
+    % connecting the head to the bodies of past
+    bodies(2:end,:)=past_bodies;
     
-    clf   
-    scatter(foodX,foodY,'filled','r')
-    xlim([-size/2 size/2])
-    ylim([-size/2 size/2])
-    hold on
+    %% plotting
+    plot(bodies(:,1), bodies(:,2),'s','markerfacecolor','b','markersize',15);
+    xlim(XLIMs);
+    ylim(YLIMs);
     
-    scatter(xPos,yPos,'filled','b')
-    xlim([-size/2 size/2])
-    ylim([-size/2 size/2])
-    hold on    
-    
-    drawnow
-       
+    pause(0.1);
+    cla
 end
 
-clf   
-scatter(foodX,foodY,'filled','r')
-xlim([-size/2 size/2])
-ylim([-size/2 size/2])
-hold on
+end
 
-scatter(xPos,yPos,'filled','b')
-annotation('textbox',[.5 .5 .3 .3],'String',L,'FitBoxToText','on')
-xlim([-size/2 size/2])
-ylim([-size/2 size/2])
-hold on
-% 
-% function dir = stroke(src,event)
-% end
+function fun_key_stroke(src,event)
+end
+
