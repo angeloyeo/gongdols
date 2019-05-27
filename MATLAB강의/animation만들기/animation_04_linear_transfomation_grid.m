@@ -33,3 +33,44 @@ for i=1:size(vert_u,2)
 end
 xlim(XLIMs)
 ylim(YLIMs)
+
+%% animation으로 만들기
+A = [2,1;1,2];
+% theta = pi/3;
+% A = [cos(theta) -sin(theta);sin(theta) cos(theta)];
+
+n_steps = 100;
+figure;
+step_mtx = (A-eye(2))/n_steps;
+for i_steps = 0:n_steps
+%     figure;
+    for i=1:size(vert_u,2)
+        line([vert_u(1,i) vert_d(1,i)],[vert_u(2,i) vert_d(2,i)],'color',[159 161 165]/255);
+        hold on;
+        line([hori_l(1,i) hori_r(1,i)],[hori_l(2,i) hori_r(2,i)],'color',[159 161 165]/255);
+    end
+
+    new_vert_u = (eye(2)+step_mtx*i_steps)*vert_u;
+    new_vert_d = (eye(2)+step_mtx*i_steps)*vert_d;
+    new_hori_r = (eye(2)+step_mtx*i_steps)*hori_r;
+    new_hori_l = (eye(2)+step_mtx*i_steps)*hori_l;
+    for i = 1:size(vert_u,2)
+        line([new_vert_u(1,i) new_vert_d(1,i)],[new_vert_u(2,i) new_vert_d(2,i)],'color','k');
+        hold on;
+        line([new_hori_l(1,i) new_hori_r(1,i)],[new_hori_l(2,i) new_hori_r(2,i)],'color','k');
+    end
+    xlim(XLIMs);
+    ylim(YLIMs);
+    
+    if i_steps ==0
+        pause;
+    end
+    
+    pause(0.01);
+    if i_steps<n_steps
+        cla;
+    end
+    
+end
+
+    
