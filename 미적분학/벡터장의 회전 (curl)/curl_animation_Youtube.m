@@ -11,7 +11,7 @@ quiver(x,y,u,v);
 axis([0 1 0 1])
 
 %% easy example for curl: Vortex
-figure;
+figure('position',[542, 137, 750, 627]);
 U_i = 10;% free stream velocity
 C = 1000/(2*pi);% vortex strength
 meshfactor = 10;
@@ -43,7 +43,8 @@ xlim([-U_i, U_i])
 ylim([-U_i, U_i])
 set(gcf,'position',[542 137 750 627])
 
-%%
+%
+set(gcf,'color','w');
 hold on;
 [verts,averts] = streamslice(x,y,u,v);
 sl = streamline([verts averts]);
