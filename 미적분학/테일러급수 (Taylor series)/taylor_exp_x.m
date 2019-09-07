@@ -5,6 +5,7 @@ YLIMs = [-1 4];
 x = linspace(XLIMs(1), XLIMs(2) ,100);
 y = exp(x);
 
+figure('color','w')
 plot(x,y,'linewidth',2)
 grid on;
 hold on;
@@ -13,14 +14,18 @@ line([XLIMs(1) XLIMs(2)],[0 0],'color','k')
 xlim(XLIMs)
 ylim(YLIMs)
 
-ExpansionPoint = 1 ;
+ExpansionPoint = 0 ;
 
 for n= 1:10
     
     syms x
     f = exp(x);
     T = taylor(f, 'ExpansionPoint', ExpansionPoint, 'Order', n);
-    h = fplot(T,XLIMs,'linewidth',2,'color','r');
+%     F = matlabFunction(T);
+%     h = fplot(F,XLIMs,'linewidth',2,'color','r');
+    h = ezplot(T,XLIMs);
+    set(h,'linewidth',2)
+    set(h, 'color','r');
 
     title('e^x and its Taylor series');
     tp1 = 0.8;
@@ -35,6 +40,8 @@ for n= 1:10
         t = text(tp1,tp2,['added upto ',num2str(n),'th term']);
     end
     t.FontSize=12;
+    xlim(XLIMs)
+ylim(YLIMs)
     pause;
     if n<10
         delete(h);

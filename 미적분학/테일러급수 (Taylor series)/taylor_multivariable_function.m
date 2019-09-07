@@ -1,10 +1,10 @@
 clear; close all; clc;
 %%
 app_point = [1,1];
-n_order = 20;
+n_order = 10;
 %%
 [X,Y] = meshgrid(linspace(-5,5,30), linspace(-5,5,30));
-figure;
+figure('color','w');
 surf(X,Y,Y.*sin(X) - X.*cos(Y) + exp(Y)/10,'facecolor',[50 50 50]/255,'facealpha',0.3)
 zlim([-10 10])
 title('f(x,y)=ysin(x)-xcos(y)+e^x/10')
@@ -23,10 +23,17 @@ for i_order = 1:n_order
     zlim([-10 10])
     xlabel('x');
     ylabel('y');
-
-    pause;
+    [caz, cel] = view;
+    
+    pause(0.1);
     if i_order < n_order
         delete(h);
+    else
+        for i = 1:100
+            view(caz + 360 * i / 300, cel)
+            drawnow
+        end
+        
     end
 end
 
