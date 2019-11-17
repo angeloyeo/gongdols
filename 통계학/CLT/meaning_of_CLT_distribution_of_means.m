@@ -6,27 +6,27 @@ clear; close all; clc;
 
 %% defining variables 
 
-pop_size=1000;
-pop_mn=160;
-pop_sd=10;
+pop_size=30;
+pop_mn=170;
+pop_sd=5;
 
 %% population의 분포가 uniform distribution인 경우
 % X=pop_mn+pop_sd*(2*rand(pop_size,1)-1);
 
 %% population의 분포가 poisson distribution인 경우
-poisson_lambda=4;
-X=pop_mn+poissrnd(poisson_lambda,pop_size,1)-poisson_lambda;
+% poisson_lambda=4;
+% X=pop_mn+poissrnd(poisson_lambda,pop_size,1)-poisson_lambda;
 
 %% population의 분포가 beta distribution인 경우
 % A=0.5; B=0.5;
 % X=pop_mn+pop_sd*betarnd(A,B,[pop_size,1])-0.5*pop_sd;
 
 %% population의 분포가 normal distribution인 경우
-% X=pop_mn+pop_sd*randn(pop_size,1);
+X=pop_mn+pop_sd*randn(pop_size,1);
 
 
 %% histogram of population
-hist(X)
+histogram(X)
 title('histogram of population');
 xlabel('height'); ylabel('# of observations');
 
@@ -36,17 +36,17 @@ set(gca,'fontsize',15);
 %% picking random N variables
 
 figure;
-N=100;
+N=3;
 n_iter=500;
 % mns=zeros(n_iter,1);
 clear mns
 for i_iter=1:n_iter
     mns(i_iter,1)=mean(X(randperm(size(X,1),N)));
-    hist(mns);
+    histogram(mns);
     drawnow
 end
 
-figure; hist(mns)
+figure; histogram(mns)
 title('distribution of means'); xlabel('mean of height'); ylabel('# of observation');
 
 %% making t-distributions
