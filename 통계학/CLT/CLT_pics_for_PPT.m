@@ -2,52 +2,53 @@ clear; close all; clc;
 data = [162, 164, 164, 166, 166, 166, ones(1,6) * 168, ones(1,5) * 170, ones(1,4) * 172, ones(1,3) * 174, ones(1,3) * 176, 178, 178, 180];
 
 %% Fig 1. 표본 추출 및 표본 평균 소개
-%
-% figure('position',[125.800000000000,287.400000000000,1331.20000000000,420.000000000000]);
-% subplot(1,2,1);
-%
-% k_data = unique(data);
-%
-% for i_data = 1:length(k_data)
-%     idx = data == k_data(i_data);
-%     find_idx = find(idx);
-%
-%     for i_idx = 1:sum(idx)
-%         plot(data(find_idx(i_idx)), i_idx, 'o','markersize',30,'markerfacecolor',ones(1,3) * 0.8, 'markeredgecolor','k');
-%         hold on;
-%     end
-% end
-%
-% set(gca,'xtick', 160:4:180)
-% xlim([160 182])
-% ylim([0.5 8.78])
-% xlabel('키 (cm)');
-% ylabel('count');
-% grid on;
-% title('3학년 1반 전체 학생의 키 (n=30)');
-% set(gca,'fontsize',12)
-%
-% % 파란색 표시
-% blue = [164,2; 166,1; 168,1];
-% plot(blue(:,1), blue(:,2),  'o','markersize',30,'markerfacecolor',ones(1,3) * 0.8, 'markeredgecolor',lines(1),'linewidth',4);
-%
-% % 빨간색 표시
-% red = [168, 4; 170, 3; 178, 2];
-% plot(red(:,1), red(:,2),  'o','markersize',30,'markerfacecolor',ones(1,3) * 0.8, 'markeredgecolor',[1, 0.325 0.098],'linewidth',4);
-%
-% subplot(1,2,2);
-% plot(round(mean(blue,1)), 1, 'o','markersize',30,'markerfacecolor',ones(1,3) * 0.8, 'markeredgecolor',lines(1), 'linewidth',4);
-% hold on;
-% plot(round(mean(red,1)), 1, 'o','markersize',30,'markerfacecolor',ones(1,3) * 0.8, 'markeredgecolor',[1, 0.325, 0.098],'linewidth',4);
-%
-% set(gca,'xtick', 160:4:180)
-% xlim([160 182])
-% ylim([0.5 8.78])
-% xlabel('키 (cm)');
-% ylabel('count');
-% grid on;
-% title('3학년 1반 학생의 표본 평균 분포 (sample size = 3)');
-% set(gca,'fontsize',12)
+
+figure('position',[125.800000000000,287.400000000000,1331.20000000000,420.000000000000]);
+subplot(1,2,1);
+
+k_data = unique(data);
+
+for i_data = 1:length(k_data)
+    idx = data == k_data(i_data);
+    find_idx = find(idx);
+
+    for i_idx = 1:sum(idx)
+        plot(data(find_idx(i_idx)), i_idx, 'o','markersize',30,'markerfacecolor',ones(1,3) * 0.8, 'markeredgecolor','k');
+        hold on;
+    end
+    pause;
+end
+
+set(gca,'xtick', 160:4:180)
+xlim([160 182])
+ylim([0.5 8.78])
+xlabel('키 (cm)');
+ylabel('count');
+grid on;
+title('3학년 1반 전체 학생의 키 (n=30)');
+set(gca,'fontsize',12)
+
+% 파란색 표시
+blue = [164,2; 166,1; 168,1];
+plot(blue(:,1), blue(:,2),  'o','markersize',30,'markerfacecolor',ones(1,3) * 0.8, 'markeredgecolor',lines(1),'linewidth',4);
+
+% 빨간색 표시
+red = [168, 4; 170, 3; 178, 2];
+plot(red(:,1), red(:,2),  'o','markersize',30,'markerfacecolor',ones(1,3) * 0.8, 'markeredgecolor',[1, 0.325 0.098],'linewidth',4);
+
+subplot(1,2,2);
+plot(round(mean(blue,1)), 1, 'o','markersize',30,'markerfacecolor',ones(1,3) * 0.8, 'markeredgecolor',lines(1), 'linewidth',4);
+hold on;
+plot(round(mean(red,1)), 1, 'o','markersize',30,'markerfacecolor',ones(1,3) * 0.8, 'markeredgecolor',[1, 0.325, 0.098],'linewidth',4);
+
+set(gca,'xtick', 160:4:180)
+xlim([160 182])
+ylim([0.5 8.78])
+xlabel('키 (cm)');
+ylabel('count');
+grid on;
+title('3학년 1반 학생의 표본 평균 분포 (sample size = 3)');
+set(gca,'fontsize',12)
 
 %% Fig 2. 무수히 많은 표본 추출 & 평균
 
