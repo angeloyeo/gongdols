@@ -18,13 +18,11 @@ ylim([0, 0.4])
 grid on
 set(gca,'fontsize',12)
 
-line([2 2] - 1.25, ylim,'color','k','linestyle','--')
-line([2 2], ylim,'color','k','linestyle','--')
-line([2 2] + 1.25, ylim,'color','k','linestyle','--')
-
-% line([5 5] - 1.25, ylim,'color','k','linestyle','--')
-line([5 5], ylim,'color','k','linestyle','--')
-% line([5 5] + 1.25, ylim,'color','k','linestyle','--')
+% line([2 2] - 1.25, ylim,'color','k','linestyle','--')
+% line([2 2], ylim,'color','k','linestyle','--')
+% line([2 2] + 1.25, ylim,'color','k','linestyle','--')
+% 
+% line([5 5], ylim,'color','k','linestyle','--')
 %% Fig. 2
 
 xx2_1 = linspace(-4, 4, 500);
@@ -61,6 +59,55 @@ ylim([0, 1.7])
 grid on
 set(gca,'fontsize',12)
 
+%% pic 5
+mksize = 15;
+XLIMs = [-5, 7];
+YLIMs = [0.5, 6.5];
+% 왼쪽 그림
+figure('position',[488, 437, 317, 324]);
+subplot(2,1,1);
+xx = [-2, -1, -1, 0, 2];
+yy = [1, 1, 2, 1, 1];
+plot(xx, yy, 'o', 'markersize',mksize,'markerfacecolor',lines(1),'markeredgecolor','none');
+xlim(XLIMs)
+ylim(YLIMs)
+grid on;
+xlabel('x');
+ylabel('count')
+
+subplot(2,1,2);
+xx = [0, 1, 2, 3, 4];
+yy = [1, 1, 1, 1, 1];
+plot(xx, yy, 'o', 'markersize',mksize,'markerfacecolor',[0.85, 0.325, 0.098],'markeredgecolor','none');
+xlim(XLIMs)
+ylim(YLIMs)
+grid on;
+
+xlabel('x');
+ylabel('count')
+
+% 오른쪽 그림
+figure('position',[809 437 317 324]);
+subplot(2,1,1);
+xx = [-3, -3, -2, -2, -2, -1, -1, -1, -1, -1, 0, 0, 0, 0, 0, 1, 1, 1, 2, 2]
+yy = [1, 2, 1, 2, 3, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 1, 2];
+plot(xx, yy, 'o', 'markersize',mksize,'markerfacecolor',lines(1),'markeredgecolor','none');
+xlim(XLIMs)
+ylim(YLIMs)
+grid on;
+
+xlabel('x');
+ylabel('count')
+subplot(2,1,2);
+xx = [-1, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 6];
+yy = [1, 1, 2, 1, 2, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 1, 2, 3, 1];
+plot(xx, yy, 'o', 'markersize',mksize,'markerfacecolor',[0.85, 0.325, 0.098],'markeredgecolor','none');
+xlim(XLIMs)
+ylim(YLIMs)
+grid on;
+
+xlabel('x');
+ylabel('count')
 %% t-분포는 dof가 커질 수록 normal distribution에 가까워진다.
 figure;
 dofs = 5:5:50;
