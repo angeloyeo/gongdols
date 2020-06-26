@@ -142,7 +142,6 @@ close(v)
 
 %% Fig. 3 Quadratic form으로 함수 표현하기 (Saddle Shape)
 
-
 clear v
 v = VideoWriter('fig3.mp4','MPEG-4');
 v.FrameRate = 30;
@@ -180,7 +179,12 @@ for i_step = 1:n_step
     
     % eigen vector & eigen value
     [V,D] = eig(A);
-    mArrow2(0, 0, V(1,1)*D(1,1),V(2,1)*D(1,1),{'color','r','linewidth',2});
+    if D(1,1) >= 0
+        mArrow2(0, 0, V(1,1)*D(1,1),V(2,1)*D(1,1),{'color','r','linewidth',2});
+    else
+        mArrow2(0, 0, V(1,1)*D(1,1),V(2,1)*D(1,1),{'color','b','linewidth',2});
+    end
+    
     mArrow2(0, 0, V(1,2)*D(2,2),V(2,2)*D(2,2),{'color','r','linewidth',2});
     str = [ 'Matrix \it{A} = ', '$$ \left[ {\matrix{ ',num2str(A(1,1)),' & ', num2str(A(1,2)),... 
         ' \cr ', num2str(A(2,1)) , ' & ', num2str(A(2,2)),' } } \right] $$' ];
@@ -190,9 +194,6 @@ for i_step = 1:n_step
     
     
     F(i)=getframe(gcf);
-    if xx<3
-        delete(h)
-    end
     i=i+1;
 end
 
@@ -204,6 +205,91 @@ end
 
 close(v)
 
+
+%% Fig. 4 Quadratic form으로 함수 표현하기 (Bowl Shape, 마지막 장면만)
+
+
+A_final = [2,1; 1,2]; % Bowl 형태의 Hessian
+% A_final = [2,0; 0,-2]; % Saddle 형태의 Hessian
+
+b = [0, 0]';
+c = 0;
+figure('position',[2028, 495, 1153, 387]);
+A = A_final;
+
+[X,Y] = meshgrid(-10:0.8:10);
+fcn = @(x,y) (1/2 * A(1,1)*x.^2 + 1/2 * (A(1,2)+A(2,1))*x.*y + 1/2 * A(2,2)*y.^2 - b(1)*x - b(2)*y + c);
+
+% 3차원 곡면 그리기
+subplot(1,2,1);
+surf(X, Y, fcn(X,Y))
+xlim([-10, 10])
+ylim([-10, 10])
+zlim([-300, 300])
+xlabel('x');
+ylabel('y');
+zlabel('z');
+% contour plot
+
+
+subplot(1,2,2);
+contour(X,Y,fcn(X,Y),50)
+
+% eigen vector & eigen value
+[V,D] = eig(A);
+mArrow2(0, 0, V(1,1)*D(1,1),V(2,1)*D(1,1),{'color','r','linewidth',2});
+mArrow2(0, 0, V(1,2)*D(2,2),V(2,2)*D(2,2),{'color','r','linewidth',2});
+str = [ 'Matrix \it{A} = ', '$$ \left[ {\matrix{ ',num2str(A(1,1)),' & ', num2str(A(1,2)),...
+    ' \cr ', num2str(A(2,1)) , ' & ', num2str(A(2,2)),' } } \right] $$' ];
+t = text(0.6, 0.2, str, 'unit','normalized' ,'Interpreter','latex', ...
+    'BackgroundColor','w','Fontsize',12);
+xlabel('x');
+ylabel('y');
+
+
+
+%% Fig. 5 Quadratic form으로 함수 표현하기 (Saddle Shape, 마지막 장면만)
+
+
+% A_final = [2,1; 1,2]; % Bowl 형태의 Hessian
+A_final = [2,0; 0,-2]; % Saddle 형태의 Hessian
+b = [0, 0]';
+c = 0;
+figure('position',[2028, 495, 1153, 387]);
+
+[X,Y] = meshgrid(-10:0.8:10);
+A = A_final;
+
+fcn = @(x,y) (1/2 * A(1,1)*x.^2 + 1/2 * (A(1,2)+A(2,1))*x.*y + 1/2 * A(2,2)*y.^2 - b(1)*x - b(2)*y + c);
+
+% 3차원 곡면 그리기
+subplot(1,2,1);
+surf(X, Y, fcn(X,Y))
+xlim([-10, 10])
+ylim([-10, 10])
+zlim([-300, 300])
+xlabel('x');
+ylabel('y');
+zlabel('z');
+% contour plot
+
+subplot(1,2,2);
+contour(X,Y,fcn(X,Y),50)
+
+% eigen vector & eigen value
+[V,D] = eig(A);
+if D(1,1) >= 0
+    mArrow2(0, 0, V(1,1)*D(1,1),V(2,1)*D(1,1),{'color','r','linewidth',2});
+else
+    mArrow2(0, 0, V(1,1)*D(1,1),V(2,1)*D(1,1),{'color','b','linewidth',2});
+end
+mArrow2(0, 0, V(1,2)*D(2,2),V(2,2)*D(2,2),{'color','r','linewidth',2});
+str = [ 'Matrix \it{A} = ', '$$ \left[ {\matrix{ ',num2str(A(1,1)),' & ', num2str(A(1,2)),...
+    ' \cr ', num2str(A(2,1)) , ' & ', num2str(A(2,2)),' } } \right] $$' ];
+t = text(0.6, 0.2, str, 'unit','normalized' ,'Interpreter','latex', ...
+    'BackgroundColor','w','Fontsize',12);
+xlabel('x');
+ylabel('y');
 %% Quadratic form으로 함수 표현하기 (3차식이 포함된 함수, Monkey Saddle)
 % 
 % clear v
