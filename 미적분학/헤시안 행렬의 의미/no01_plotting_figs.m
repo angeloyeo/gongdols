@@ -205,7 +205,6 @@ end
 
 close(v)
 
-
 %% Fig. 4 Quadratic form으로 함수 표현하기 (Bowl Shape, 마지막 장면만)
 
 
@@ -246,8 +245,7 @@ t = text(0.6, 0.2, str, 'unit','normalized' ,'Interpreter','latex', ...
 xlabel('x');
 ylabel('y');
 
-
-
+saveas(gcf,'fig4.png')
 %% Fig. 5 Quadratic form으로 함수 표현하기 (Saddle Shape, 마지막 장면만)
 
 
@@ -290,6 +288,9 @@ t = text(0.6, 0.2, str, 'unit','normalized' ,'Interpreter','latex', ...
     'BackgroundColor','w','Fontsize',12);
 xlabel('x');
 ylabel('y');
+
+saveas(gcf,'fig5.png')
+
 %% Quadratic form으로 함수 표현하기 (3차식이 포함된 함수, Monkey Saddle)
 % 
 % clear v
