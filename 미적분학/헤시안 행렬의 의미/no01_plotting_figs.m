@@ -78,14 +78,14 @@ end
 close(v)
 %% Fig. 2 Quadratic form으로 함수 표현하기 (Bowl Shape)
 
-
-clear v
-v = VideoWriter('fig2.mp4','MPEG-4');
-v.FrameRate = 30;
-v.Quality = 100;
-open(v);
-
-clear F
+% 
+% clear v
+% v = VideoWriter('fig2.mp4','MPEG-4');
+% v.FrameRate = 30;
+% v.Quality = 100;
+% open(v);
+% 
+% clear F
 
 n_step = 100;
 
@@ -94,7 +94,7 @@ A_final = [2,1; 1,2]; % Bowl 형태의 Hessian
 
 b = [0, 0]';
 c = 0;
-figure('position',[2028, 495, 1153, 387]);
+figure('position',[738, 261, 1153, 387]);
 
 [X,Y] = meshgrid(-10:0.8:10);
 i=1;
@@ -123,22 +123,22 @@ for i_step = 1:n_step
     t = text(0.6, 0.2, str, 'unit','normalized' ,'Interpreter','latex', ...
         'BackgroundColor','w','Fontsize',12);
     drawnow
-    
-    
-    F(i)=getframe(gcf);
+%     
+%     
+%     F(i)=getframe(gcf);
     if xx<3
         delete(h)
     end
     i=i+1;
 end
-
-for i=1:length(F)
-    % convert the image to a frame
-    frame = F(i) ;
-    writeVideo(v, frame);
-end
-
-close(v)
+% 
+% for i=1:length(F)
+%     % convert the image to a frame
+%     frame = F(i) ;
+%     writeVideo(v, frame);
+% end
+% 
+% close(v)
 
 %% Fig. 3 Quadratic form으로 함수 표현하기 (Saddle Shape)
 
@@ -213,7 +213,7 @@ A_final = [2,1; 1,2]; % Bowl 형태의 Hessian
 
 b = [0, 0]';
 c = 0;
-figure('position',[2028, 495, 1153, 387]);
+figure('position',[230, 100, 1153, 387]);
 A = A_final;
 
 [X,Y] = meshgrid(-10:0.8:10);
@@ -253,10 +253,11 @@ saveas(gcf,'fig4.png')
 A_final = [2,0; 0,-2]; % Saddle 형태의 Hessian
 b = [0, 0]';
 c = 0;
-figure('position',[2028, 495, 1153, 387]);
+figure('position',[230, 100, 1153, 387]);
 
 [X,Y] = meshgrid(-10:0.8:10);
 A = A_final;
+A = eye(2);
 
 fcn = @(x,y) (1/2 * A(1,1)*x.^2 + 1/2 * (A(1,2)+A(2,1))*x.*y + 1/2 * A(2,2)*y.^2 - b(1)*x - b(2)*y + c);
 
@@ -303,7 +304,7 @@ saveas(gcf,'fig5.png')
 
 n_step = 100;
 
-figure('position',[2028, 495, 1153, 387]);
+figure('position',[230, 100, 1153, 387]);
 
 [X,Y] = meshgrid(linspace(-3, 3, 20));
 
@@ -329,6 +330,7 @@ Monkey Saddle의 Hessian
 %}
 n_grid = 10;
 [X,Y] = meshgrid(linspace(-3, 3, n_grid));
+% colormap(jet)
 
 H = cell(n_grid,n_grid);
 V = cell(n_grid,n_grid);
@@ -345,9 +347,52 @@ end
 for i = 1:n_grid
     for j = 1:n_grid
         for k = 1:2
-            mArrow2(X(i,j), Y(i,j), X(i,j) + D{i,j}(k,k)*V{i,j}(1, k)/10, Y(i,j) + D{i,j}(k,k)*V{i,j}(2, k)/10,...
-                {'color','r','linewidth',1});
+            temp = D{i,j};
+            
+            
+            if temp(k,k) >= 0
+                my_c = 'r';
+            else
+                my_c = 'b';
+            end
+            
+            mArrow2(X(i,j), Y(i,j), X(i,j) + D{i,j}(k,k)*V{i,j}(1, k)/20, Y(i,j) + D{i,j}(k,k)*V{i,j}(2, k)/20,...
+                {'color',my_c,'linewidth',1,'HeadWidth',5});
+                
         end
     end
 end
 
+%% 썸네일용
+
+
+A = eye(2);
+
+fcn = @(x,y) (1/2 * A(1,1)*x.^2 + 1/2 * (A(1,2)+A(2,1))*x.*y + 1/2 * A(2,2)*y.^2 - b(1)*x - b(2)*y + c);
+
+% 3차원 곡면 그리기
+subplot(1,2,1);
+surf(X, Y, fcn(X,Y))
+xlim([-10, 10])
+ylim([-10, 10])
+zlim([-300, 300])
+xlabel('x');
+ylabel('y');
+zlabel('z');
+% contour plot
+
+
+A = [2,0;0,-2];
+
+fcn = @(x,y) (1/2 * A(1,1)*x.^2 + 1/2 * (A(1,2)+A(2,1))*x.*y + 1/2 * A(2,2)*y.^2 - b(1)*x - b(2)*y + c);
+
+% 3차원 곡면 그리기
+subplot(1,2,2);
+surf(X, Y, fcn(X,Y))
+xlim([-10, 10])
+ylim([-10, 10])
+zlim([-300, 300])
+xlabel('x');
+ylabel('y');
+zlabel('z');
+% contour plot

@@ -1,6 +1,6 @@
 clear; close all; clc;
 %%
-app_point = [1,1];
+app_point = [5,5];
 n_order = 10;
 %%
 [X,Y] = meshgrid(linspace(-5,5,30), linspace(-5,5,30));
