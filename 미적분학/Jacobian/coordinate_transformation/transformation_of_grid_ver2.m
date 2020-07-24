@@ -73,12 +73,12 @@ h_ROI =1;
 function_num = 'basic';
 % function_num = 1;
 % 
-function_num = 'polar'; % ±ØÁÂÇ¥°è
+% function_num = 'polar'; % ±ØÁÂÇ¥°è
 range = 11;
 
 for i_step = 0:n_steps
+    Y = linspace(-range,range,100);
     for i_x = -range:range
-        Y = linspace(-range,range,100);
         X = i_x*ones(1,100);
         
         %%% ÇÔ¼ö %%%
@@ -92,8 +92,9 @@ for i_step = 0:n_steps
         
     end
     
+    X = linspace(-range,range,100);
     for i_y = -range:range
-        X = linspace(-range,range,100);
+        
         Y = i_y*ones(1,100);
         
         %%% ÇÔ¼ö %%%
