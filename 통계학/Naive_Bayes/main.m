@@ -76,10 +76,17 @@ figure
 h1 = plot(male_height_xx,male_height_yy,'linewidth',2,'color',my_color(1,:));
 hold on;
 h2 = plot(female_height_xx,female_height_yy,'linewidth',2,'color',my_color(2,:));
-legend([h1, h2], '남자 키', '여자 키')
 xlabel('키 (cm)');
 ylabel('probability density');
 grid on;
+% 
+% [~, male175idx] = min(abs(male_height_xx - 175));
+% [~, female175idx] = min(abs(female_height_xx - 175));
+% line([175, 175], [0, male_height_yy(male175idx)], 'color','b','linestyle','--')
+% plot(male_height_xx(male175idx), male_height_yy(male175idx),'o','markerfacecolor','r','markeredgecolor','none')
+% line([175, 175], [0, female_height_yy(female175idx)], 'color','r','linestyle','--')
+% plot(female_height_xx(female175idx), female_height_yy(female175idx),'o','markerfacecolor','r','markeredgecolor','none')
+legend([h1, h2], '남자 키', '여자 키')
 
 
 %%%%%%%%% weight %%%%%%%%%
