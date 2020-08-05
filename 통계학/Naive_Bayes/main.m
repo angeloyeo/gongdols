@@ -10,7 +10,7 @@ data.gender = {'male','male','male','male','female','female','female','female'};
 data.height = [6,5.92,5.58,5.92,5,5.5,5.42,5.75] * 30.48; % feet to cm
 data.weight = [180,190,170,165,100,150,130,150] * 0.453592; % lbs to kg
 data.footsize = [12,11,12,10,6,8,7,9] * 25.4; % inch to mm
-
+    
 person = struct('gender',[],'height',[],'weight',[],'footsize',[]);
 person.height = 6 * 30.48;
 person.weight = 130 * 0.453592;
