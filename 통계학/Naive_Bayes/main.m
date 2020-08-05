@@ -102,14 +102,23 @@ female_weight_mtx = [female_weight_mean + 5 * sqrt(female_weight_var), ...
 female_weight_xx = linspace(min(female_weight_mtx), max(female_weight_mtx), 100);
 female_weight_yy = gaussian(female_weight_xx, female_weight_mean, female_weight_var);
 
+
 figure
 h1 = plot(male_weight_xx,male_weight_yy,'linewidth',2,'color',my_color(1,:));
 hold on;
 h2 = plot(female_weight_xx,female_weight_yy,'linewidth',2,'color',my_color(2,:));
-legend([h1, h2], '巢磊 个公霸', '咯磊 个公霸')
 xlabel('个公霸 (kg)');
 ylabel('probability density');
 grid on;
+
+
+[~, male80idx] = min(abs(male_weight_xx - 80));
+[~, female80idx] = min(abs(female_weight_xx - 80));
+line([80, 80], [0, male_weight_yy(male80idx)], 'color','b','linestyle','--')
+plot(male_weight_xx(male80idx), male_weight_yy(male80idx),'o','markerfacecolor','r','markeredgecolor','none')
+line([80, 80], [0, female_weight_yy(female80idx)], 'color','r','linestyle','--')
+plot(female_weight_xx(female80idx), female_weight_yy(female80idx),'o','markerfacecolor','r','markeredgecolor','none')
+legend([h1, h2], '巢磊 个公霸', '咯磊 个公霸')
 
 
 %%%%%%%%% footsize %%%%%%%%%
