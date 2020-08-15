@@ -111,13 +111,13 @@ xlabel('¸ö¹«°Ô (kg)');
 ylabel('probability density');
 grid on;
 
-
-[~, male80idx] = min(abs(male_weight_xx - 80));
-[~, female80idx] = min(abs(female_weight_xx - 80));
-line([80, 80], [0, male_weight_yy(male80idx)], 'color','b','linestyle','--')
-plot(male_weight_xx(male80idx), male_weight_yy(male80idx),'o','markerfacecolor','r','markeredgecolor','none')
-line([80, 80], [0, female_weight_yy(female80idx)], 'color','r','linestyle','--')
-plot(female_weight_xx(female80idx), female_weight_yy(female80idx),'o','markerfacecolor','r','markeredgecolor','none')
+% 
+% [~, male80idx] = min(abs(male_weight_xx - 80));
+% [~, female80idx] = min(abs(female_weight_xx - 80));
+% line([80, 80], [0, male_weight_yy(male80idx)], 'color','b','linestyle','--')
+% plot(male_weight_xx(male80idx), male_weight_yy(male80idx),'o','markerfacecolor','r','markeredgecolor','none')
+% line([80, 80], [0, female_weight_yy(female80idx)], 'color','r','linestyle','--')
+% plot(female_weight_xx(female80idx), female_weight_yy(female80idx),'o','markerfacecolor','r','markeredgecolor','none')
 legend([h1, h2], '³²ÀÚ ¸ö¹«°Ô', '¿©ÀÚ ¸ö¹«°Ô')
 
 
@@ -148,11 +148,13 @@ grid on;
 
 p_x_given_y = @(x, mean_y, variance_y) 1/sqrt(2*pi*variance_y) * exp(-(x-mean_y)^2/(2*variance_y)); % Á¶°ÇºÎÈ®·ü ÇÔ¼ö
 
-posterior_male = P_male * p_x_given_y(person.height, male_height_mean, male_height_var) * ...
+posterior_male = P_male *...
+    p_x_given_y(person.height, male_height_mean, male_height_var) * ...
     p_x_given_y(person.weight, male_weight_mean, male_weight_var) * ...
     p_x_given_y(person.footsize, male_footsize_mean, male_footsize_var);
 
-posterior_female = P_female * p_x_given_y(person.height, female_height_mean, female_height_var) * ...
+posterior_female = P_female * ...
+    p_x_given_y(person.height, female_height_mean, female_height_var) * ...
     p_x_given_y(person.weight, female_weight_mean, female_weight_var) * ...
     p_x_given_y(person.footsize, female_footsize_mean, female_footsize_var);
 
