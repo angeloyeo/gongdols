@@ -32,17 +32,27 @@ for i_time= 2:length(total_t)-1
             + CFL^2 * (whole_wave(i_time,i_space+1) - 2*whole_wave(i_time,i_space) + whole_wave(i_time,i_space-1));
     end
 end
+% 
+% for i = 1:length(total_t)
+%     plot(whole_wave(i,:))
+%     
+%     xlim([0 100])
+%     ylim([-1 1])
+%     title(sprintf('%.2f s',total_t(i)));
+%     pause(dt*0.1);
+%     
+% end
 
-for i = 1:length(total_t)
-    plot(whole_wave(i,:))
-    
-    xlim([0 100])
-    ylim([-1 1])
-    title(sprintf('%.2f s',total_t(i)));
-    pause(dt*0.1);
-    
-end
-
-figure;
+figure('color','w');
+colormap(jet)
 mesh(x,total_t,whole_wave);
 ylabel('time'); xlabel('space (x)');
+[caz, cel] = view;
+% set(gca,'xtick',0:2:50)
+% set(gca,'ytick',-5:5:25)
+for i = 1:300
+    view(caz + 360 * i / 300, cel)
+    axis tight
+    pause(0.02)
+end
+
