@@ -43,10 +43,13 @@ for n = 2:Nt
     % Boundary condition
     Tn(1) = 0; Tn(end) = 0; % Dirichlet condition
     whole_heat(:,n) = Tn;
-
+    
 end
 
 whole_time = 0:dt:Nt*dt-dt;
+
+%%
+
 figure;
 for i_time = 1:Nt
     plot(x,whole_heat(:,i_time));
@@ -56,5 +59,23 @@ for i_time = 1:Nt
     pause(0.01);
 end
 
-figure;
+
+%%
+close all;
+figure('color','w');
+colormap(jet)
 mesh(whole_time,x,whole_heat);
+xlabel('time (s)');
+ylabel('length of rod');
+zlabel('temperature')
+[caz, cel] = view;
+set(gca,'xtick',0:2:50)
+set(gca,'ytick',-5:5:25)
+for i = 1:300
+    view(caz + 360 * i / 300, cel)
+    axis tight
+    ylim([-5, 25])
+    xlim([0, Nt*dt])
+    pause(0.02)
+end
+
