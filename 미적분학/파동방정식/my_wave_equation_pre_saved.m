@@ -8,7 +8,7 @@ nx = fix(Lx/dx);
 x = linspace(0, Lx, nx);
 
 % Time
-T = 40;
+T = 10;
 
 %% Field variables
 % parameters
@@ -43,7 +43,7 @@ end
 %     
 % end
 
-figure('color','w');
+figure('color','w','position',[480, 226, 560, 420]);
 colormap(jet)
 mesh(x,total_t,whole_wave);
 ylabel('time'); xlabel('space (x)');
@@ -53,6 +53,6 @@ ylabel('time'); xlabel('space (x)');
 for i = 1:300
     view(caz + 360 * i / 300, cel)
     axis tight
-    pause(0.02)
+    pause(0.01)
 end
 

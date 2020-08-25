@@ -62,20 +62,20 @@ end
 
 %%
 close all;
-figure('color','w');
+figure('color','w','position',[480, 226, 560, 420]);
 colormap(jet)
 mesh(whole_time,x,whole_heat);
-xlabel('time (s)');
-ylabel('length of rod');
-zlabel('temperature')
+xlabel('시간 (s)');
+ylabel('막대기의 길이');
+zlabel('온도')
 [caz, cel] = view;
 set(gca,'xtick',0:2:50)
 set(gca,'ytick',-5:5:25)
 for i = 1:300
     view(caz + 360 * i / 300, cel)
-    axis tight
+%     axis tight
     ylim([-5, 25])
     xlim([0, Nt*dt])
-    pause(0.02)
+    pause(0.01)
 end
 
