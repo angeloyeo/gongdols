@@ -17,9 +17,9 @@ ylim([-1.2 1.2]+0.5)
 zlim([-1.2 1.2]+0.5)
 
 view(3)
-xlabel('x');
-ylabel('y');
-zlabel('z');
+xlabel('$$x$$','interpreter','latex');
+ylabel('$$y$$','interpreter','latex');
+zlabel('$$z$$','interpreter','latex');
 
 axis vis3d
 alpha(1)
@@ -27,9 +27,9 @@ alpha(1)
 
 %% splitting cubes
 
-n_split_x = 10;
-n_split_y = 10;
-n_split_z = 10;
+n_split_x = 1;
+n_split_y = 2;
+n_split_z = 1;
 
 for i_split = 1:(n_split_x-1)
     split_vertices = [i_split/n_split_x 0 0; i_split/n_split_x 1 0;i_split/n_split_x 1 1;i_split/n_split_x 0 1];
@@ -76,5 +76,12 @@ for i_x = 1:(n_split_x-1)
 end
 
 %% alpha
+alpha(0.5)
 
-
+%% 녹화를 위한 회전
+set(gcf,'color','w')
+for i = 1:360
+    disp(i)
+    camorbit(1, 0, 'data')
+    drawnow
+end
