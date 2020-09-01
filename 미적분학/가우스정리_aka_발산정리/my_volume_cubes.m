@@ -27,9 +27,9 @@ alpha(1)
 
 %% splitting cubes
 
-n_split_x = 1;
-n_split_y = 2;
-n_split_z = 1;
+n_split_x = 10;
+n_split_y = 10;
+n_split_z = 10;
 
 for i_split = 1:(n_split_x-1)
     split_vertices = [i_split/n_split_x 0 0; i_split/n_split_x 1 0;i_split/n_split_x 1 1;i_split/n_split_x 0 1];
@@ -79,9 +79,16 @@ end
 alpha(0.5)
 
 %% 녹화를 위한 회전
+newVid = VideoWriter('1000cube', 'MPEG-4'); % New
+newVid.FrameRate = 30;
+newVid.Quality = 100;
+open(newVid);
+figure(1)
 set(gcf,'color','w')
 for i = 1:360
     disp(i)
     camorbit(1, 0, 'data')
+    writeVideo(newVid, getframe(gcf))
     drawnow
 end
+close(newVid)
