@@ -33,10 +33,10 @@ xlabel('$$x$$','interpreter','latex')
 ylabel('$$y$$','interpreter','latex')
 zlabel('$$z$$','interpreter','latex')
 axis vis3d
-for i = 1:360
-    camorbit(1, 0, 'data')
-    drawnow
-end
+% for i = 1:360
+%     camorbit(1, 0, 'data')
+%     drawnow
+% end
 
 %%
 nr = 1;
@@ -53,12 +53,20 @@ axis vis3d
 
 % view([90, 90])
 
-% for i = 1:360
-%     camorbit(1, 0, 'data')
-%     drawnow
-% end
-
+newVid = VideoWriter('2curves', 'MPEG-4'); % New
+newVid.FrameRate = 30;
+newVid.Quality = 100;
+open(newVid);
+figure(1)
+set(gcf,'color','w')
+for i = 1:360
+    disp(i)
+    camorbit(1, 0, 'data')
+    writeVideo(newVid, getframe(gcf))
+    drawnow
+end
+close(newVid)
 
 %% changing views
-view(2)
-view(3)
+% view(2)
+% view(3)
