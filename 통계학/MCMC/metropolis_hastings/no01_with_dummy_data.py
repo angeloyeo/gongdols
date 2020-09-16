@@ -9,6 +9,8 @@ https://github.com/Joseph94m/MCMC/blob/master/MCMC.ipynb
 MCMC의 Metropolis-Hastings 알고리즘 구현 따라해보기
 
 """
+
+#%%
 import random
 import matplotlib.pyplot as plt
 import numpy as np
@@ -28,7 +30,9 @@ ax.set_xlabel("Value")
 ax.set_ylabel("Frequency")
 ax.set_title("Figure 1: Distribution of 1000 observations sampled from a population of 30,000 with $\mu$=10, $\sigma$=3")
 mu_obs=observation.mean()
-mu_obs
+var_obs = observation.std()
+
+print(var_obs)
 
 
 #The tranistion model defines how to move from sigma_current to sigma_new
@@ -40,6 +44,7 @@ def prior(x):
     #returns 0 for all invalid values of sigma (<=0). Log(0)=-infinity, and Log(negative number) is undefined.
     #It makes the new sigma infinitely unlikely.
     if(x[1] <=0):
+        print('prior is equal to 0')
         return 0
     return 1
 
@@ -47,7 +52,9 @@ def prior(x):
 def manual_log_like_normal(x,data):
     #x[0]=mu, x[1]=sigma (new or current)
     #data = the observation
-    return np.sum(-np.log(x[1] * np.sqrt(2* np.pi) )-((data-x[0])**2) / (2*x[1]**2))
+    return np.sum(
+        -np.log(x[1] * np.sqrt(2* np.pi))-((data-x[0])**2) / (2*x[1]**2)
+        )
 
 #Same as manual_log_like_normal(x,data), but using scipy implementation. It's pretty slow.
 def log_lik_normal(x,data):
@@ -86,7 +93,6 @@ def metropolis_hastings(likelihood_computer,prior, transition_model, param_init,
             accepted.append(x_new)
         else:
             rejected.append(x_new)            
-                
     return np.array(accepted), np.array(rejected)
 
 accepted, rejected = metropolis_hastings(manual_log_like_normal,prior,transition_model,[mu_obs,0.1], 50000,observation,acceptance)
@@ -139,8 +145,8 @@ ax.set_xlabel("$\sigma$")
 ax.set_title("Figure 5: Histogram of $\sigma$")
 fig.tight_layout()
 
-
 ax.grid("off")
+plt.show()
 
 #%% prediction
 
@@ -157,3 +163,5 @@ ax.set_xlabel("Mean")
 ax.set_ylabel("Frequency")
 ax.set_title("Figure 6: Posterior distribution of predicitons")
 ax.legend()
+
+plt.show()
