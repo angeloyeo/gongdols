@@ -1,6 +1,6 @@
 clear; close all; clc;
 
-%% rejection sampling을 통해 data를 sampling
+%% rejection sampling을 통해 data를 약간이나마 추출
 % target distribution과 유사 분포 
 target = @(x) 0.3*exp(-0.2 * x.^2) + 0.7 * exp(-0.2 * (x - 10).^2);
 pseudo_dist = @(x, mu, sigma) 1/(sigma*sqrt(2*pi)) * exp(-((x-mu).^2)/(2*sigma^2));
