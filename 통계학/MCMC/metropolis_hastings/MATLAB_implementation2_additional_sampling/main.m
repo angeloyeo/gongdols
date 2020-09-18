@@ -40,5 +40,7 @@ for i = 1 : n_iter
 end
 
 %% °á°ú plot
-figure; h = histogram(x);
-hold on; plot(xx, target(xx)/max(target(xx))*max(h.Values))
+figure; h = histogram(x,'BinWidth',0.5, 'Normalization','probability');
+hold on; plot(xx, target(xx)/max(target(xx))*max(h.Values),'linewidth',2)
+grid on;
+xlabel('x');

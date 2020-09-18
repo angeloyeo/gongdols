@@ -44,7 +44,7 @@ plot(accepted,'b.');
 figure;
 plot(rejected,'.');
 
-%% 
+%%
 % burn-in period를 처음의 25%라고 가정하고, 뒤의 75%의 추정 평균의 평균값을 가지고 최종 추정 평균값을 계산하자.
 
 mu_estimated = mean(accepted(round(length(accepted) * 0.25):end));
