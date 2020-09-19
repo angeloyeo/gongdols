@@ -19,6 +19,10 @@ figure;
 histogram(observation);
 
 std_obs = std(observation); % 우리가 표본 집단을 통해서 확인한 표준편차
+xlabel('$$x$$','interpreter','latex');
+ylabel('frequency');
+title('1000개의 표본');
+grid on;
 
 %% metropolis_hastings 알고리즘 돌려보기
 
@@ -29,16 +33,24 @@ initial_guess = [1, std_obs];
 %% 처음 50개의 iteration 동안의 accept, reject 확인
 
 figure;
-plot(rejected(1:50), 'rx');
+h1 = plot(rejected(1:50), 'rx','markersize',15);
 hold on;
-plot(accepted(1:50),'b.');
-
+h2 = plot(accepted(1:50),'o','markerfacecolor','b','markersize',5);  
+line(xlim, [10, 10],'linestyle','--','linewidth',2,'color','g')
+xlabel('iteration');
+ylabel('$$\mu$$','interpreter','latex');
+grid on;
+legend([h1, h2], 'rejected', 'accepted','location','best');
 %% 전체 iteration 동안의 accept, reject 확인
 
 figure;
-plot(rejected, 'rx');
+h1 = plot(rejected(1:length(accepted)), 'rx');
 hold on;
-plot(accepted,'b.');
+h2 = plot(accepted,'b.');
+xlabel('iteration');
+ylabel('$$\mu$$','interpreter','latex');
+grid on;
+legend([h1, h2], 'rejected', 'accepted','location','best');
 
 %% rejected 된 경우만 plot
 figure;
@@ -57,3 +69,6 @@ hold on;
 h2 = histogram(population_est);
 
 legend([h1, h2], '원래의 모집단', '추정된 모집단')
+xlabel('x');
+ylabel('frequency');
+grid on;
