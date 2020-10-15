@@ -137,7 +137,7 @@ testset = datasets.MNIST('./MNIST_data', train=False, transform=transforms.Compo
                        transforms.ToTensor()
                    ]))
 
-sample_data = testset.data[:32,:].view(-1, 784) # 총 32개 데이터를 받아옴.
+sample_data = testset.test_data[:32,:].view(-1, 784) # 총 32개 데이터를 받아옴.
 sample_data = sample_data.type(torch.FloatTensor)/255.
 
 v, v1 = rbm(sample_data)
@@ -145,3 +145,21 @@ show_adn_save("real_testdata",make_grid(v.view(32,1,28,28).data))
 show_adn_save("generated_testdata",make_grid(v1.view(32,1,28,28).data))
 
 
+#%% 적절한 hidden layer의 sample을 하나 가지고 visible layer의 sample을 만들어보자.
+
+random_idx = np.random.permutation(testset.test_data.shape[0])
+random_image = Variable(testset.test_data[random_idx[0], :, :].view(-1, 784))/255.
+sample_data = random_image.bernoulli()
+
+pr_h, h = rbm.v_to_h(sample_data)
+
+new_data = torch.empty(100, 1, 28, 28)
+for i in range(100):
+    pr_v, v = rbm.h_to_v(h)
+    new_data[i, :, :, :] = v.view(28, 28)
+    # plt.imshow(v.view(28, 28).detach().numpy(), cmap = 'gray')
+
+
+plt.imshow(
+    np.transpose(make_grid(new_data, nrow = 10).detach().numpy(),(1,2,0))
+    )
