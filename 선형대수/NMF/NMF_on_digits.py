@@ -39,6 +39,9 @@ t0 = time()
 nmf = NMF(n_components=n_components, init='nndsvd', tol=1e-2).fit(X)
 print("done in %0.3fs" % (time() - t0))
 
+W = nmf.fit_transform(X)
+H = nmf.components_
+
 nmfdigits = nmf.components_
 
 ######################################################################
