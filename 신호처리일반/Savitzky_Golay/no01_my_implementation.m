@@ -4,7 +4,6 @@ M = 10; % 필터의 길이는 2M+1 = 21
 N = 9; % 다항식의 차수는 9
 
 % 테스트용 신호
-
 load mtlb
 t = (0:length(mtlb)-1)/Fs;
 
@@ -42,6 +41,6 @@ figure;
 plot(t, mtlb);
 axis([0.2 0.22 -3 2])
 hold on;
-plot(t, smtlb);
-plot(t, my_smtlb_calculated);
-plot(t, smtlb_MATLAB);
+% plot(t, smtlb);
+plot(t, my_smtlb_calculated,'color','r','linewidth',2);
+% plot(t, smtlb_MATLAB);
