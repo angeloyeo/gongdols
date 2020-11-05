@@ -76,7 +76,7 @@ plot(2,3,'o','markerfacecolor','w','markeredgecolor','k')
 
 %% fig6 -1 represented with Euler's Equation
 figure
-plotComplexPlane(-2,2,-2,2);
+plotComplexPlane(-2,2,-2,2,true);
 hold on;
 line([0,-1],[0,0],'color','r','linewidth',2)
 plot(-1,0,'o','markerfacecolor','w','markeredgecolor','r','linewidth',2)

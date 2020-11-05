@@ -1,4 +1,4 @@
-clear all; close all; clc;
+clear; close all; clc;
 
 %% real space
 x=linspace(-2,2,30);
