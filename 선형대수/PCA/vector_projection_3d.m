@@ -3,7 +3,7 @@ function output = vector_projection_3d(data,cov_mtx,dim_to_project)
 % cov_mtx: 3 x 3 covariance matrix
 % output = N x 3 matrix
 
-addpath('C:\Users\icbab\Google 드라이브\여동훈_개인공부정리파일\MATLAB코드모음\다른사람_참고code\arrow3\');
+% addpath('C:\Users\icbab\Google 드라이브\여동훈_개인공부정리파일\MATLAB코드모음\다른사람_참고code\arrow3\');
 
 
 [V,D] = eig(cov_mtx);
