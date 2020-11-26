@@ -1,14 +1,14 @@
 clear; close all; clc;
 
 % A = [1,2,3; 1,2,1;3,5,4];
-% A = [1 2 3;2,1,4;3,4,1]; % shear
+A = [1 2 3;2,1,4;3,4,1]; % shear
 % A = [1,0,0;0,2,0;0,0,3]; % scaling
 % A = [0,1,0; 1,0,0; 0,0,1] % xy permutation
 % A = [1,0,0; 0,0,1; 0,1,0] % yz permutation
 % A = [0,0,1; 0,1,0; 1,0,0] % xz permutation
 % angle = pi/4; A = [1,0,0;0,cos(angle),-sin(angle);0,sin(angle),cos(angle)]; % rotation around x
 % A=[1,0,0;0,1,0;0,0,0]; % projection on xy plane
-vector1 = [-1,2,1]'; vector2 = [1,1,1]'; A = [vector1/norm(vector1) vector2/norm(vector2)]*[vector1/norm(vector1) vector2/norm(vector2)]'; % projection onto a plane defined with vectors 1 & 2
+% vector1 = [-1,2,1]'; vector2 = [1,1,1]'; A = [vector1/norm(vector1) vector2/norm(vector2)]*[vector1/norm(vector1) vector2/norm(vector2)]'; % projection onto a plane defined with vectors 1 & 2
 
 %% animation with dots
 [X,Y,Z] = ndgrid(-1:0.3:1);
