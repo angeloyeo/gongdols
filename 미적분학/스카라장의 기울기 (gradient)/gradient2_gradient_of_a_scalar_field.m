@@ -13,6 +13,7 @@ zlabel('elevation (m)')
 title('temperature or something') 
 axis tight
 colorbar
+colormap(jet)
 %% Gradient
 [fx1,fy1,fz1]=gradient(T, 0.1); % spacing 인자 추가함. 2020년 9월 14일.
 
@@ -32,3 +33,5 @@ colorbar
 
 hold on;
 quiver3(lon,lat,z,fx1,fy1,fz1);
+
+view([0, 90])
