@@ -2,7 +2,8 @@ clear; close all; clc;
 
 % rng(4)
 % data = round(randn(1,150)* 2 + 15);
-load('C:\gongdols\통계학\sampling_and_standard_error\data.mat')
+% load('C:\gongdols\통계학\sampling_and_standard_error\data.mat')
+load('data.mat');
 %% Fig. 1. 모집단의 분포 형태
 close all;
 mksize = 8;
