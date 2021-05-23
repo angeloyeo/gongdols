@@ -155,14 +155,28 @@ end
 
 %% 비선형 변환 + 원의 넓이 구하기
 
+applying_jacobian = 0; % jacobian 적용 여부
+
+if applying_jacobian == 0
+    v = VideoWriter('polar_to_xy_circle_area_no_Jaco.mp4','MPEG-4');
+elseif applying_jacobian == 1
+    v = VideoWriter('polar_to_xy_circle_area_with_Jaco.mp4','MPEG-4');
+end
+
+v.FrameRate = 30;
+v.Quality = 100;
+open(v);
+
+clear F
+
 close all
-n_steps = 50;
+n_steps = 100;
 n_points = 100; % 이 값이 클 수록 촘촘하게 그려질 것이다.
 size = 10;
 my_colors = jet(n_points^2);
 r = 2; % radius
 
-applying_jacobian = 1; % jacobian 적용 여부
+
 
 [R,THETA] = ndgrid(linspace(0,r,n_points),linspace(0,2*pi,n_points));
 scatter(R(:),THETA(:),size,my_colors,'filled')
@@ -173,7 +187,7 @@ for i_step = 0:n_steps
     %%% 함수 %%%
     new_R = R(:)+changeR*i_step/n_steps;
     new_THETA = THETA(:)+changeTHETA*i_step/n_steps;
-    
+    set(gcf,'color','w')
     if applying_jacobian == 0
         scatter(new_R,new_THETA,size,my_colors,'filled'); hold on;
     else
@@ -199,6 +213,20 @@ for i_step = 0:n_steps
     axis square
     drawnow;
 %         pause;
+
+    F(i_step+1)=getframe(gcf);
     
 end
+
+for i_step = n_steps+1:n_steps+50
+    F(i_step+1)=getframe(gcf);
+end
+
+for i=1:length(F)
+    % convert the image to a frame
+    frame = F(i) ;
+    writeVideo(v, frame);
+end
+
+close(v)
 

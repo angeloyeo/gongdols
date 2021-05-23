@@ -12,6 +12,7 @@ for i_x=1:length(x)
     end
 end
 
+figure;
 surf(x,y,f)
 xlabel('x'); ylabel('y'); zlabel('f(x,y)')
 hold on;
@@ -31,6 +32,9 @@ for i_x=1:length(x)
 end
 
 quiver3(x,y,f,u_x,v_x,w_x)
+view([-36, 80])
+xlim([-1.5, 1.5])
+ylim([-1.5, 1.5])
 
 % y방향 성분 quiver 그리기
 
@@ -45,7 +49,9 @@ for i_x=1:length(x)
 end
 
 quiver3(x,y,f,u_y,v_y,w_y)
-
+view([-36, 80])
+xlim([-1.5, 1.5])
+ylim([-1.5, 1.5])
 % xy방향 성분 quiver 그리기
 
 u_xy=zeros(length(x),length(y));
@@ -60,4 +66,7 @@ for i_x=1:length(x)
 end
 
 quiver3(x,y,f,u_xy,v_xy,w_xy)
+view([-36, 80])
+xlim([-1.5, 1.5])
+ylim([-1.5, 1.5])
 
