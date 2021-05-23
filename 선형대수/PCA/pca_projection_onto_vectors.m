@@ -14,7 +14,7 @@ new_xy = cov_mtx*xy';
 proj_vec= V(:,2)*D(2,2);
 % proj_vec= V(:,1)*D(1,1);
 
-% proj_vec = [-2,1]';
+% proj_vec = [2,1]';
 
 output = vector_projection(transpose(new_xy),proj_vec);
 

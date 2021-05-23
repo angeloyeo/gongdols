@@ -22,9 +22,9 @@ h_dead = false;
 
 %% BGM
 % https://freesound.org/people/Sirkoto51/sounds/393818/
-[y, Fs] = audioread('bgm.wav');
-player_bgm = audioplayer(y, Fs);
-play(player_bgm)
+% [y, Fs] = audioread('bgm.wav');
+% player_bgm = audioplayer(y, Fs);
+% play(player_bgm)
 
 %% item sound effect
 % https://freesound.org/people/Scrampunk/sounds/345297/
@@ -94,7 +94,7 @@ while(1)
     %% Á×¾ú³ª?
     if h_dead
         play(player_dead);
-        stop(player_bgm)
+%         stop(player_bgm)
         pause(1)
         t = text(0,0,'You died','HorizontalAlignment','center');
         t.Color = 'r';

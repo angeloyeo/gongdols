@@ -8,7 +8,7 @@ theta= linspace(0,2*pi,100);
 
 x = cos(theta); y = sin(theta);
 
-for i = 10%1:length(theta)
+for i = 1:length(theta)
     plot(x,y,'color','b')
     axis square
     
