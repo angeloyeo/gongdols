@@ -8,7 +8,6 @@ Kalman filter를 이용한 Mouse Position Tracking
 
 %% DEFINITION
 global C
-
 %%
 figure;
 set(gcf,'WindowButtonMotionFcn', @mouseMove);
@@ -28,15 +27,16 @@ while(1)
     
     xlim([0, 1])
     ylim([0, 1])
-    pause(0.001);
+%     pause(0.001);
+    drawnow;
     
     % history가 너무 길어지면 화면이 지저분해지므로 shift 해줄 것.
-    if size(history_C, 2) > 500
-        history_C = history_C(:, end-499:end);
+    if size(history_C, 2) > 100
+        history_C = history_C(:, end-99:end);
     end
     
-    if size(history_C_pred, 2) > 500
-        history_C_pred = history_C_pred(:, end-499:end);
+    if size(history_C_pred, 2) > 100
+        history_C_pred = history_C_pred(:, end-99:end);
     end
     
     cla;
@@ -66,7 +66,7 @@ if isempty(firstRun)
   H = [ 1  0  0  0
         0  0  1  0 ];
  
-  Q = 0.0001*eye(4); % 작아질 수록 예측값이 true 값을 천천히 따라감.
+  Q = 0.01*eye(4); % 작아질 수록 예측값이 true 값을 천천히 따라감.
   R = 200 * eye(2);
 
   x = [0, 0, 0, 0]';

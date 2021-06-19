@@ -22,9 +22,9 @@ h_dead = false;
 
 %% BGM
 % https://freesound.org/people/Sirkoto51/sounds/393818/
-% [y, Fs] = audioread('bgm.wav');
-% player_bgm = audioplayer(y, Fs);
-% play(player_bgm)
+[y, Fs] = audioread('bgm.wav');
+player_bgm = audioplayer(y, Fs);
+play(player_bgm)
 
 %% item sound effect
 % https://freesound.org/people/Scrampunk/sounds/345297/
@@ -85,12 +85,12 @@ while(1)
     
     
     %% plotting
-    plot(bodies(:,1), bodies(:,2),'s','markerfacecolor','b','markersize',15);
+    plot(bodies(:,1), bodies(:,2),'s','markerfacecolor','b','markersize',10);
     hold on
     plot(food_x, food_y, 'o', 'markerfacecolor','r','markersize',15);
     xlim(XLIMs);
     ylim(YLIMs);
-    
+    grid on;
     %% Á×¾ú³ª?
     if h_dead
         play(player_dead);
