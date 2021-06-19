@@ -9,24 +9,23 @@ import java.awt.event.*;
 robot = Robot;
 
 % Restart
-robot.mouseMove(483, 502);
+robot.mouseMove(630, 450);
 robot.mousePress(InputEvent.BUTTON1_MASK);
 robot.mouseRelease(InputEvent.BUTTON1_MASK);
-% temp = [];
+robot.keyPress(java.awt.event.KeyEvent.VK_SPACE)
+
 while(1)
     % 공룡 앞에 점프해야 할 사물이 나타났는가?
-    img = screenShotRGB(226,528,24,27);
-    %     temp = [temp sum(img(:))];
-    if sum(img(:)) < 4e5
-        % spacebar 누르기
-        robot.keyPress(java.awt.event.KeyEvent.VK_SPACE)
-    end
-    
+    img1 = screenShotRGB(500,460,24,27);
     % 공룡 앞에 숙여야 할 사물이 나타났는가?
-    img = screenShotRGB(216,449,29,19);
+    img2 = screenShotRGB(550,430,24,27);
+    
+%     montage({img1, img2})
     %     temp = [temp sum(img(:))];
-    if sum(img(:)) < 4e5
+    if sum(img1(:)) < 4e5
         % spacebar 누르기
+         robot.keyPress(java.awt.event.KeyEvent.VK_SPACE)
+    elseif sum(img2(:)) < 4e5
         robot.keyPress(java.awt.event.KeyEvent.VK_DOWN)
         robot.keyRelease(java.awt.event.KeyEvent.VK_DOWN)
     end
