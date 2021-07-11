@@ -53,8 +53,8 @@ h4.Y = [0 0];
 
 %% complex space
 
-real_axis=linspace(-2,2,30);
-imag_axis=linspace(-2,2,30);
+real_axis=-2:0.1:2;
+imag_axis=-2:0.1:2;
 
 fz= zeros(length(real_axis),length(imag_axis));
 for iter_r=1:length(real_axis)
@@ -64,7 +64,8 @@ for iter_r=1:length(real_axis)
     end
 end
 figure;
-surf(real_axis,imag_axis,abs(fz'),angle(fz'));
+% surf(real_axis,imag_axis,abs(fz'),angle(fz'));
+surf(real_axis,imag_axis,abs(fz'),abs(fz'));
 xlabel('Real(f(z))');
 ylabel('Imag(f(z))');
 zlabel('Mag(f(z))');
