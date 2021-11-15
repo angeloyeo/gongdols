@@ -31,7 +31,7 @@ for i_step = 1:n_step
     ylabel('pdf','interpreter','latex');
     grid on;
     set(gca,'fontsize',12);
-    set(gca,'fontname','?˜ëˆ”ê³ ë”•')
+    set(gca,'fontname','³ª´®°íµñ')
     writeVideo(newVid, getframe(gcf));
 
     drawnow;
@@ -72,7 +72,7 @@ for i_step = 1:n_step
     ylabel('pdf','interpreter','latex');
     grid on;
     set(gca,'fontsize',12);
-    set(gca,'fontname','?˜ëˆ”ê³ ë”•')
+    set(gca,'fontname','³ª´®°íµñ')
     writeVideo(newVid, getframe(gcf));
 
     drawnow;
@@ -113,7 +113,7 @@ for i_step = 1:n_step
     ylabel('pdf','interpreter','latex');
     grid on;
     set(gca,'fontsize',12);
-    set(gca,'fontname','?˜ëˆ”ê³ ë”•')
+    set(gca,'fontname','³ª´®°íµñ')
     
     writeVideo(newVid, getframe(gcf));
 
@@ -158,7 +158,7 @@ for i_step = 1:n_step
     ylabel('pdf','interpreter','latex');
     grid on;
     set(gca,'fontsize',12);
-    set(gca,'fontname','?˜ëˆ”ê³ ë”•')
+    set(gca,'fontname','³ª´®°íµñ')
     ylim([0, 0.4])
     
     writeVideo(newVid, getframe(gcf));
