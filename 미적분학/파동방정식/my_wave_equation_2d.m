@@ -47,7 +47,12 @@ while(t<T)
     wnm1 = wn; wn = wnp1;
     
     % Source
-    wn(50,50) = dt^2*20*sin(30*pi*t/20);
+%     if t < 1
+        wn(50,50) = dt^2*20*sin(30*pi*t/20);
+%     else
+%         wn(50,50) = 0;
+%     end
+    
     
     for i = 2:nx-1
         for j=2:ny-1
