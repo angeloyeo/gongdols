@@ -78,7 +78,7 @@ class RBM(nn.Module):
     def free_energy(self,v):
         vbias_term = v.mv(self.v_bias) # mv: matrix - vector product
         wx_b = F.linear(v,self.W,self.h_bias)
-        
+        wx_b = torch.clamp(wx_b, -87, 87) # by limbo-wg
         temp = torch.log(
             torch.exp(wx_b) + 1
             )
